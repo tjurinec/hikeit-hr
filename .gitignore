@@ -1,0 +1,32 @@
+# ===== Frontend =====
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+frontend/.env.production
+
+# ===== Backend =====
+backend/target/
+backend/*.log
+
+# ===== Upload folder (lokalne slike) =====
+uploads/
+
+# ===== Lozinke i konfiguracija =====
+.env
+*.env
+application-prod.yml
+application-local.yml
+
+# ===== IDE =====
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== Docker volumes =====
+postgres_data/

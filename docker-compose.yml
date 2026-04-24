@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: vrhiput_db
+    environment:
+      POSTGRES_DB: vrhiput
+      POSTGRES_USER: vrhiput
+      POSTGRES_PASSWORD: vrhiput123
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vrhiput -d vrhiput"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
