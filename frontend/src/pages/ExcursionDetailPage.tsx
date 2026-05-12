@@ -194,7 +194,7 @@ export default function ExcursionDetailPage() {
                     Rezerviraj — uskoro!
                   </a>
                   <a
-                    href="mailto:info@vrhiput.hr"
+                    href="mailto:info@hikeit.hr"
                     className="block w-full text-center mt-3 border border-[#2d5a27] text-[#2d5a27] hover:bg-[#2d5a27]/5 font-semibold py-3.5 rounded-xl transition-colors"
                   >
                     Pošalji upit emailom

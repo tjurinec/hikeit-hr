@@ -52,7 +52,7 @@ export default function AboutPage() {
           <span className="text-white/60 text-sm uppercase tracking-widest font-semibold">Naša priča</span>
           <h1 className="font-display text-4xl sm:text-5xl font-bold mt-2 mb-4">O Nama</h1>
           <p className="text-white/80 text-lg leading-relaxed">
-            Vrh & Put je nastao iz jednostavne ideje — dijeliti ljubav prema prirodi, kulturi i pustolovini 
+            hikeIT.hr je nastao iz jednostavne ideje — dijeliti ljubav prema prirodi, kulturi i pustolovini
             s ljudima koji žele nešto više od prosječnog godišnjeg odmora.
           </p>
         </div>
@@ -73,7 +73,7 @@ export default function AboutPage() {
               koja nudi i visoko planinarenje i kulturne ture — sve s istom razinom strasti i profesionalnosti?
             </p>
             <p className="text-stone-600 leading-relaxed">
-              Tako je nastao <strong className="text-[#2d5a27]">Vrh & Put</strong> — mali, strastveni tim 
+              Tako je nastao <strong className="text-[#2d5a27]">hikeIT.hr</strong> — mali, strastveni tim
               koji vjeruje da prava avantura mijenja ljude iznutra.
             </p>
           </div>

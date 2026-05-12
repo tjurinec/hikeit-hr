@@ -36,7 +36,7 @@ export default function AdminLoginPage({ onLogin }: Props) {
             <Mountain className="w-7 h-7 text-white" />
           </div>
           <h1 className="font-display text-2xl font-bold text-[#3d2b1f]">Admin pristup</h1>
-          <p className="text-stone-500 text-sm mt-1">Vrh & Put — upravljanje sadržajem</p>
+          <p className="text-stone-500 text-sm mt-1">hikeIT.hr — upravljanje sadržajem</p>
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm border border-stone-200 p-7 space-y-4">

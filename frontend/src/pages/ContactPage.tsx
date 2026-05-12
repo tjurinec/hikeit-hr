@@ -39,8 +39,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs text-stone-400 uppercase tracking-wider font-semibold mb-0.5">Email</p>
-                    <a href="mailto:info@vrhiput.hr" className="text-[#3d2b1f] hover:text-[#2d5a27] font-medium transition-colors">
-                      info@vrhiput.hr
+                    <a href="mailto:info@hikeit.hr" className="text-[#3d2b1f] hover:text-[#2d5a27] font-medium transition-colors">
+                      info@hikeit.hr
                     </a>
                   </div>
                 </li>

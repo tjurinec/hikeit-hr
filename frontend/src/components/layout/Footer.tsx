@@ -13,8 +13,8 @@ export default function Footer() {
                 <Mountain className="w-5 h-5 text-white" />
               </div>
               <div>
-                <span className="block text-base font-bold font-display">Vrh & Put</span>
-                <span className="block text-[10px] text-white/60 uppercase tracking-widest">Turistička agencija</span>
+                <span className="block text-base font-bold font-display">hikeIT.hr</span>
+                <span className="block text-[10px] text-white/60 uppercase tracking-widest">Avanturizam</span>
               </div>
             </div>
             <p className="text-white/70 text-sm leading-relaxed max-w-xs">
@@ -57,7 +57,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-3">
               <li className="flex items-center gap-2 text-sm text-white/70">
                 <Mail className="w-4 h-4 flex-shrink-0" />
-                <a href="mailto:info@vrhiput.hr" className="hover:text-white transition-colors">info@vrhiput.hr</a>
+                <a href="mailto:info@hikeit.hr" className="hover:text-white transition-colors">info@hikeit.hr</a>
               </li>
               <li className="flex items-center gap-2 text-sm text-white/70">
                 <Phone className="w-4 h-4 flex-shrink-0" />
@@ -72,7 +72,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-white/40">
-          <span>© {new Date().getFullYear()} Vrh & Put. Sva prava pridržana.</span>
+          <span>© {new Date().getFullYear()} hikeIT.hr. Sva prava pridržana.</span>
           <span>Izrađeno s ❤️ za planine</span>
         </div>
       </div>

@@ -27,7 +27,7 @@ export default function AdminPage({ onLogout }: Props) {
             <Mountain className="w-4 h-4" />
           </div>
           <div>
-            <span className="font-semibold text-sm">Vrh & Put</span>
+            <span className="font-semibold text-sm">hikeIT.hr</span>
             <span className="text-white/50 text-xs ml-2">· Admin</span>
           </div>
         </div>

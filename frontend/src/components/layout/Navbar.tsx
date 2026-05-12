@@ -21,8 +21,8 @@ export default function Navbar() {
             <Mountain className="w-5 h-5 text-white" />
           </div>
           <div className="leading-tight">
-            <span className="block text-sm font-bold text-[#2d5a27] tracking-wide font-display">Vrh & Put</span>
-            <span className="block text-[10px] text-[#8b7355] uppercase tracking-widest">Turistička agencija</span>
+            <span className="block text-sm font-bold text-[#2d5a27] tracking-wide font-display">hikeIT.hr</span>
+            <span className="block text-[10px] text-[#8b7355] uppercase tracking-widest">Avanturizam</span>
           </div>
         </Link>
 
