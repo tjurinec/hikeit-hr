@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Search, SlidersHorizontal } from 'lucide-react';
 import ExcursionCard from '../components/ui/ExcursionCard';
-import DifficultyBadge from '../components/ui/DifficultyBadge';
 import type { Excursion } from '../types';
 
 const ALL_EXCURSIONS: Excursion[] = [
