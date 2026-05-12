@@ -8,5 +8,5 @@ CREATE TABLE admin_users (
 
 -- Lozinka: admin123 (bcrypt hash) — promijeni prije produkcije!
 INSERT INTO admin_users (username, password) VALUES
-('tomislav', '$2b$12$cgYcTi5n5Rl9L8fngPrc5.7qvH.Tk.nYEGaCP1UD2yblhPD.5kH7K'),
-('ana',      '$2b$12$cgYcTi5n5Rl9L8fngPrc5.7qvH.Tk.nYEGaCP1UD2yblhPD.5kH7K');
+('tomislav', '$2a$12$XJfFEF0lDDfXn7o5T3LLPeiCY1WUiWwTGPGbEbBUSYxRMqhFe5oCa'),
+('ana',      '$2a$12$XJfFEF0lDDfXn7o5T3LLPeiCY1WUiWwTGPGbEbBUSYxRMqhFe5oCa');

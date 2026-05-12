@@ -23,7 +23,7 @@ class ImageUploadService {
         val ext = file.originalFilename?.substringAfterLast('.', "jpg") ?: "jpg"
         val filename = "${UUID.randomUUID()}.$ext"
 
-        val dir = Paths.get(uploadDir)
+        val dir = Paths.get(uploadDir).toAbsolutePath().normalize()
         Files.createDirectories(dir)
         file.transferTo(dir.resolve(filename).toFile())
 
