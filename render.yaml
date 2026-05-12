@@ -1,3 +1,9 @@
+databases:
+  - name: hikeit-db
+    plan: free
+    databaseName: hikeit
+    user: hikeit
+
 services:
   - type: web
     name: hikeit-backend
@@ -7,7 +13,9 @@ services:
     dockerContext: ./backend
     envVars:
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: hikeit-db
+          property: connectionString
       - key: FRONTEND_URL
         value: https://hikeit-frontend.onrender.com
 
