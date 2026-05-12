@@ -41,6 +41,7 @@ class SecurityConfig {
                 // Javni GET endpointi
                 auth.requestMatchers(HttpMethod.GET, "/api/excursions/**").permitAll()
                 auth.requestMatchers(HttpMethod.GET, "/api/gallery/**").permitAll()
+                auth.requestMatchers(HttpMethod.GET, "/api/guides/**").permitAll()
                 // Upload slika — javno dostupno za sad (zaštititi u produkciji)
                 auth.requestMatchers("/api/upload/**").permitAll()
                 // Admin endpointi — zahtijevaju Basic Auth
@@ -49,6 +50,9 @@ class SecurityConfig {
                 auth.requestMatchers(HttpMethod.DELETE, "/api/excursions/**").hasRole("ADMIN")
                 auth.requestMatchers(HttpMethod.POST, "/api/gallery/**").hasRole("ADMIN")
                 auth.requestMatchers(HttpMethod.DELETE, "/api/gallery/**").hasRole("ADMIN")
+                auth.requestMatchers(HttpMethod.POST, "/api/guides/**").hasRole("ADMIN")
+                auth.requestMatchers(HttpMethod.PUT, "/api/guides/**").hasRole("ADMIN")
+                auth.requestMatchers(HttpMethod.DELETE, "/api/guides/**").hasRole("ADMIN")
                 auth.anyRequest().authenticated()
             }
             .httpBasic { }

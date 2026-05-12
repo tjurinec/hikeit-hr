@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Excursion, GalleryImage } from '../types';
+import type { Excursion, GalleryImage, Guide } from '../types';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : '/api',
@@ -26,6 +26,13 @@ export const excursionsApi = {
 
 export const galleryApi = {
   getAll: () => api.get<GalleryImage[]>('/gallery').then(r => r.data),
+};
+
+export const guidesApi = {
+  getAll: () => api.get<Guide[]>('/guides').then(r => r.data),
+  create: (data: Omit<Guide, 'id'>) => api.post<Guide>('/guides', data).then(r => r.data),
+  update: (id: number, data: Omit<Guide, 'id'>) => api.put<Guide>(`/guides/${id}`, data).then(r => r.data),
+  delete: (id: number) => api.delete(`/guides/${id}`),
 };
 
 export const uploadApi = {

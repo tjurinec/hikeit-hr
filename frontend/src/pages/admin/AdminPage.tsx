@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Mountain, LogOut, PlusCircle, List } from 'lucide-react';
+import { Mountain, LogOut, PlusCircle, List, Users } from 'lucide-react';
 import { clearAdminAuth } from '../../api';
 import ExcursionForm from './ExcursionForm';
+import GuideList from './GuideList';
 
-type Tab = 'new' | 'list';
+type Tab = 'new' | 'list' | 'guides';
 
 interface Props {
   onLogout: () => void;
@@ -69,6 +70,17 @@ export default function AdminPage({ onLogout }: Props) {
             <List className="w-4 h-4" />
             Svi izleti
           </button>
+          <button
+            onClick={() => setTab('guides')}
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+              tab === 'guides'
+                ? 'bg-[#2d5a27] text-white'
+                : 'bg-white text-stone-600 border border-stone-200 hover:border-[#2d5a27]'
+            }`}
+          >
+            <Users className="w-4 h-4" />
+            Vodiči
+          </button>
         </div>
 
         {tab === 'new' && (
@@ -90,6 +102,13 @@ export default function AdminPage({ onLogout }: Props) {
             <p className="text-stone-400 text-xs mt-2">
               Za sada koristi <strong>Novi izlet</strong> tab za dodavanje, i direktno bazu za uređivanje.
             </p>
+          </div>
+        )}
+
+        {tab === 'guides' && (
+          <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-8">
+            <h2 className="font-display text-xl font-bold text-[#3d2b1f] mb-6">Vodiči</h2>
+            <GuideList />
           </div>
         )}
       </div>

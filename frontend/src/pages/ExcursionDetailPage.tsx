@@ -133,7 +133,7 @@ export default function ExcursionDetailPage() {
               <h3 className="font-display text-xl font-bold text-[#3d2b1f] mb-4">Vaš vodič</h3>
               <div className="flex items-start gap-4">
                 <img
-                  src={excursion.guide.avatarUrl}
+                  src={excursion.guide.avatarUrl ?? undefined}
                   alt={excursion.guide.name}
                   className="w-16 h-16 rounded-full object-cover flex-shrink-0"
                 />

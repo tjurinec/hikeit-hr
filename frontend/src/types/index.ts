@@ -21,9 +21,9 @@ export interface Excursion {
 export interface Guide {
   id: number;
   name: string;
-  bio: string;
-  avatarUrl: string;
-  specialization: string;
+  bio: string | null;
+  avatarUrl: string | null;
+  specialization: string | null;
 }
 
 export interface GalleryImage {
