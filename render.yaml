@@ -21,7 +21,6 @@ services:
 
   - type: web
     name: hikeit-frontend
-    plan: free
     env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
