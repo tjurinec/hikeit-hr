@@ -8,6 +8,7 @@ services:
   - type: web
     name: hikeit-backend
     plan: free
+    env: docker
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
     envVars:
@@ -21,7 +22,7 @@ services:
   - type: web
     name: hikeit-frontend
     plan: free
-    runtime: static
+    env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
