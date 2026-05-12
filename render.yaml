@@ -1,0 +1,36 @@
+databases:
+  - name: hikeit-db
+    plan: free
+    databaseName: hikeit
+    user: hikeit
+
+services:
+  - type: web
+    name: hikeit-backend
+    plan: free
+    runtime: java
+    rootDir: backend
+    buildCommand: mvn package -DskipTests
+    startCommand: java -Dspring.profiles.active=prod -jar target/*.jar
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: hikeit-db
+          property: connectionString
+      - key: FRONTEND_URL
+        value: https://hikeit-frontend.onrender.com
+
+  - type: web
+    name: hikeit-frontend
+    plan: free
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://hikeit-backend.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

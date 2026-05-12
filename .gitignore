@@ -14,7 +14,6 @@ uploads/
 # ===== Lozinke i konfiguracija =====
 .env
 *.env
-application-prod.yml
 application-local.yml
 
 # ===== IDE =====
