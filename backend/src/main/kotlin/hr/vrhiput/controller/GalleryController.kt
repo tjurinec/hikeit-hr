@@ -27,7 +27,8 @@ class GalleryController(private val service: GalleryService) {
         @RequestParam(defaultValue = "9") size: Int,
     ): PageDto<GalleryDto> = service.getPage(page, size)
 
-    @GetMapping("/{id}")
+    // {id} ograničen na brojeve da ne proguta literalne putove poput /page
+    @GetMapping("/{id:[0-9]+}")
     fun getById(@PathVariable id: Long): ResponseEntity<GalleryDto> =
         try { ResponseEntity.ok(service.getById(id)) }
         catch (e: NoSuchElementException) { ResponseEntity.notFound().build() }
@@ -36,7 +37,7 @@ class GalleryController(private val service: GalleryService) {
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@Valid @RequestBody req: CreateGalleryRequest): GalleryDto = service.create(req)
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id:[0-9]+}")
     fun update(@PathVariable id: Long, @Valid @RequestBody req: CreateGalleryRequest): ResponseEntity<GalleryDto> =
         try { ResponseEntity.ok(service.update(id, req)) }
         catch (e: NoSuchElementException) { ResponseEntity.notFound().build() }
@@ -47,7 +48,7 @@ class GalleryController(private val service: GalleryService) {
         service.reorder(ids)
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id:[0-9]+}")
     fun delete(@PathVariable id: Long): ResponseEntity<Void> =
         try { service.delete(id); ResponseEntity.noContent().build() }
         catch (e: NoSuchElementException) { ResponseEntity.notFound().build() }
