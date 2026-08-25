@@ -1,21 +1,27 @@
 import { Link } from 'react-router-dom';
 import { thumbOf } from '../../api';
-import { Clock, Users, MapPin, ArrowRight } from 'lucide-react';
+import { Clock, Users, MapPin, ArrowRight, Mountain } from 'lucide-react';
 import type { Excursion } from '../../types';
 import DifficultyBadge from './DifficultyBadge';
-
-const PLACEHOLDER = 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80';
 
 export default function ExcursionCard({ excursion }: { excursion: Excursion }) {
   return (
     <article className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-100">
       <Link to={`/izleti/${excursion.slug}`} className="block">
         <div className="relative h-56 overflow-hidden">
-          <img
-            src={excursion.coverImageUrl ? thumbOf(excursion.coverImageUrl) : PLACEHOLDER}
-            alt={excursion.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
+          {excursion.coverImageUrl ? (
+            <img
+              src={thumbOf(excursion.coverImageUrl)}
+              alt={excursion.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          ) : (
+            // Bez slike ide neutralno polje — stock fotografija bi se čitala kao
+            // fotografija baš tog izleta
+            <div className="w-full h-full bg-stone-100 flex items-center justify-center">
+              <Mountain className="w-12 h-12 text-stone-300" />
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
           <div className="absolute top-3 left-3">
             <DifficultyBadge difficulty={excursion.difficulty} />

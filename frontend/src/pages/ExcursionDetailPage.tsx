@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { excursionsApi } from '../api';
-import { ArrowLeft, Clock, Users, MapPin, Calendar, Star, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Clock, Users, MapPin, Calendar, Star, ChevronRight, Mountain } from 'lucide-react';
 import DifficultyBadge from '../components/ui/DifficultyBadge';
 
 function renderContent(md: string) {
@@ -41,7 +41,13 @@ export default function ExcursionDetailPage() {
     <main className="pt-16">
       {/* Hero image */}
       <div className="relative h-[50vh] min-h-80 overflow-hidden">
-        <img src={excursion.coverImageUrl} alt={excursion.title} className="w-full h-full object-cover" />
+        {excursion.coverImageUrl ? (
+          <img src={excursion.coverImageUrl} alt={excursion.title} className="w-full h-full object-cover" />
+        ) : (
+          <div className="w-full h-full bg-stone-200 flex items-center justify-center">
+            <Mountain className="w-16 h-16 text-stone-400" />
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-8 max-w-7xl mx-auto">
           <nav className="flex items-center gap-1 text-white/60 text-sm mb-3">
