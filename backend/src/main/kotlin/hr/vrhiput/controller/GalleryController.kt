@@ -13,13 +13,17 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/gallery")
 class GalleryController(private val service: GalleryService) {
 
-    /** Bez parametara vraća sve (koristi admin); s "page" vraća jednu stranicu. */
+    /** Sve galerije — koristi admin za popis i redoslijed. */
     @GetMapping
     fun getAll(): List<GalleryDto> = service.getAll()
 
-    @GetMapping(params = ["page"])
+    /**
+     * Jedna stranica galerija. Zaseban put, a ne ?page na /api/gallery: dva
+     * mapiranja koja se razlikuju samo po parametru Spring ne razlučuje pouzdano.
+     */
+    @GetMapping("/page")
     fun getPage(
-        @RequestParam page: Int,
+        @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "9") size: Int,
     ): PageDto<GalleryDto> = service.getPage(page, size)
 
