@@ -1,67 +1,8 @@
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { excursionsApi } from '../api';
 import { ArrowRight, Mountain, Shield, Users, Star, ChevronDown } from 'lucide-react';
 import ExcursionCard from '../components/ui/ExcursionCard';
-import type { Excursion } from '../types';
-
-const MOCK_EXCURSIONS: Excursion[] = [
-  {
-    id: 1,
-    title: 'Triglav — Krov Julijskih Alpa',
-    slug: 'triglav',
-    description: 'Uspinjemo se na najviši vrh Slovenije i jednu od najljepših planina u ovom dijelu Europe.',
-    content: '',
-    difficulty: 'HARD',
-    durationDays: 3,
-    maxParticipants: 8,
-    price: 249,
-    coverImageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
-    imageUrls: [],
-    location: 'Julijske Alpe, Slovenija',
-    startingPoint: 'Bled',
-    guide: { id: 1, name: 'Tomislav', bio: '', avatarUrl: '', specialization: 'Planinarenje' },
-    tags: ['alpe', 'triglav', 'visoko'],
-    publishedAt: '2024-03-01',
-    nextDeparture: '2025-07-15',
-  },
-  {
-    id: 2,
-    title: 'Velebit — Bajkovita Hrvatska Divljina',
-    slug: 'velebit',
-    description: 'Treking kroz srce Velebita — endemska flora, fauna i pogled koji oduzima dah.',
-    content: '',
-    difficulty: 'MODERATE',
-    durationDays: 4,
-    maxParticipants: 10,
-    price: 189,
-    coverImageUrl: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80',
-    imageUrls: [],
-    location: 'Velebit, Hrvatska',
-    startingPoint: 'Zadar',
-    guide: { id: 1, name: 'Tomislav', bio: '', avatarUrl: '', specialization: 'Planinarenje' },
-    tags: ['velebit', 'treking', 'hrvatska'],
-    publishedAt: '2024-03-10',
-    nextDeparture: '2025-06-20',
-  },
-  {
-    id: 3,
-    title: 'Dubrovnik & Elafiti — Otočki Raj',
-    slug: 'dubrovnik-elafiti',
-    description: 'Kombinirani izlet s obilascima Dubrovnika i jedrilicama prema Elafitskim otocima.',
-    content: '',
-    difficulty: 'EASY',
-    durationDays: 5,
-    maxParticipants: 12,
-    price: 320,
-    coverImageUrl: 'https://images.unsplash.com/photo-1555990793-da11153b6BE8?w=800&q=80',
-    imageUrls: [],
-    location: 'Dubrovnik & Elafiti, Hrvatska',
-    startingPoint: 'Dubrovnik',
-    guide: { id: 2, name: 'Ana', bio: '', avatarUrl: '', specialization: 'Kulturni turizam' },
-    tags: ['dubrovnik', 'more', 'otoci'],
-    publishedAt: '2024-03-15',
-    nextDeparture: '2025-08-01',
-  },
-];
 
 const STATS = [
   { value: '120+', label: 'Sretnih putnika' },
@@ -94,6 +35,11 @@ const WHY_US = [
 ];
 
 export default function HomePage() {
+  const { data: featured = [], isLoading } = useQuery({
+    queryKey: ['excursions', 'featured'],
+    queryFn: excursionsApi.getFeatured,
+  });
+
   return (
     <main>
       {/* Hero */}
@@ -160,7 +106,11 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {MOCK_EXCURSIONS.map(exc => (
+            {isLoading ? (
+              <p className="col-span-full text-center text-stone-400 py-10">Učitavanje...</p>
+            ) : featured.length === 0 ? (
+              <p className="col-span-full text-center text-stone-400 py-10">Uskoro objavljujemo nove izlete.</p>
+            ) : featured.map(exc => (
               <ExcursionCard key={exc.id} excursion={exc} />
             ))}
           </div>

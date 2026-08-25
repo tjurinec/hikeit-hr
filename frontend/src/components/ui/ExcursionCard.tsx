@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { thumbOf } from '../../api';
 import { Clock, Users, MapPin, ArrowRight } from 'lucide-react';
 import type { Excursion } from '../../types';
 import DifficultyBadge from './DifficultyBadge';
@@ -11,7 +12,7 @@ export default function ExcursionCard({ excursion }: { excursion: Excursion }) {
       <Link to={`/izleti/${excursion.slug}`} className="block">
         <div className="relative h-56 overflow-hidden">
           <img
-            src={excursion.coverImageUrl || PLACEHOLDER}
+            src={excursion.coverImageUrl ? thumbOf(excursion.coverImageUrl) : PLACEHOLDER}
             alt={excursion.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />

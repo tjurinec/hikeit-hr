@@ -1,65 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { excursionsApi } from '../api';
 import { ArrowLeft, Clock, Users, MapPin, Calendar, Star, ChevronRight } from 'lucide-react';
 import DifficultyBadge from '../components/ui/DifficultyBadge';
-import type { Excursion } from '../types';
-
-const MOCK: Record<string, Excursion> = {
-  triglav: {
-    id: 1,
-    title: 'Triglav — Krov Julijskih Alpa',
-    slug: 'triglav',
-    description: 'Uspinjemo se na najviši vrh Slovenije i jednu od najljepših planina u ovom dijelu Europe.',
-    content: `
-## O izletu
-
-Triglav (2864 m) je simbol Slovenije i jedna od najatraktivnijih planinarskih destinacija u Alpama. Naša trodnevna ekspedicija vodi te kroz Triglav nacionalni park, uz kristalno čista planinska jezera i nepregledne poglede.
-
-## Raspored
-
-### Dan 1 — Dolazak u Bled
-Skupljamo se u Bledu, kratki briefing i večera u planinarskom domu.
-
-### Dan 2 — Uspon
-Rani start, uspon kroz Krmu i Dolič do Triglavskog doma. Spavanje u planinskom domu.
-
-### Dan 3 — Vrh & povratak
-Uspon na sam vrh (2864m) po lijepom vremenu, silazak i povratak u Bled.
-
-## Što je uključeno
-
-- Stručni planinski vodič
-- 2 noćenja u planinarskom domu s polupansionom
-- Sve dozvole za park
-- Komplet prve pomoći
-
-## Oprema
-
-Potrebna prava planinska obuća (visoke planinarske cipele), toplinska odjeća u slojevima, kabanica.
-    `,
-    difficulty: 'HARD',
-    durationDays: 3,
-    maxParticipants: 8,
-    price: 249,
-    coverImageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=90',
-    imageUrls: [
-      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80',
-      'https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&q=80',
-      'https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80',
-    ],
-    location: 'Julijske Alpe, Slovenija',
-    startingPoint: 'Bled, Slovenija',
-    guide: {
-      id: 1,
-      name: 'Tomislav',
-      bio: 'Certificirani planinski vodič s više od 8 godina iskustva. Uspio sam se popeti na Triglav više od 40 puta i uvijek pronalazim nešto novo što me oduševljava.',
-      avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&q=80',
-      specialization: 'Visoko planinarenje & Alpinizam',
-    },
-    tags: ['alpe', 'triglav', 'visoko', 'slovenija'],
-    publishedAt: '2024-03-01',
-    nextDeparture: '2025-07-15',
-  },
-};
 
 function renderContent(md: string) {
   return md.split('\n').map((line, i) => {
@@ -73,7 +16,15 @@ function renderContent(md: string) {
 
 export default function ExcursionDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const excursion = slug ? MOCK[slug] : null;
+  const { data: excursion, isLoading } = useQuery({
+    queryKey: ['excursion', slug],
+    queryFn: () => excursionsApi.getBySlug(slug!),
+    enabled: !!slug,
+  });
+
+  if (isLoading) {
+    return <main className="pt-32 pb-20 text-center text-stone-400">Učitavanje izleta...</main>;
+  }
 
   if (!excursion) {
     return (

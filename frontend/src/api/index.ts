@@ -50,4 +50,10 @@ export const uploadApi = {
   },
 };
 
+/**
+ * Minijatura za sliku s R2 — upload sprema obje varijante pod istim imenom.
+ * Vanjske slike (npr. Unsplash) vraća nepromijenjene.
+ */
+export const thumbOf = (url: string) => url.replace('_full.jpg', '_thumb.jpg');
+
 export default api;

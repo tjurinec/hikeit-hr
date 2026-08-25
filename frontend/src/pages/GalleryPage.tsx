@@ -1,40 +1,25 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { X, ZoomIn } from 'lucide-react';
-
-interface Photo {
-  id: number;
-  url: string;
-  thumb: string;
-  caption: string;
-  location: string;
-  category: 'planine' | 'mora' | 'kultura' | 'priroda';
-}
-
-const PHOTOS: Photo[] = [
-  { id: 1, url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=90', thumb: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80', caption: 'Triglav — Vrh iznad oblaka', location: 'Julijske Alpe', category: 'planine' },
-  { id: 2, url: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=90', thumb: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80', caption: 'Velebitska šuma', location: 'Velebit', category: 'priroda' },
-  { id: 3, url: 'https://images.unsplash.com/photo-1555990793-da11153b6BE8?w=1200&q=90', thumb: 'https://images.unsplash.com/photo-1555990793-da11153b6BE8?w=600&q=80', caption: 'Dubrovnik iz zraka', location: 'Dubrovnik', category: 'kultura' },
-  { id: 4, url: 'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=1200&q=90', thumb: 'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=600&q=80', caption: 'Plitvička jezera', location: 'Lika', category: 'priroda' },
-  { id: 5, url: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=1200&q=90', thumb: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80', caption: 'Šuma na Risnjaku', location: 'Gorski Kotar', category: 'priroda' },
-  { id: 6, url: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1200&q=90', thumb: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&q=80', caption: 'Zora na Biokovu', location: 'Biokovo', category: 'planine' },
-  { id: 7, url: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=90', thumb: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80', caption: 'Planinska panorama', location: 'Alpe', category: 'planine' },
-  { id: 8, url: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=1200&q=90', thumb: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&q=80', caption: 'Treking staza', location: 'Dinaridi', category: 'planine' },
-  { id: 9, url: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1200&q=90', thumb: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80', caption: 'Jadransko more', location: 'Dalmacija', category: 'mora' },
-  { id: 10, url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=90', thumb: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80', caption: 'Plaža na Elafitima', location: 'Elafitski otoci', category: 'mora' },
-  { id: 11, url: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=90', thumb: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=80', caption: 'Zvjezdano nebo planine', location: 'Velebit', category: 'planine' },
-  { id: 12, url: 'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=1200&q=90', thumb: 'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=600&q=80', caption: 'Stari grad', location: 'Hrvatska', category: 'kultura' },
-];
-
-const CATEGORIES = ['sve', 'planine', 'mora', 'kultura', 'priroda'] as const;
-const CAT_LABELS: Record<string, string> = {
-  sve: 'Sve', planine: 'Planine', mora: 'Mora & Otoci', kultura: 'Kultura', priroda: 'Priroda',
-};
+import { galleryApi, thumbOf } from '../api';
+import type { GalleryImage } from '../types';
 
 export default function GalleryPage() {
   const [active, setActive] = useState<string>('sve');
-  const [lightbox, setLightbox] = useState<Photo | null>(null);
+  const [lightbox, setLightbox] = useState<GalleryImage | null>(null);
 
-  const filtered = active === 'sve' ? PHOTOS : PHOTOS.filter(p => p.category === active);
+  const { data: photos = [], isLoading, isError } = useQuery({
+    queryKey: ['gallery'],
+    queryFn: galleryApi.getAll,
+  });
+
+  // Kategorije se izvode iz sadržaja — nema fiksnog popisa koji bi se razišao s bazom
+  const categories = useMemo(
+    () => ['sve', ...new Set(photos.map(p => p.category).filter((c): c is string => !!c))],
+    [photos],
+  );
+
+  const filtered = active === 'sve' ? photos : photos.filter(p => p.category === active);
 
   return (
     <main className="pt-24 pb-20">
@@ -50,7 +35,7 @@ export default function GalleryPage() {
       <div className="max-w-7xl mx-auto px-4">
         {/* Category filter */}
         <div className="flex flex-wrap gap-2 justify-center mb-10">
-          {CATEGORIES.map(cat => (
+          {categories.length > 1 && categories.map(cat => (
             <button
               key={cat}
               onClick={() => setActive(cat)}
@@ -60,10 +45,16 @@ export default function GalleryPage() {
                   : 'bg-white text-stone-600 border-stone-200 hover:border-[#2d5a27] hover:text-[#2d5a27]'
               }`}
             >
-              {CAT_LABELS[cat]}
+              {cat === 'sve' ? 'Sve' : cat.charAt(0).toUpperCase() + cat.slice(1)}
             </button>
           ))}
         </div>
+
+        {isLoading && <p className="text-center text-stone-400 py-16">Učitavanje galerije...</p>}
+        {isError && <p className="text-center text-stone-400 py-16">Trenutno ne mogu dohvatiti galeriju.</p>}
+        {!isLoading && !isError && photos.length === 0 && (
+          <p className="text-center text-stone-400 py-16">Galerija je još prazna.</p>
+        )}
 
         {/* Masonry grid */}
         <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
@@ -74,8 +65,8 @@ export default function GalleryPage() {
               onClick={() => setLightbox(photo)}
             >
               <img
-                src={photo.thumb}
-                alt={photo.caption}
+                src={thumbOf(photo.url)}
+                alt={photo.caption ?? ''}
                 className="w-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center">
@@ -103,7 +94,7 @@ export default function GalleryPage() {
             <X className="w-6 h-6" />
           </button>
           <div className="max-w-5xl max-h-full" onClick={e => e.stopPropagation()}>
-            <img src={lightbox.url} alt={lightbox.caption} className="max-h-[85vh] max-w-full object-contain rounded-lg" />
+            <img src={lightbox.url} alt={lightbox.caption ?? ''} className="max-h-[85vh] max-w-full object-contain rounded-lg" />
             <div className="text-center mt-4">
               <p className="text-white font-medium">{lightbox.caption}</p>
               <p className="text-white/60 text-sm">{lightbox.location}</p>
