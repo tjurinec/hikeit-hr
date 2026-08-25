@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { Mountain, LogOut, PlusCircle, List, Users, Image, MessageSquare } from 'lucide-react';
+import { Mountain, LogOut, PlusCircle, List, Users, Image, MessageSquare, Settings } from 'lucide-react';
 import { clearAdminAuth } from '../../api';
 import ExcursionForm from './ExcursionForm';
 import ExcursionList from './ExcursionList';
 import GalleryList from './GalleryList';
 import GuideList from './GuideList';
 import MessageList from './MessageList';
+import SettingsForm from './SettingsForm';
 
-type Tab = 'new' | 'list' | 'guides' | 'gallery' | 'messages';
+type Tab = 'new' | 'list' | 'guides' | 'gallery' | 'messages' | 'settings';
 
 interface Props {
   onLogout: () => void;
@@ -107,6 +108,17 @@ export default function AdminPage({ onLogout }: Props) {
             <MessageSquare className="w-4 h-4" />
             Poruke
           </button>
+          <button
+            onClick={() => setTab('settings')}
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+              tab === 'settings'
+                ? 'bg-[#2d5a27] text-white'
+                : 'bg-white text-stone-600 border border-stone-200 hover:border-[#2d5a27]'
+            }`}
+          >
+            <Settings className="w-4 h-4" />
+            Kontakt podaci
+          </button>
         </div>
 
         {tab === 'new' && (
@@ -120,6 +132,14 @@ export default function AdminPage({ onLogout }: Props) {
           <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-8">
             <h2 className="font-display text-xl font-bold text-[#3d2b1f] mb-4">Popis izleta</h2>
             <ExcursionList key={savedCount} />
+          </div>
+        )}
+
+        {tab === 'settings' && (
+          <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-8">
+            <h2 className="font-display text-xl font-bold text-[#3d2b1f] mb-2">Kontakt podaci</h2>
+            <p className="text-stone-500 text-sm mb-6">Prikazuju se na stranici Kontakt i u podnožju svake stranice.</p>
+            <SettingsForm />
           </div>
         )}
 

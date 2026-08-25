@@ -61,6 +61,27 @@ export const contactApi = {
   delete: (id: number) => api.delete(`/contact/${id}`),
 };
 
+export interface ContactPhone {
+  label: string | null;
+  number: string;
+}
+
+export interface SiteSettings {
+  contactEmail: string | null;
+  phones: ContactPhone[];
+  location: string | null;
+  locationNote: string | null;
+  workingHours: string | null;
+  workingHoursNote: string | null;
+  instagramUrl: string | null;
+  facebookUrl: string | null;
+}
+
+export const settingsApi = {
+  get: () => api.get<SiteSettings>('/settings').then(r => r.data),
+  update: (data: SiteSettings) => api.put<SiteSettings>('/settings', data).then(r => r.data),
+};
+
 export const uploadApi = {
   image: (file: File) => {
     const form = new FormData();

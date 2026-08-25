@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { contactApi } from '../api';
+import { useSettings } from '../hooks/useSettings';
 import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
 
 export default function ContactPage() {
@@ -7,6 +8,7 @@ export default function ContactPage() {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const settings = useSettings();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,36 +46,45 @@ export default function ContactPage() {
             <div>
               <h2 className="font-display text-2xl font-bold text-[#3d2b1f] mb-6">Pronađi nas</h2>
               <ul className="space-y-5">
+                {settings?.contactEmail && (
                 <li className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-[#2d5a27]/10 text-[#2d5a27] flex items-center justify-center flex-shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
                     <p className="text-xs text-stone-400 uppercase tracking-wider font-semibold mb-0.5">Email</p>
-                    <a href="mailto:info@hikeit.hr" className="text-[#3d2b1f] hover:text-[#2d5a27] font-medium transition-colors">
-                      info@hikeit.hr
+                    <a href={`mailto:${settings.contactEmail}`} className="text-[#3d2b1f] hover:text-[#2d5a27] font-medium transition-colors">
+                      {settings.contactEmail}
                     </a>
                   </div>
                 </li>
+                )}
+                {!!settings?.phones?.length && (
                 <li className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-[#2d5a27]/10 text-[#2d5a27] flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5" />
                   </div>
-                  <div>
+                  <div className="space-y-2">
                     <p className="text-xs text-stone-400 uppercase tracking-wider font-semibold mb-0.5">Telefon / WhatsApp</p>
-                    <a href="tel:+385912345678" className="text-[#3d2b1f] hover:text-[#2d5a27] font-medium transition-colors">
-                      +385 91 234 5678
-                    </a>
+                    {settings.phones.map(p => (
+                      <div key={p.number}>
+                        {p.label && <p className="text-xs text-stone-500">{p.label}</p>}
+                        <a href={`tel:${p.number.replace(/\s/g, '')}`} className="text-[#3d2b1f] hover:text-[#2d5a27] font-medium transition-colors">
+                          {p.number}
+                        </a>
+                      </div>
+                    ))}
                   </div>
                 </li>
+                )}
                 <li className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-[#2d5a27]/10 text-[#2d5a27] flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
                     <p className="text-xs text-stone-400 uppercase tracking-wider font-semibold mb-0.5">Lokacija</p>
-                    <p className="text-[#3d2b1f] font-medium">Zagreb, Hrvatska</p>
-                    <p className="text-stone-500 text-sm">Izleti diljem HR i regije</p>
+                    <p className="text-[#3d2b1f] font-medium">{settings?.location}</p>
+                    {settings?.locationNote && <p className="text-stone-500 text-sm">{settings.locationNote}</p>}
                   </div>
                 </li>
               </ul>
@@ -82,11 +93,11 @@ export default function ContactPage() {
             <div>
               <h3 className="font-semibold text-[#3d2b1f] mb-3">Prati nas</h3>
               <div className="flex gap-3">
-                <a href="https://instagram.com" target="_blank" rel="noreferrer"
+                <a href={settings?.instagramUrl ?? '#'} target="_blank" rel="noreferrer"
                   className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-medium hover:opacity-90 transition">
                   Instagram
                 </a>
-                <a href="https://facebook.com" target="_blank" rel="noreferrer"
+                <a href={settings?.facebookUrl ?? '#'} target="_blank" rel="noreferrer"
                   className="px-4 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-medium hover:opacity-90 transition">
                   Facebook
                 </a>
@@ -95,9 +106,10 @@ export default function ContactPage() {
 
             <div className="bg-[#f5f0e8] rounded-2xl p-5 border border-stone-200">
               <p className="text-sm font-semibold text-[#3d2b1f] mb-1">Radno vrijeme</p>
-              <p className="text-sm text-stone-600">Ponedjeljak — Petak: 9:00 — 18:00</p>
-              <p className="text-sm text-stone-600">Subota: 10:00 — 14:00</p>
-              <p className="text-xs text-stone-400 mt-2">Na terenu smo dostupni i van radnog vremena — pišite slobodno!</p>
+              <p className="text-sm text-stone-600 whitespace-pre-line">{settings?.workingHours}</p>
+              {settings?.workingHoursNote && (
+                <p className="text-xs text-stone-400 mt-2">{settings.workingHoursNote}</p>
+              )}
             </div>
           </div>
 

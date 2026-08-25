@@ -48,6 +48,8 @@ class SecurityConfig {
                 auth.requestMatchers(HttpMethod.GET, "/api/excursions/**").permitAll()
                 auth.requestMatchers(HttpMethod.GET, "/api/gallery/**").permitAll()
                 auth.requestMatchers(HttpMethod.GET, "/api/guides/**").permitAll()
+                auth.requestMatchers(HttpMethod.GET, "/api/settings").permitAll()
+                auth.requestMatchers(HttpMethod.PUT, "/api/settings").hasRole("ADMIN")
                 // Kontakt forma: slanje je javno, čitanje poruka samo za admina
                 auth.requestMatchers(HttpMethod.POST, "/api/contact").permitAll()
                 auth.requestMatchers("/api/contact/**").hasRole("ADMIN")

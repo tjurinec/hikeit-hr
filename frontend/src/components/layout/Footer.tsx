@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useSettings } from '../../hooks/useSettings';
 import { Mountain, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
+  const settings = useSettings();
+
   return (
     <footer className="bg-[#1a3a16] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
@@ -21,11 +24,11 @@ export default function Footer() {
               Vodimo te do vrhova koje nisi ni sanjao. Planinski i turistički izleti po mjeri — sigurno, odgovorno i nezaboravno.
             </p>
             <div className="flex gap-3 mt-5">
-              <a href="https://instagram.com" target="_blank" rel="noreferrer"
+              <a href={settings?.instagramUrl ?? '#'} target="_blank" rel="noreferrer"
                 className="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-medium transition-colors">
                 Instagram
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noreferrer"
+              <a href={settings?.facebookUrl ?? '#'} target="_blank" rel="noreferrer"
                 className="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-medium transition-colors">
                 Facebook
               </a>
@@ -57,15 +60,15 @@ export default function Footer() {
             <ul className="flex flex-col gap-3">
               <li className="flex items-center gap-2 text-sm text-white/70">
                 <Mail className="w-4 h-4 flex-shrink-0" />
-                <a href="mailto:info@hikeit.hr" className="hover:text-white transition-colors">info@hikeit.hr</a>
+                <a href={`mailto:${settings?.contactEmail ?? ''}`} className="hover:text-white transition-colors">{settings?.contactEmail}</a>
               </li>
               <li className="flex items-center gap-2 text-sm text-white/70">
                 <Phone className="w-4 h-4 flex-shrink-0" />
-                <a href="tel:+385912345678" className="hover:text-white transition-colors">+385 91 234 5678</a>
+                <a href={`tel:${(settings?.phones?.[0]?.number ?? '').replace(/\s/g, '')}`} className="hover:text-white transition-colors">{settings?.phones?.[0]?.number}</a>
               </li>
               <li className="flex items-start gap-2 text-sm text-white/70">
                 <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                <span>Zagreb, Hrvatska</span>
+                <span>{settings?.location}</span>
               </li>
             </ul>
           </div>
