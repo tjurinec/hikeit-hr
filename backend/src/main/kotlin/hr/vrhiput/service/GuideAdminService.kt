@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class GuideAdminService(private val repo: GuideRepository) {
+class GuideAdminService(
+    private val repo: GuideRepository,
+    private val imageCleanup: ImageCleanupService,
+) {
 
     fun getAll(): List<GuideDto> = repo.findAll().map { it.toDto() }
 
@@ -20,18 +23,25 @@ class GuideAdminService(private val repo: GuideRepository) {
     @Transactional
     fun update(id: Long, req: CreateGuideRequest): GuideDto {
         val guide = repo.findById(id).orElseThrow { NoSuchElementException("Vodič $id nije pronađen") }
+        val stariAvatar = guide.avatarUrl
         guide.apply {
             name = req.name
             bio = req.bio
             avatarUrl = req.avatarUrl
             specialization = req.specialization
         }
-        return repo.save(guide).toDto()
+        val dto = repo.save(guide).toDto()
+        repo.flush()
+        if (stariAvatar != req.avatarUrl) imageCleanup.deleteIfUnused(stariAvatar)
+        return dto
     }
 
     @Transactional
     fun delete(id: Long) {
-        if (!repo.existsById(id)) throw NoSuchElementException("Vodič $id nije pronađen")
-        repo.deleteById(id)
+        val guide = repo.findById(id).orElseThrow { NoSuchElementException("Vodič $id nije pronađen") }
+        val avatar = guide.avatarUrl
+        repo.delete(guide)
+        repo.flush()
+        imageCleanup.deleteIfUnused(avatar)
     }
 }

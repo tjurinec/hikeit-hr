@@ -20,4 +20,10 @@ interface ExcursionRepository : JpaRepository<Excursion, Long> {
         ORDER BY e.publishedAt DESC
     """)
     fun search(query: String): List<Excursion>
+
+    // Za provjeru koristi li sliku još netko prije brisanja s R2
+    fun countByCoverImageUrl(url: String): Long
+
+    @Query("SELECT COUNT(i) FROM ExcursionImage i WHERE i.url = :url")
+    fun countImagesByUrl(url: String): Long
 }

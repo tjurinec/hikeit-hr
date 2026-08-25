@@ -17,6 +17,7 @@ import java.time.OffsetDateTime
 class ExcursionAdminService(
     private val excursionRepo: ExcursionRepository,
     private val guideRepo: GuideRepository,
+    private val imageCleanup: ImageCleanupService,
 ) {
 
     /** Za razliku od javnog API-ja vraća i neobjavljene izlete. */
@@ -61,6 +62,7 @@ class ExcursionAdminService(
         val excursion = excursionRepo.findById(id)
             .orElseThrow { NoSuchElementException("Izlet $id nije pronađen") }
         val guide = req.guideId?.let { guideRepo.findById(it).orElse(null) }
+        val staraSlika = excursion.coverImageUrl
 
         excursion.apply {
             title = req.title
@@ -81,13 +83,20 @@ class ExcursionAdminService(
             nextDeparture = req.nextDeparture
             updatedAt = OffsetDateTime.now()
         }
-        return excursionRepo.save(excursion).toDetailDto()
+        val dto = excursionRepo.save(excursion).toDetailDto()
+        excursionRepo.flush()
+        if (staraSlika != req.coverImageUrl) imageCleanup.deleteIfUnused(staraSlika)
+        return dto
     }
 
     @Transactional
     fun delete(id: Long) {
-        if (!excursionRepo.existsById(id)) throw NoSuchElementException("Izlet $id nije pronađen")
-        excursionRepo.deleteById(id)
+        val excursion = excursionRepo.findById(id)
+            .orElseThrow { NoSuchElementException("Izlet $id nije pronađen") }
+        val slike = excursion.images.map { it.url } + excursion.coverImageUrl
+        excursionRepo.delete(excursion)
+        excursionRepo.flush()
+        imageCleanup.deleteIfUnused(slike)
     }
 
     private fun generateSlug(title: String): String {

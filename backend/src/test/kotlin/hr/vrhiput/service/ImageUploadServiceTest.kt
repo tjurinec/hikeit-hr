@@ -56,6 +56,29 @@ class ImageUploadServiceTest {
         assertTrue(out.size <= src.size, "original se mora zadrzati kad bi rekompresija povecala file")
     }
 
+    private val pub = "https://pub-abc.r2.dev"
+
+    @Test
+    fun `keysFor vraca obje varijante`() {
+        val ocekivano = listOf("uuid1_full.jpg", "uuid1_thumb.jpg")
+        assertEquals(ocekivano, ImageUploadService.keysFor("$pub/uuid1_full.jpg", pub))
+        assertEquals(ocekivano, ImageUploadService.keysFor("$pub/uuid1_thumb.jpg", pub))
+    }
+
+    @Test
+    fun `keysFor ignorira tude i neispravne urlove`() {
+        // vanjska slika (npr. Unsplash) — ne smijemo je pokusati brisati
+        assertEquals(emptyList<String>(), ImageUploadService.keysFor("https://images.unsplash.com/foto.jpg", pub))
+        // stara lokalna putanja
+        assertEquals(emptyList<String>(), ImageUploadService.keysFor("/uploads/staro.png", pub))
+        // nas host, ali nepoznat sufiks
+        assertEquals(emptyList<String>(), ImageUploadService.keysFor("$pub/nesto.png", pub))
+        // prazan publicUrl (lokalni dev bez R2 konfiguracije)
+        assertEquals(emptyList<String>(), ImageUploadService.keysFor("$pub/uuid_full.jpg", ""))
+        // slican prefiks ne smije proci
+        assertEquals(emptyList<String>(), ImageUploadService.keysFor("https://pub-abc.r2.dev.zlo.com/x_full.jpg", pub))
+    }
+
     @Test
     fun `neslika baca gresku`() {
         assertThrows(IllegalArgumentException::class.java) {

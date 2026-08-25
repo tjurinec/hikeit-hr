@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional
 class GalleryService(
     private val repo: GalleryRepository,
     private val excursionRepo: ExcursionRepository,
+    private val imageCleanup: ImageCleanupService,
 ) {
 
     fun getAll(): List<GalleryImageDto> =
@@ -38,6 +39,7 @@ class GalleryService(
     @Transactional
     fun update(id: Long, req: CreateGalleryImageRequest): GalleryImageDto {
         val image = repo.findById(id).orElseThrow { NoSuchElementException("Slika $id nije pronađena") }
+        val stariUrl = image.url
         image.apply {
             url = req.url
             caption = req.caption
@@ -46,12 +48,18 @@ class GalleryService(
             excursion = req.excursionId?.let { excursionRepo.findById(it).orElse(null) }
             sortOrder = req.sortOrder
         }
-        return repo.save(image).toDto()
+        val dto = repo.save(image).toDto()
+        repo.flush()
+        if (stariUrl != req.url) imageCleanup.deleteIfUnused(stariUrl)
+        return dto
     }
 
     @Transactional
     fun delete(id: Long) {
-        if (!repo.existsById(id)) throw NoSuchElementException("Slika $id nije pronađena")
-        repo.deleteById(id)
+        val image = repo.findById(id).orElseThrow { NoSuchElementException("Slika $id nije pronađena") }
+        val url = image.url
+        repo.delete(image)
+        repo.flush()
+        imageCleanup.deleteIfUnused(url)
     }
 }

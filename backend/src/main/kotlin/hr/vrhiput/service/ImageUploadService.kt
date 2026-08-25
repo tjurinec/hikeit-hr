@@ -40,6 +40,13 @@ class ImageUploadService(private val s3: S3Client) {
         return UploadedImage(url = "$publicUrl/$id$FULL", thumbUrl = "$publicUrl/$id$THUMB")
     }
 
+    /** Briše obje varijante slike. Vanjske URL-ove (npr. Unsplash) ignorira. */
+    fun delete(url: String) {
+        keysFor(url, publicUrl).forEach { key ->
+            s3.deleteObject { it.bucket(bucket).key(key) }
+        }
+    }
+
     private fun put(key: String, data: ByteArray) {
         s3.putObject(
             PutObjectRequest.builder()
@@ -87,6 +94,19 @@ class ImageUploadService(private val s3: S3Client) {
                     reader.dispose()
                 }
             }
+
+        /**
+         * Ključevi obiju varijanti za dani javni URL.
+         * Prazna lista ako URL nije naš — tada nema što brisati.
+         */
+        fun keysFor(url: String, publicUrl: String): List<String> {
+            if (publicUrl.isBlank() || !url.startsWith("$publicUrl/")) return emptyList()
+            val name = url.removePrefix("$publicUrl/")
+            if (name.isBlank() || name.contains('/')) return emptyList()
+            val base = name.removeSuffix(FULL).removeSuffix(THUMB)
+            if (base == name) return emptyList() // nepoznat sufiks, ne diraj
+            return listOf("$base$FULL", "$base$THUMB")
+        }
 
         const val MAX_BYTES = 20L * 1024 * 1024 // mora pratiti spring.servlet.multipart.max-file-size
         const val FULL = "_full.jpg"
