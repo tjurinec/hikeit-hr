@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Mountain, Lock } from 'lucide-react';
-import { setAdminAuth } from '../../api';
-import axios from 'axios';
+import api, { setAdminAuth, clearAdminAuth } from '../../api';
 
 interface Props {
   onLogin: () => void;
@@ -19,10 +18,12 @@ export default function AdminLoginPage({ onLogin }: Props) {
     setError('');
     setAdminAuth(username, password);
     try {
-      // Provjeri kredencijale pokušajem admin poziva
-      await axios.get('/api/excursions/featured', { auth: { username, password } });
+      // Mora ići kroz `api` instancu — relativni URL bi pogodio static site,
+      // koji zbog SPA rewritea vraća index.html s 200 na bilo koju lozinku.
+      await api.get('/excursions/featured', { auth: { username, password } });
       onLogin();
     } catch {
+      clearAdminAuth();
       setError('Pogrešno korisničko ime ili lozinka.');
       setLoading(false);
     }
