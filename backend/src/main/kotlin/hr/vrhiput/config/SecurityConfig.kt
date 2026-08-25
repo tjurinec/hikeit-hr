@@ -44,6 +44,9 @@ class SecurityConfig {
             .authorizeHttpRequests { auth ->
                 // Admin GET rute moraju doći prije javnog permitAll — prvi match pobjeđuje
                 auth.requestMatchers(HttpMethod.GET, "/api/excursions/admin/**").hasRole("ADMIN")
+                // Spring na grešku radi forward na /error; bez ovoga bi validacijska
+                // greška na javnom endpointu izašla kao 401 umjesto 400
+                auth.requestMatchers("/error").permitAll()
                 // Javni GET endpointi
                 auth.requestMatchers(HttpMethod.GET, "/api/excursions/**").permitAll()
                 auth.requestMatchers(HttpMethod.GET, "/api/gallery/**").permitAll()
