@@ -1,25 +1,6 @@
-import { Mountain, Award, Heart } from 'lucide-react';
-
-const GUIDES = [
-  {
-    name: 'Tomislav',
-    role: 'Planinski vodič',
-    specialization: 'Visoko planinarenje & Alpinizam',
-    bio: 'Certificirani planinski vodič s više od 8 godina iskustva na terenu. Triglav sam prošao više od 40 puta — i svaki put me iznova fascinira. Vodim izlete na Velebit, Biokovo, u Julijske Alpe i Dinaride. Vjerujem da planine mijenjaju ljude na bolje.',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
-    certifications: ['Planinski vodič — HPS', 'Prva pomoć u prirodi', 'Avalanche Safety Level 2'],
-    emoji: '⛰️',
-  },
-  {
-    name: 'Ana',
-    role: 'Turistički vodič',
-    specialization: 'Kulturni turizam & Jadran',
-    bio: 'Licencirani turistički vodič s fokusom na kulturne i eno-gastronomske rute duž Jadranske obale. Svaki grad ima svoju priču, svako mjesto svoju dušu — i ja uživam u tome da te upoznam s tom dušom. Posebna ljubav: Dubrovnik i otoci.',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80',
-    certifications: ['Turistički vodič — Ministarstvo turizma RH', 'Sommelier Level 1', 'Vodič za kulturnu baštinu UNESCO'],
-    emoji: '🌊',
-  },
-];
+import { useQuery } from '@tanstack/react-query';
+import { Mountain, Award, Heart, User } from 'lucide-react';
+import { guidesApi } from '../api';
 
 const VALUES = [
   {
@@ -40,6 +21,11 @@ const VALUES = [
 ];
 
 export default function AboutPage() {
+  const { data: guides = [], isLoading } = useQuery({
+    queryKey: ['guides'],
+    queryFn: guidesApi.getAll,
+  });
+
   return (
     <main className="pt-24 pb-20">
       {/* Hero */}
@@ -118,31 +104,32 @@ export default function AboutPage() {
           <h2 className="font-display text-3xl font-bold text-[#3d2b1f] mt-2">Naš Tim</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {GUIDES.map(guide => (
-            <div key={guide.name} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-100 hover:shadow-lg transition-shadow">
-              <div className="relative h-64">
-                <img src={guide.avatar} alt={guide.name} className="w-full h-full object-cover object-top" />
+          {isLoading && <p className="col-span-full text-center text-stone-400 py-10">Učitavanje...</p>}
+          {!isLoading && guides.length === 0 && (
+            <p className="col-span-full text-center text-stone-400 py-10">Vodiči će uskoro biti predstavljeni.</p>
+          )}
+          {guides.map(guide => (
+            <div key={guide.id} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-100 hover:shadow-lg transition-shadow">
+              <div className="relative h-64 bg-stone-100">
+                {guide.avatarUrl ? (
+                  <img src={guide.avatarUrl} alt={guide.name} className="w-full h-full object-cover object-top" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-stone-300">
+                    <User className="w-16 h-16" />
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-4 left-5">
-                  <div className="text-2xl mb-1">{guide.emoji}</div>
                   <h3 className="font-display text-2xl font-bold text-white">{guide.name}</h3>
-                  <p className="text-white/80 text-sm">{guide.role}</p>
                 </div>
               </div>
               <div className="p-6">
-                <p className="text-[#2d5a27] font-semibold text-sm mb-3">{guide.specialization}</p>
-                <p className="text-stone-600 text-sm leading-relaxed mb-4">{guide.bio}</p>
-                <div>
-                  <p className="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-2">Certifikati</p>
-                  <ul className="space-y-1">
-                    {guide.certifications.map(cert => (
-                      <li key={cert} className="flex items-center gap-2 text-xs text-stone-600">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#2d5a27] flex-shrink-0" />
-                        {cert}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {guide.specialization && (
+                  <p className="text-[#2d5a27] font-semibold text-sm mb-3">{guide.specialization}</p>
+                )}
+                {guide.bio && (
+                  <p className="text-stone-600 text-sm leading-relaxed">{guide.bio}</p>
+                )}
               </div>
             </div>
           ))}
