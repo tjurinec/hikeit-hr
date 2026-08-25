@@ -34,8 +34,14 @@ export interface GalleryImage {
   url: string;
   caption: string | null;
   location: string | null;
-  category: string | null;
-  excursionTitle?: string | null;
+}
+
+export interface Gallery {
+  id: number;
+  title: string;
+  description: string | null;
+  externalUrl: string | null;
+  images: GalleryImage[];
 }
 
 export type DifficultyLabel = {

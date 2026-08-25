@@ -1,10 +1,10 @@
 package hr.vrhiput.service
 
-import hr.vrhiput.dto.CreateGalleryImageRequest
-import hr.vrhiput.dto.GalleryImageDto
+import hr.vrhiput.dto.CreateGalleryRequest
+import hr.vrhiput.dto.GalleryDto
 import hr.vrhiput.dto.toDto
+import hr.vrhiput.entity.Gallery
 import hr.vrhiput.entity.GalleryImage
-import hr.vrhiput.repository.ExcursionRepository
 import hr.vrhiput.repository.GalleryRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -13,53 +13,63 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional(readOnly = true)
 class GalleryService(
     private val repo: GalleryRepository,
-    private val excursionRepo: ExcursionRepository,
     private val imageCleanup: ImageCleanupService,
 ) {
 
-    fun getAll(): List<GalleryImageDto> =
-        repo.findAllByOrderBySortOrderAsc().map { it.toDto() }
+    fun getAll(): List<GalleryDto> = repo.findAllByOrderBySortOrderAscIdAsc().map { it.toDto() }
 
-    fun getByCategory(category: String): List<GalleryImageDto> =
-        repo.findAllByCategoryOrderBySortOrderAsc(category).map { it.toDto() }
-
-    @Transactional
-    fun create(req: CreateGalleryImageRequest): GalleryImageDto =
-        repo.save(
-            GalleryImage(
-                url = req.url,
-                caption = req.caption,
-                location = req.location,
-                category = req.category,
-                excursion = req.excursionId?.let { excursionRepo.findById(it).orElse(null) },
-                sortOrder = req.sortOrder,
-            )
-        ).toDto()
+    fun getById(id: Long): GalleryDto =
+        repo.findById(id).orElseThrow { NoSuchElementException("Galerija $id nije pronađena") }.toDto()
 
     @Transactional
-    fun update(id: Long, req: CreateGalleryImageRequest): GalleryImageDto {
-        val image = repo.findById(id).orElseThrow { NoSuchElementException("Slika $id nije pronađena") }
-        val stariUrl = image.url
-        image.apply {
-            url = req.url
-            caption = req.caption
-            location = req.location
-            category = req.category
-            excursion = req.excursionId?.let { excursionRepo.findById(it).orElse(null) }
-            sortOrder = req.sortOrder
-        }
-        val dto = repo.save(image).toDto()
+    fun create(req: CreateGalleryRequest): GalleryDto {
+        val gallery = Gallery(
+            title = req.title.trim(),
+            description = req.description.orNull(),
+            externalUrl = req.externalUrl.orNull(),
+            sortOrder = repo.count().toInt(),
+        )
+        gallery.images = req.images.mapIndexed { i, img -> img.toEntity(gallery, i) }.toMutableList()
+        return repo.save(gallery).toDto()
+    }
+
+    @Transactional
+    fun update(id: Long, req: CreateGalleryRequest): GalleryDto {
+        val gallery = repo.findById(id).orElseThrow { NoSuchElementException("Galerija $id nije pronađena") }
+        val stareSlike = gallery.images.map { it.url }
+
+        gallery.title = req.title.trim()
+        gallery.description = req.description.orNull()
+        gallery.externalUrl = req.externalUrl.orNull()
+
+        // orphanRemoval briše uklonjene slike; lista se gradi ispočetka da
+        // redoslijed odgovara onom iz forme
+        gallery.images.clear()
+        gallery.images.addAll(req.images.mapIndexed { i, img -> img.toEntity(gallery, i) })
+
+        val dto = repo.save(gallery).toDto()
         repo.flush()
-        if (stariUrl != req.url) imageCleanup.deleteIfUnused(stariUrl)
+        imageCleanup.deleteIfUnused(stareSlike - req.images.map { it.url }.toSet())
         return dto
     }
 
     @Transactional
     fun delete(id: Long) {
-        val image = repo.findById(id).orElseThrow { NoSuchElementException("Slika $id nije pronađena") }
-        val url = image.url
-        repo.delete(image)
+        val gallery = repo.findById(id).orElseThrow { NoSuchElementException("Galerija $id nije pronađena") }
+        val slike = gallery.images.map { it.url }
+        repo.delete(gallery)
         repo.flush()
-        imageCleanup.deleteIfUnused(url)
+        imageCleanup.deleteIfUnused(slike)
     }
+
+    private fun hr.vrhiput.dto.CreateGalleryImageRequest.toEntity(gallery: Gallery, index: Int) =
+        GalleryImage(
+            url = url.trim(),
+            caption = caption.orNull(),
+            location = location.orNull(),
+            gallery = gallery,
+            sortOrder = index,
+        )
+
+    private fun String?.orNull(): String? = this?.trim()?.ifBlank { null }
 }

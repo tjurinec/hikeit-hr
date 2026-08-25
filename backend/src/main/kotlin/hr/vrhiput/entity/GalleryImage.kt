@@ -18,12 +18,9 @@ class GalleryImage(
     @Column(length = 255)
     var location: String? = null,
 
-    @Column(length = 100)
-    var category: String? = null,
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "excursion_id")
-    var excursion: Excursion? = null,
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "gallery_id")
+    var gallery: Gallery? = null,
 
     @Column(name = "sort_order", nullable = false)
     var sortOrder: Int = 0,

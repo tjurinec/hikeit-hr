@@ -2,7 +2,6 @@ package hr.vrhiput.dto
 
 import hr.vrhiput.entity.Difficulty
 import hr.vrhiput.entity.Excursion
-import hr.vrhiput.entity.GalleryImage
 import hr.vrhiput.entity.Guide
 import java.math.BigDecimal
 import java.time.LocalDate
@@ -58,15 +57,6 @@ data class ExcursionDetailDto(
     val nextDeparture: LocalDate?,
 )
 
-data class GalleryImageDto(
-    val id: Long,
-    val url: String,
-    val caption: String?,
-    val location: String?,
-    val category: String?,
-    val excursionTitle: String?,
-)
-
 fun Guide.toDto() = GuideDto(id, name, bio, avatarUrl, specialization)
 
 fun Excursion.toSummaryDto() = ExcursionSummaryDto(
@@ -80,5 +70,3 @@ fun Excursion.toDetailDto() = ExcursionDetailDto(
     price, coverImageUrl, images.map { it.url }, location, startingPoint,
     guide?.toDto(), tags, featured, published, publishedAt, nextDeparture,
 )
-
-fun GalleryImage.toDto() = GalleryImageDto(id, url, caption, location, category, excursion?.title)

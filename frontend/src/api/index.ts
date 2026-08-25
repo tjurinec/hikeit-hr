@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Excursion, GalleryImage, Guide } from '../types';
+import type { Excursion, Gallery, Guide } from '../types';
 
 // Bez globalnog Content-Typea: axios ga postavlja sam po tipu tijela
 // (application/json za objekte, multipart/form-data s boundaryem za FormData).
@@ -29,9 +29,10 @@ export const excursionsApi = {
 };
 
 export const galleryApi = {
-  getAll: () => api.get<GalleryImage[]>('/gallery').then(r => r.data),
-  create: (data: unknown) => api.post<GalleryImage>('/gallery', data).then(r => r.data),
-  update: (id: number, data: unknown) => api.put<GalleryImage>(`/gallery/${id}`, data).then(r => r.data),
+  getAll: () => api.get<Gallery[]>('/gallery').then(r => r.data),
+  getById: (id: number) => api.get<Gallery>(`/gallery/${id}`).then(r => r.data),
+  create: (data: unknown) => api.post<Gallery>('/gallery', data).then(r => r.data),
+  update: (id: number, data: unknown) => api.put<Gallery>(`/gallery/${id}`, data).then(r => r.data),
   delete: (id: number) => api.delete(`/gallery/${id}`),
 };
 

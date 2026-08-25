@@ -1,7 +1,7 @@
 package hr.vrhiput.controller
 
-import hr.vrhiput.dto.CreateGalleryImageRequest
-import hr.vrhiput.dto.GalleryImageDto
+import hr.vrhiput.dto.CreateGalleryRequest
+import hr.vrhiput.dto.GalleryDto
 import hr.vrhiput.service.GalleryService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -13,18 +13,19 @@ import org.springframework.web.bind.annotation.*
 class GalleryController(private val service: GalleryService) {
 
     @GetMapping
-    fun getAll(@RequestParam(required = false) category: String?): List<GalleryImageDto> =
-        if (category.isNullOrBlank()) service.getAll() else service.getByCategory(category)
+    fun getAll(): List<GalleryDto> = service.getAll()
+
+    @GetMapping("/{id}")
+    fun getById(@PathVariable id: Long): ResponseEntity<GalleryDto> =
+        try { ResponseEntity.ok(service.getById(id)) }
+        catch (e: NoSuchElementException) { ResponseEntity.notFound().build() }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@Valid @RequestBody req: CreateGalleryImageRequest): GalleryImageDto = service.create(req)
+    fun create(@Valid @RequestBody req: CreateGalleryRequest): GalleryDto = service.create(req)
 
     @PutMapping("/{id}")
-    fun update(
-        @PathVariable id: Long,
-        @Valid @RequestBody req: CreateGalleryImageRequest,
-    ): ResponseEntity<GalleryImageDto> =
+    fun update(@PathVariable id: Long, @Valid @RequestBody req: CreateGalleryRequest): ResponseEntity<GalleryDto> =
         try { ResponseEntity.ok(service.update(id, req)) }
         catch (e: NoSuchElementException) { ResponseEntity.notFound().build() }
 
