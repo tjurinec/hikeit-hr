@@ -1,6 +1,8 @@
 package hr.vrhiput.entity
 
 import jakarta.persistence.*
+import org.hibernate.annotations.JdbcTypeCode
+import org.hibernate.type.SqlTypes
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.OffsetDateTime
@@ -26,7 +28,10 @@ class Excursion(
     var content: String? = null,
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "difficulty")
+    // Stupac je PostgreSQL enum tip (CREATE TYPE difficulty), ne varchar —
+    // bez NAMED_ENUM Hibernate šalje varchar i Postgres odbija insert.
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(columnDefinition = "difficulty", nullable = false)
     var difficulty: Difficulty = Difficulty.MODERATE,
 
     @Column(name = "duration_days", nullable = false)
