@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { X, ExternalLink, Images, ChevronLeft, ChevronRight } from 'lucide-react';
 import { galleryApi, thumbOf } from '../api';
@@ -19,8 +19,12 @@ export default function GalleryPage() {
   const navigate = useNavigate();
   const qc = useQueryClient();
   const { id } = useParams<{ id: string }>();
-  const [page, setPage] = useState(0);
   const [zoom, setZoom] = useState<GalleryImage | null>(null);
+
+  // Stranica živi u URL-u (?stranica=2, 1-indeksirano) pa je link dijeljiv
+  // i back gumb vraća na prethodnu stranicu
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = Math.max(0, (Number(searchParams.get('stranica')) || 1) - 1);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['gallery', 'page', page],
@@ -51,20 +55,22 @@ export default function GalleryPage() {
   }, [page, pages, qc]);
 
   const goTo = (p: number) => {
-    setPage(p);
+    setSearchParams(p === 0 ? {} : { stranica: String(p + 1) });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const zatvori = page === 0 ? '/galerija' : `/galerija?stranica=${page + 1}`;
 
   // Zatvaranje tipkom Esc: prvo uvećana slika, pa modal
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return;
       if (zoom) setZoom(null);
-      else if (open) navigate('/galerija');
+      else if (open) navigate(zatvori);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [zoom, open, navigate]);
+  }, [zoom, open, navigate, zatvori]);
 
   return (
     <main className="pt-24 pb-20">
@@ -87,7 +93,7 @@ export default function GalleryPage() {
           {visible.map(g => (
             <article
               key={g.id}
-              onClick={() => navigate(`/galerija/${g.id}`)}
+              onClick={() => navigate(`/galerija/${g.id}${page === 0 ? '' : `?stranica=${page + 1}`}`)}
               className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-stone-100 shadow-sm hover:shadow-xl transition-all duration-300"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-stone-100">
@@ -160,7 +166,7 @@ export default function GalleryPage() {
 
       {/* Modal s galerijom */}
       {open && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-start justify-center p-4 overflow-y-auto" onClick={() => navigate('/galerija')}>
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-start justify-center p-4 overflow-y-auto" onClick={() => navigate(zatvori)}>
           <div
             className="bg-[#f5f0e8] rounded-2xl max-w-5xl w-full my-8 overflow-hidden"
             onClick={e => e.stopPropagation()}
@@ -183,7 +189,7 @@ export default function GalleryPage() {
                 )}
               </div>
               <button
-                onClick={() => navigate('/galerija')}
+                onClick={() => navigate(zatvori)}
                 className="p-2 rounded-full text-stone-500 hover:bg-stone-200 transition-colors shrink-0"
                 aria-label="Zatvori"
               >
