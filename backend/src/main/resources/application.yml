@@ -28,6 +28,11 @@ server:
   port: 8080
 
 app:
-  upload-dir: ./uploads
+  r2:
+    account-id: ${R2_ACCOUNT_ID:}
+    access-key: ${R2_ACCESS_KEY:}
+    secret-key: ${R2_SECRET_KEY:}
+    bucket: ${R2_BUCKET:hikeit}
+    public-url: ${R2_PUBLIC_URL:}
   cors:
     allowed-origins: http://localhost:5173

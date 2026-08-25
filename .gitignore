@@ -29,3 +29,9 @@ Thumbs.db
 
 # ===== Docker volumes =====
 postgres_data/
+
+# ===== Radne slike u rootu (ne idu u repo; logotipi u frontend/ ostaju) =====
+/*.png
+/*.jpg
+/*.jpeg
+/*.webp

@@ -10,6 +10,17 @@ services:
         sync: false
       - key: FRONTEND_URL
         value: https://hikeit-frontend.onrender.com
+      # Cloudflare R2 — vrijednosti se unose ručno u Render dashboardu
+      - key: R2_ACCOUNT_ID
+        sync: false
+      - key: R2_ACCESS_KEY
+        sync: false
+      - key: R2_SECRET_KEY
+        sync: false
+      - key: R2_BUCKET
+        sync: false
+      - key: R2_PUBLIC_URL
+        sync: false
 
   - type: web
     name: hikeit-frontend
