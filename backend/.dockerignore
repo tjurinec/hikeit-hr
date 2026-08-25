@@ -1,6 +1,0 @@
-# Build kontekst se šalje Render builderu prije nego build uopće počne —
-# ovdje ide sve što nije potrebno za `mvn package`.
-target/
-uploads/
-.env
-*.log

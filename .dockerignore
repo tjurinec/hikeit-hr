@@ -1,0 +1,14 @@
+# Build kontekst je repo root (Dockerfile Path: ./Dockerfile), pa ovdje ide
+# sve što `mvn package` ne treba.
+backend/target/
+backend/uploads/
+backend/.env
+frontend/
+*.log
+*.png
+*.jpg
+*.jpeg
+*.docx
+*.md
+.idea/
+.vscode/
