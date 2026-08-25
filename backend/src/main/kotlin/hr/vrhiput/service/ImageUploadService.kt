@@ -29,7 +29,7 @@ class ImageUploadService(private val s3: S3Client) {
     fun upload(file: MultipartFile): UploadedImage {
         val contentType = file.contentType ?: throw IllegalArgumentException("Nepoznat tip datoteke")
         if (contentType !in allowed) throw IllegalArgumentException("Dozvoljeni formati: JPG, PNG, WEBP")
-        if (file.size > MAX_BYTES) throw IllegalArgumentException("Maksimalna veličina datoteke je 25 MB")
+        if (file.size > MAX_BYTES) throw IllegalArgumentException("Maksimalna veličina datoteke je 20 MB")
 
         val bytes = file.bytes
         val id = UUID.randomUUID().toString()
@@ -88,7 +88,7 @@ class ImageUploadService(private val s3: S3Client) {
                 }
             }
 
-        const val MAX_BYTES = 25L * 1024 * 1024
+        const val MAX_BYTES = 20L * 1024 * 1024 // mora pratiti spring.servlet.multipart.max-file-size
         const val FULL = "_full.jpg"
         const val THUMB = "_thumb.jpg"
         const val FULL_PX = 2000

@@ -3,6 +3,7 @@ package hr.vrhiput.config
 import hr.vrhiput.repository.AdminUserRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.config.Customizer
 import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -35,6 +36,9 @@ class SecurityConfig {
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
+            // CORS mora ici kroz Security chain, inace preflight (OPTIONS bez
+            // Authorization headera) padne na 401 prije nego CorsFilter dode na red
+            .cors(Customizer.withDefaults())
             .csrf { it.disable() }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests { auth ->
