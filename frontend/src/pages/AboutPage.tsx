@@ -112,7 +112,7 @@ export default function AboutPage() {
             <div key={guide.id} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-100 hover:shadow-lg transition-shadow">
               <div className="relative h-64 bg-stone-100">
                 {guide.avatarUrl ? (
-                  <img src={guide.avatarUrl} alt={guide.name} className="w-full h-full object-cover object-top" />
+                  <img src={guide.avatarUrl} alt={guide.name} loading="lazy" className="w-full h-full object-cover object-top" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-stone-300">
                     <User className="w-16 h-16" />

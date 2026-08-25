@@ -13,6 +13,7 @@ export default function ExcursionCard({ excursion }: { excursion: Excursion }) {
             <img
               src={thumbOf(excursion.coverImageUrl)}
               alt={excursion.title}
+              loading="lazy"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
