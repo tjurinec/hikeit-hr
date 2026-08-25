@@ -6,6 +6,7 @@ import { settingsApi, type SiteSettings } from '../../api';
 const EMPTY: SiteSettings = {
   contactEmail: '', phones: [], location: '', locationNote: '',
   workingHours: '', workingHoursNote: '', instagramUrl: '', facebookUrl: '',
+  galleryIntro: '',
 };
 
 const input = 'w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm outline-none focus:border-[#2d5a27] focus:ring-2 focus:ring-[#2d5a27]/20 transition';
@@ -146,6 +147,17 @@ export default function SettingsForm() {
           <label className={label}>Facebook</label>
           <input type="url" value={form.facebookUrl ?? ''} onChange={set('facebookUrl')} placeholder="https://facebook.com/..." className={input} />
         </div>
+      </div>
+
+      <div className="pt-2 border-t border-stone-200">
+        <label className={label}>Uvodni tekst na stranici Galerija</label>
+        <textarea
+          rows={3}
+          value={form.galleryIntro ?? ''}
+          onChange={set('galleryIntro')}
+          placeholder="Prikazuje se iznad svih galerija."
+          className={`${input} resize-y`}
+        />
       </div>
 
       <button

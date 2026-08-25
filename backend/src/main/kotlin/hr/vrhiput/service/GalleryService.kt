@@ -53,6 +53,14 @@ class GalleryService(
         return dto
     }
 
+    /** Postavlja redoslijed prema poziciji id-a u listi. */
+    @Transactional
+    fun reorder(ids: List<Long>) {
+        val byId = repo.findAllById(ids).associateBy { it.id }
+        ids.forEachIndexed { index, id -> byId[id]?.sortOrder = index }
+        repo.saveAll(byId.values)
+    }
+
     @Transactional
     fun delete(id: Long) {
         val gallery = repo.findById(id).orElseThrow { NoSuchElementException("Galerija $id nije pronađena") }

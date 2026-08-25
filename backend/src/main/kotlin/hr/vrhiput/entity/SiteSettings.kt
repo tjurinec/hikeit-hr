@@ -45,6 +45,10 @@ class SiteSettings(
     @Column(name = "facebook_url", length = 300)
     var facebookUrl: String? = null,
 
+    /** Uvodni tekst iznad galerija. */
+    @Column(name = "gallery_intro", columnDefinition = "TEXT")
+    var galleryIntro: String? = null,
+
     @Column(name = "updated_at", nullable = false)
     var updatedAt: OffsetDateTime = OffsetDateTime.now(),
 )

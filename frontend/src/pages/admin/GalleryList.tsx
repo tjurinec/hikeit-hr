@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Pencil, Trash2, Loader2, FolderPlus, ExternalLink, Images } from 'lucide-react';
+import { Pencil, Trash2, Loader2, FolderPlus, ExternalLink, Images, ArrowUp, ArrowDown } from 'lucide-react';
 import { galleryApi, thumbOf } from '../../api';
 import type { Gallery } from '../../types';
 import GalleryForm from './GalleryForm';
@@ -39,6 +39,22 @@ export default function GalleryList() {
     }
   };
 
+  /** Zamjena susjeda: prikaz se pomakne odmah, redoslijed se spremi u pozadini. */
+  const move = async (i: number, delta: number) => {
+    const j = i + delta;
+    if (j < 0 || j >= items.length) return;
+    const next = [...items];
+    [next[i], next[j]] = [next[j], next[i]];
+    setItems(next);
+    setError('');
+    try {
+      await galleryApi.reorder(next.map(g => g.id));
+    } catch {
+      setError('Redoslijed nije spremljen.');
+      await load();
+    }
+  };
+
   const done = () => { setEditing(null); setCreating(false); load(); };
 
   if (creating || editing) {
@@ -69,8 +85,24 @@ export default function GalleryList() {
 
       {items.length === 0 && <p className="text-stone-500 text-sm py-4">Još nema galerija.</p>}
 
-      {items.map(g => (
-        <div key={g.id} className="flex items-center gap-4 p-3 rounded-xl border border-stone-200 hover:border-stone-300 transition-colors">
+      {items.length > 1 && (
+        <p className="text-xs text-stone-400">Strelicama mijenjaš redoslijed kojim se galerije prikazuju na stranici.</p>
+      )}
+
+      {items.map((g, i) => (
+        <div key={g.id} className="flex items-center gap-3 p-3 rounded-xl border border-stone-200 hover:border-stone-300 transition-colors">
+          {items.length > 1 && (
+            <div className="flex flex-col shrink-0">
+              <button onClick={() => move(i, -1)} disabled={i === 0}
+                className="p-1 rounded text-stone-400 hover:text-[#2d5a27] hover:bg-stone-100 disabled:opacity-30 transition-colors" title="Pomakni gore">
+                <ArrowUp className="w-4 h-4" />
+              </button>
+              <button onClick={() => move(i, 1)} disabled={i === items.length - 1}
+                className="p-1 rounded text-stone-400 hover:text-[#2d5a27] hover:bg-stone-100 disabled:opacity-30 transition-colors" title="Pomakni dolje">
+                <ArrowDown className="w-4 h-4" />
+              </button>
+            </div>
+          )}
           {g.images[0]
             ? <img src={thumbOf(g.images[0].url)} alt="" className="w-16 h-16 rounded-lg object-cover shrink-0" />
             : <div className="w-16 h-16 rounded-lg bg-stone-100 shrink-0" />}

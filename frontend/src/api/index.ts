@@ -34,6 +34,7 @@ export const galleryApi = {
   create: (data: unknown) => api.post<Gallery>('/gallery', data).then(r => r.data),
   update: (id: number, data: unknown) => api.put<Gallery>(`/gallery/${id}`, data).then(r => r.data),
   delete: (id: number) => api.delete(`/gallery/${id}`),
+  reorder: (ids: number[]) => api.put('/gallery/order', ids),
 };
 
 export const guidesApi = {
@@ -76,6 +77,7 @@ export interface SiteSettings {
   workingHoursNote: string | null;
   instagramUrl: string | null;
   facebookUrl: string | null;
+  galleryIntro: string | null;
 }
 
 export const settingsApi = {

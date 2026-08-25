@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { X, ZoomIn, ExternalLink } from 'lucide-react';
 import { galleryApi, thumbOf } from '../api';
+import { useSettings } from '../hooks/useSettings';
 import type { GalleryImage } from '../types';
 
 export default function GalleryPage() {
   const [lightbox, setLightbox] = useState<GalleryImage | null>(null);
+
+  const settings = useSettings();
 
   const { data: galleries = [], isLoading, isError } = useQuery({
     queryKey: ['gallery'],
@@ -18,8 +21,8 @@ export default function GalleryPage() {
       <div className="bg-[#2d5a27] py-16 px-4 text-center text-white mb-10">
         <span className="text-white/60 text-sm uppercase tracking-widest font-semibold">Naše fotografije</span>
         <h1 className="font-display text-4xl sm:text-5xl font-bold mt-2 mb-3">Galerija</h1>
-        <p className="text-white/80 max-w-lg mx-auto">
-          Svaka fotografija je priča. Ovo su trenuci koje smo živjeli zajedno s našim gostima.
+        <p className="text-white/80 max-w-lg mx-auto whitespace-pre-line">
+          {settings?.galleryIntro || 'Svaka fotografija je priča. Ovo su trenuci koje smo živjeli zajedno s našim gostima.'}
         </p>
       </div>
 

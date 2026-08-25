@@ -31,6 +31,7 @@ class SiteSettingsService(private val repo: SiteSettingsRepository) {
             workingHoursNote = req.workingHoursNote.orNull()
             instagramUrl = req.instagramUrl.orNull()
             facebookUrl = req.facebookUrl.orNull()
+            galleryIntro = req.galleryIntro.orNull()
             updatedAt = OffsetDateTime.now()
         }
         return repo.save(s).toDto()

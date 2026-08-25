@@ -117,7 +117,7 @@ export default function AdminPage({ onLogout }: Props) {
             }`}
           >
             <Settings className="w-4 h-4" />
-            Kontakt podaci
+            Postavke
           </button>
         </div>
 
@@ -137,8 +137,8 @@ export default function AdminPage({ onLogout }: Props) {
 
         {tab === 'settings' && (
           <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-8">
-            <h2 className="font-display text-xl font-bold text-[#3d2b1f] mb-2">Kontakt podaci</h2>
-            <p className="text-stone-500 text-sm mb-6">Prikazuju se na stranici Kontakt i u podnožju svake stranice.</p>
+            <h2 className="font-display text-xl font-bold text-[#3d2b1f] mb-2">Postavke stranice</h2>
+            <p className="text-stone-500 text-sm mb-6">Kontakt podaci (stranica Kontakt i podnožje) te uvodni tekst galerije.</p>
             <SettingsForm />
           </div>
         )}
