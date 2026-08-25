@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Pencil, Trash2, Loader2, FolderPlus, ExternalLink, Images, ArrowUp, ArrowDown } from 'lucide-react';
-import { galleryApi, thumbOf } from '../../api';
+import { Pencil, Trash2, Loader2, FolderPlus, ExternalLink, Images, ArrowUp, ArrowDown, Save } from 'lucide-react';
+import { galleryApi, settingsApi, thumbOf, type SiteSettings } from '../../api';
 import type { Gallery } from '../../types';
 import GalleryForm from './GalleryForm';
 
@@ -11,6 +11,13 @@ export default function GalleryList() {
   const [error, setError] = useState('');
   const [editing, setEditing] = useState<Gallery | null>(null);
   const [creating, setCreating] = useState(false);
+
+  // Uvodni tekst živi u postavkama stranice, ali se uređuje ovdje.
+  // Cijeli objekt se nosi kroz state da spremanje ne obriše kontakt podatke.
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+  const [intro, setIntro] = useState('');
+  const [savingIntro, setSavingIntro] = useState(false);
+  const [introSaved, setIntroSaved] = useState(false);
 
   const load = async () => {
     setLoading(true);
@@ -24,7 +31,26 @@ export default function GalleryList() {
     }
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+    settingsApi.get().then(d => { setSettings(d); setIntro(d.galleryIntro ?? ''); }).catch(() => {});
+  }, []);
+
+  const saveIntro = async () => {
+    if (!settings) return;
+    setSavingIntro(true);
+    setError('');
+    setIntroSaved(false);
+    try {
+      const updated = await settingsApi.update({ ...settings, galleryIntro: intro || null });
+      setSettings(updated);
+      setIntroSaved(true);
+    } catch {
+      setError('Uvodni tekst nije spremljen.');
+    } finally {
+      setSavingIntro(false);
+    }
+  };
 
   const handleDelete = async (g: Gallery) => {
     if (!confirm(`Obrisati galeriju "${g.title}" i njenih ${g.images.length} slika? Ovo se ne može poništiti.`)) return;
@@ -75,6 +101,30 @@ export default function GalleryList() {
   return (
     <div className="space-y-3">
       {error && <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">{error}</div>}
+
+      {/* Uvodni tekst stranice */}
+      <div className="p-4 rounded-xl border border-stone-200 bg-stone-50">
+        <label className="block text-sm font-semibold text-[#3d2b1f] mb-1.5">Uvodni tekst</label>
+        <p className="text-xs text-stone-500 mb-2">Prikazuje se u zaglavlju stranice Galerija, iznad svih galerija.</p>
+        <textarea
+          rows={3}
+          value={intro}
+          onChange={e => { setIntro(e.target.value); setIntroSaved(false); }}
+          placeholder="Ostavi prazno za zadani tekst."
+          className="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm outline-none focus:border-[#2d5a27] focus:ring-2 focus:ring-[#2d5a27]/20 transition resize-y bg-white"
+        />
+        <div className="flex items-center gap-3 mt-2">
+          <button
+            type="button"
+            onClick={saveIntro}
+            disabled={savingIntro || !settings}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#2d5a27] hover:bg-[#1a3a16] text-white text-sm font-medium transition-colors disabled:opacity-60"
+          >
+            {savingIntro ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Spremi tekst
+          </button>
+          {introSaved && <span className="text-sm text-emerald-700">Spremljeno.</span>}
+        </div>
+      </div>
 
       <button
         onClick={() => setCreating(true)}

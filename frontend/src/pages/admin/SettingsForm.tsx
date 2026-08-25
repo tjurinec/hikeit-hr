@@ -42,6 +42,7 @@ export default function SettingsForm() {
     setError('');
     setSuccess('');
     try {
+      // galleryIntro se uređuje u tabu Galerija — nosi se kroz formu netaknut
       await settingsApi.update({ ...form, phones: form.phones.filter(p => p.number.trim()) });
       // Kontakt stranica i footer čitaju iste podatke — osvježi ih odmah
       qc.invalidateQueries({ queryKey: ['settings'] });
@@ -147,17 +148,6 @@ export default function SettingsForm() {
           <label className={label}>Facebook</label>
           <input type="url" value={form.facebookUrl ?? ''} onChange={set('facebookUrl')} placeholder="https://facebook.com/..." className={input} />
         </div>
-      </div>
-
-      <div className="pt-2 border-t border-stone-200">
-        <label className={label}>Uvodni tekst na stranici Galerija</label>
-        <textarea
-          rows={3}
-          value={form.galleryIntro ?? ''}
-          onChange={set('galleryIntro')}
-          placeholder="Prikazuje se iznad svih galerija."
-          className={`${input} resize-y`}
-        />
       </div>
 
       <button
