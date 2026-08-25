@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { Mountain, LogOut, PlusCircle, List, Users, Image } from 'lucide-react';
+import { Mountain, LogOut, PlusCircle, List, Users, Image, MessageSquare } from 'lucide-react';
 import { clearAdminAuth } from '../../api';
 import ExcursionForm from './ExcursionForm';
 import ExcursionList from './ExcursionList';
 import GalleryList from './GalleryList';
 import GuideList from './GuideList';
+import MessageList from './MessageList';
 
-type Tab = 'new' | 'list' | 'guides' | 'gallery';
+type Tab = 'new' | 'list' | 'guides' | 'gallery' | 'messages';
 
 interface Props {
   onLogout: () => void;
@@ -95,6 +96,17 @@ export default function AdminPage({ onLogout }: Props) {
             <Image className="w-4 h-4" />
             Galerija
           </button>
+          <button
+            onClick={() => setTab('messages')}
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+              tab === 'messages'
+                ? 'bg-[#2d5a27] text-white'
+                : 'bg-white text-stone-600 border border-stone-200 hover:border-[#2d5a27]'
+            }`}
+          >
+            <MessageSquare className="w-4 h-4" />
+            Poruke
+          </button>
         </div>
 
         {tab === 'new' && (
@@ -108,6 +120,13 @@ export default function AdminPage({ onLogout }: Props) {
           <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-8">
             <h2 className="font-display text-xl font-bold text-[#3d2b1f] mb-4">Popis izleta</h2>
             <ExcursionList key={savedCount} />
+          </div>
+        )}
+
+        {tab === 'messages' && (
+          <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-8">
+            <h2 className="font-display text-xl font-bold text-[#3d2b1f] mb-6">Poruke s kontakt forme</h2>
+            <MessageList />
           </div>
         )}
 

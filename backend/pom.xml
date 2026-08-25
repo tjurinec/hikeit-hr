@@ -86,6 +86,12 @@
             <artifactId>flyway-database-postgresql</artifactId>
         </dependency>
 
+        <!-- Email obavijesti za kontakt formu -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
         <!-- Cloudflare R2 (S3-kompatibilan) -->
         <dependency>
             <groupId>software.amazon.awssdk</groupId>

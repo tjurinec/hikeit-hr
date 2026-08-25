@@ -48,6 +48,9 @@ class SecurityConfig {
                 auth.requestMatchers(HttpMethod.GET, "/api/excursions/**").permitAll()
                 auth.requestMatchers(HttpMethod.GET, "/api/gallery/**").permitAll()
                 auth.requestMatchers(HttpMethod.GET, "/api/guides/**").permitAll()
+                // Kontakt forma: slanje je javno, čitanje poruka samo za admina
+                auth.requestMatchers(HttpMethod.POST, "/api/contact").permitAll()
+                auth.requestMatchers("/api/contact/**").hasRole("ADMIN")
                 auth.requestMatchers("/api/upload/**").hasRole("ADMIN")
                 // Admin endpointi — zahtijevaju Basic Auth
                 auth.requestMatchers(HttpMethod.POST, "/api/excursions/**").hasRole("ADMIN")

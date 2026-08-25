@@ -13,6 +13,18 @@ spring:
     locations: classpath:db/migration
     baseline-on-migrate: true
 
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.connectiontimeout: 5000
+      mail.smtp.timeout: 5000
+      mail.smtp.writetimeout: 5000
+
   servlet:
     multipart:
       max-file-size: 20MB
@@ -22,6 +34,8 @@ server:
   port: ${PORT:8080}
 
 app:
+  contact:
+    notify-email: ${CONTACT_NOTIFY_EMAIL:}
   r2:
     account-id: ${R2_ACCOUNT_ID}
     access-key: ${R2_ACCESS_KEY}

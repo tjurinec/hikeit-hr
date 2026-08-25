@@ -42,6 +42,25 @@ export const guidesApi = {
   delete: (id: number) => api.delete(`/guides/${id}`),
 };
 
+export interface ContactMessage {
+  id: number;
+  name: string;
+  email: string;
+  phone: string | null;
+  subject: string | null;
+  message: string;
+  handled: boolean;
+  createdAt: string;
+}
+
+export const contactApi = {
+  send: (data: unknown) => api.post('/contact', data).then(r => r.data),
+  getAll: () => api.get<ContactMessage[]>('/contact').then(r => r.data),
+  setHandled: (id: number, handled: boolean) =>
+    api.put<ContactMessage>(`/contact/${id}/handled`, null, { params: { handled } }).then(r => r.data),
+  delete: (id: number) => api.delete(`/contact/${id}`),
+};
+
 export const uploadApi = {
   image: (file: File) => {
     const form = new FormData();

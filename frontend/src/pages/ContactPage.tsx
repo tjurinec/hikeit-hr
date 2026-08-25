@@ -1,18 +1,29 @@
 import { useState } from 'react';
+import { contactApi } from '../api';
 import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // TODO: spojiti na backend /api/contact
-    await new Promise(r => setTimeout(r, 1000));
-    setLoading(false);
-    setSent(true);
+    setError('');
+    try {
+      await contactApi.send({
+        ...form,
+        phone: form.phone || null,
+        subject: form.subject || null,
+      });
+      setSent(true);
+    } catch {
+      setError('Slanje nije uspjelo. Pokušaj ponovno ili nam piši na info@hikeit.hr.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -106,6 +117,9 @@ export default function ContactPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-stone-200 shadow-sm p-8 space-y-5">
+                {error && (
+                  <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">{error}</div>
+                )}
                 <h2 className="font-display text-2xl font-bold text-[#3d2b1f] mb-2">Pošalji poruku</h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
