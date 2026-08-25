@@ -1,6 +1,7 @@
 package hr.vrhiput.entity
 
 import jakarta.persistence.*
+import org.hibernate.annotations.BatchSize
 import java.time.OffsetDateTime
 
 @Entity
@@ -22,7 +23,10 @@ class Gallery(
     @Column(name = "sort_order", nullable = false)
     var sortOrder: Int = 0,
 
-    @OneToMany(mappedBy = "gallery", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.EAGER)
+    // LAZY + BatchSize: uz EAGER bi Hibernate kod paginacije dohvatio sve
+    // galerije i rezao ih u memoriji (HHH000104). BatchSize drži broj upita na dva.
+    @OneToMany(mappedBy = "gallery", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
+    @BatchSize(size = 25)
     @OrderBy("sortOrder ASC")
     var images: MutableList<GalleryImage> = mutableListOf(),
 

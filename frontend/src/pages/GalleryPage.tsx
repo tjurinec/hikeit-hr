@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { X, ExternalLink, Images, ChevronLeft, ChevronRight } from 'lucide-react';
 import { galleryApi, thumbOf } from '../api';
 import { useSettings } from '../hooks/useSettings';
-import type { Gallery, GalleryImage } from '../types';
+import type { GalleryImage } from '../types';
 
 const PER_PAGE = 9;
 const OPIS_MAX = 100;
@@ -15,37 +16,55 @@ function skrati(text: string, max = OPIS_MAX) {
 
 export default function GalleryPage() {
   const settings = useSettings();
+  const navigate = useNavigate();
+  const qc = useQueryClient();
+  const { id } = useParams<{ id: string }>();
   const [page, setPage] = useState(0);
-  const [open, setOpen] = useState<Gallery | null>(null);
   const [zoom, setZoom] = useState<GalleryImage | null>(null);
 
-  // ponytail: sve galerije stižu jednim pozivom i stranice se režu na klijentu.
-  // Kod ~50 galerija prebaciti na Pageable na backendu.
-  const { data: galleries = [], isLoading, isError } = useQuery({
-    queryKey: ['gallery'],
-    queryFn: galleryApi.getAll,
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['gallery', 'page', page],
+    queryFn: () => galleryApi.getPage(page, PER_PAGE),
   });
 
-  const pages = Math.ceil(galleries.length / PER_PAGE);
+  const visible = data?.content ?? [];
+  const pages = data?.totalPages ?? 0;
+
+  // Otvorena galerija dolazi iz URL-a (/galerija/:id), pa je link dijeljiv
+  const { data: open } = useQuery({
+    queryKey: ['gallery', 'one', id],
+    queryFn: () => galleryApi.getById(Number(id)),
+    enabled: !!id,
+    // Kad je galerija već na ovoj stranici, nema potrebe za novim zahtjevom;
+    // dohvat ostaje za dolazak izravnim linkom
+    initialData: () => visible.find(g => g.id === Number(id)),
+  });
+
+  // Sljedeća stranica se dohvaća u pozadini da klik bude trenutačan
+  useEffect(() => {
+    if (page + 1 < pages) {
+      qc.prefetchQuery({
+        queryKey: ['gallery', 'page', page + 1],
+        queryFn: () => galleryApi.getPage(page + 1, PER_PAGE),
+      });
+    }
+  }, [page, pages, qc]);
+
   const goTo = (p: number) => {
     setPage(p);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  const visible = useMemo(
-    () => galleries.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE),
-    [galleries, page],
-  );
 
   // Zatvaranje tipkom Esc: prvo uvećana slika, pa modal
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return;
       if (zoom) setZoom(null);
-      else if (open) setOpen(null);
+      else if (open) navigate('/galerija');
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [zoom, open]);
+  }, [zoom, open, navigate]);
 
   return (
     <main className="pt-24 pb-20">
@@ -60,7 +79,7 @@ export default function GalleryPage() {
       <div className="max-w-7xl mx-auto px-4">
         {isLoading && <p className="text-center text-stone-400 py-16">Učitavanje galerije...</p>}
         {isError && <p className="text-center text-stone-400 py-16">Trenutno ne mogu dohvatiti galeriju.</p>}
-        {!isLoading && !isError && galleries.length === 0 && (
+        {!isLoading && !isError && visible.length === 0 && (
           <p className="text-center text-stone-400 py-16">Galerija je još prazna.</p>
         )}
 
@@ -68,7 +87,7 @@ export default function GalleryPage() {
           {visible.map(g => (
             <article
               key={g.id}
-              onClick={() => setOpen(g)}
+              onClick={() => navigate(`/galerija/${g.id}`)}
               className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-stone-100 shadow-sm hover:shadow-xl transition-all duration-300"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-stone-100">
@@ -141,7 +160,7 @@ export default function GalleryPage() {
 
       {/* Modal s galerijom */}
       {open && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-start justify-center p-4 overflow-y-auto" onClick={() => setOpen(null)}>
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-start justify-center p-4 overflow-y-auto" onClick={() => navigate('/galerija')}>
           <div
             className="bg-[#f5f0e8] rounded-2xl max-w-5xl w-full my-8 overflow-hidden"
             onClick={e => e.stopPropagation()}
@@ -164,7 +183,7 @@ export default function GalleryPage() {
                 )}
               </div>
               <button
-                onClick={() => setOpen(null)}
+                onClick={() => navigate('/galerija')}
                 className="p-2 rounded-full text-stone-500 hover:bg-stone-200 transition-colors shrink-0"
                 aria-label="Zatvori"
               >

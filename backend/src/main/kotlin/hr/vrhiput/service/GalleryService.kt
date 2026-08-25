@@ -2,10 +2,13 @@ package hr.vrhiput.service
 
 import hr.vrhiput.dto.CreateGalleryRequest
 import hr.vrhiput.dto.GalleryDto
+import hr.vrhiput.dto.PageDto
 import hr.vrhiput.dto.toDto
 import hr.vrhiput.entity.Gallery
 import hr.vrhiput.entity.GalleryImage
 import hr.vrhiput.repository.GalleryRepository
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -17,6 +20,17 @@ class GalleryService(
 ) {
 
     fun getAll(): List<GalleryDto> = repo.findAllByOrderBySortOrderAscIdAsc().map { it.toDto() }
+
+    fun getPage(page: Int, size: Int): PageDto<GalleryDto> {
+        val sort = Sort.by(Sort.Direction.ASC, "sortOrder").and(Sort.by(Sort.Direction.ASC, "id"))
+        val result = repo.findAll(PageRequest.of(page.coerceAtLeast(0), size.coerceIn(1, 100), sort))
+        return PageDto(
+            content = result.content.map { it.toDto() },
+            page = result.number,
+            totalPages = result.totalPages,
+            totalElements = result.totalElements,
+        )
+    }
 
     fun getById(id: Long): GalleryDto =
         repo.findById(id).orElseThrow { NoSuchElementException("Galerija $id nije pronađena") }.toDto()

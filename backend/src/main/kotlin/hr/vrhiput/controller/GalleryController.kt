@@ -2,6 +2,7 @@ package hr.vrhiput.controller
 
 import hr.vrhiput.dto.CreateGalleryRequest
 import hr.vrhiput.dto.GalleryDto
+import hr.vrhiput.dto.PageDto
 import hr.vrhiput.service.GalleryService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -12,8 +13,15 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/gallery")
 class GalleryController(private val service: GalleryService) {
 
+    /** Bez parametara vraća sve (koristi admin); s "page" vraća jednu stranicu. */
     @GetMapping
     fun getAll(): List<GalleryDto> = service.getAll()
+
+    @GetMapping(params = ["page"])
+    fun getPage(
+        @RequestParam page: Int,
+        @RequestParam(defaultValue = "9") size: Int,
+    ): PageDto<GalleryDto> = service.getPage(page, size)
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Long): ResponseEntity<GalleryDto> =

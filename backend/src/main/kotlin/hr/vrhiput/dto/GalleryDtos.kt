@@ -22,6 +22,14 @@ data class GalleryDto(
     val images: List<GalleryImageDto>,
 )
 
+/** Jedna stranica rezultata — vlastiti oblik umjesto Springovog Page, čiji JSON nije stabilan. */
+data class PageDto<T>(
+    val content: List<T>,
+    val page: Int,
+    val totalPages: Int,
+    val totalElements: Long,
+)
+
 data class CreateGalleryImageRequest(
     @field:NotBlank @field:Size(max = 500) val url: String,
     @field:Size(max = 500) val caption: String? = null,

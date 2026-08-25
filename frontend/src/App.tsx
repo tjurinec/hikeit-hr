@@ -26,6 +26,7 @@ export default function App() {
                 <Route path="/izleti" element={<ExcursionsPage />} />
                 <Route path="/izleti/:slug" element={<ExcursionDetailPage />} />
                 <Route path="/galerija" element={<GalleryPage />} />
+                <Route path="/galerija/:id" element={<GalleryPage />} />
                 <Route path="/o-nama" element={<AboutPage />} />
                 <Route path="/kontakt" element={<ContactPage />} />
               </Routes>

@@ -28,8 +28,17 @@ export const excursionsApi = {
   delete: (id: number) => api.delete(`/excursions/${id}`),
 };
 
+export interface Page<T> {
+  content: T[];
+  page: number;
+  totalPages: number;
+  totalElements: number;
+}
+
 export const galleryApi = {
   getAll: () => api.get<Gallery[]>('/gallery').then(r => r.data),
+  getPage: (page: number, size = 9) =>
+    api.get<Page<Gallery>>('/gallery', { params: { page, size } }).then(r => r.data),
   getById: (id: number) => api.get<Gallery>(`/gallery/${id}`).then(r => r.data),
   create: (data: unknown) => api.post<Gallery>('/gallery', data).then(r => r.data),
   update: (id: number, data: unknown) => api.put<Gallery>(`/gallery/${id}`, data).then(r => r.data),
