@@ -1,9 +1,10 @@
 import axios from 'axios';
 import type { Excursion, GalleryImage, Guide } from '../types';
 
+// Bez globalnog Content-Typea: axios ga postavlja sam po tipu tijela
+// (application/json za objekte, multipart/form-data s boundaryem za FormData).
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : '/api',
-  headers: { 'Content-Type': 'application/json' },
 });
 
 // Postavi Basic Auth kredencijale za admin pozive
