@@ -42,6 +42,8 @@ class SecurityConfig {
             .csrf { it.disable() }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests { auth ->
+                // Admin GET rute moraju doći prije javnog permitAll — prvi match pobjeđuje
+                auth.requestMatchers(HttpMethod.GET, "/api/excursions/admin/**").hasRole("ADMIN")
                 // Javni GET endpointi
                 auth.requestMatchers(HttpMethod.GET, "/api/excursions/**").permitAll()
                 auth.requestMatchers(HttpMethod.GET, "/api/gallery/**").permitAll()
@@ -52,6 +54,7 @@ class SecurityConfig {
                 auth.requestMatchers(HttpMethod.PUT, "/api/excursions/**").hasRole("ADMIN")
                 auth.requestMatchers(HttpMethod.DELETE, "/api/excursions/**").hasRole("ADMIN")
                 auth.requestMatchers(HttpMethod.POST, "/api/gallery/**").hasRole("ADMIN")
+                auth.requestMatchers(HttpMethod.PUT, "/api/gallery/**").hasRole("ADMIN")
                 auth.requestMatchers(HttpMethod.DELETE, "/api/gallery/**").hasRole("ADMIN")
                 auth.requestMatchers(HttpMethod.POST, "/api/guides/**").hasRole("ADMIN")
                 auth.requestMatchers(HttpMethod.PUT, "/api/guides/**").hasRole("ADMIN")

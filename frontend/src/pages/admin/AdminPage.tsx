@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Mountain, LogOut, PlusCircle, List, Users } from 'lucide-react';
+import { Mountain, LogOut, PlusCircle, List, Users, Image } from 'lucide-react';
 import { clearAdminAuth } from '../../api';
 import ExcursionForm from './ExcursionForm';
+import ExcursionList from './ExcursionList';
+import GalleryList from './GalleryList';
 import GuideList from './GuideList';
 
-type Tab = 'new' | 'list' | 'guides';
+type Tab = 'new' | 'list' | 'guides' | 'gallery';
 
 interface Props {
   onLogout: () => void;
@@ -12,6 +14,7 @@ interface Props {
 
 export default function AdminPage({ onLogout }: Props) {
   const [tab, setTab] = useState<Tab>('new');
+  // Mijenja se pri spremanju kako bi se popis izleta ponovno učitao
   const [savedCount, setSavedCount] = useState(0);
 
   const handleLogout = () => {
@@ -81,6 +84,17 @@ export default function AdminPage({ onLogout }: Props) {
             <Users className="w-4 h-4" />
             Vodiči
           </button>
+          <button
+            onClick={() => setTab('gallery')}
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+              tab === 'gallery'
+                ? 'bg-[#2d5a27] text-white'
+                : 'bg-white text-stone-600 border border-stone-200 hover:border-[#2d5a27]'
+            }`}
+          >
+            <Image className="w-4 h-4" />
+            Galerija
+          </button>
         </div>
 
         {tab === 'new' && (
@@ -93,15 +107,14 @@ export default function AdminPage({ onLogout }: Props) {
         {tab === 'list' && (
           <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-8">
             <h2 className="font-display text-xl font-bold text-[#3d2b1f] mb-4">Popis izleta</h2>
-            <p className="text-stone-500 text-sm">
-              {savedCount > 0
-                ? `Upravo si dodao ${savedCount} novi izlet.`
-                : 'Upravljanje postojećim izletima dolazi uskoro.'
-              }
-            </p>
-            <p className="text-stone-400 text-xs mt-2">
-              Za sada koristi <strong>Novi izlet</strong> tab za dodavanje, i direktno bazu za uređivanje.
-            </p>
+            <ExcursionList key={savedCount} />
+          </div>
+        )}
+
+        {tab === 'gallery' && (
+          <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-8">
+            <h2 className="font-display text-xl font-bold text-[#3d2b1f] mb-6">Galerija</h2>
+            <GalleryList />
           </div>
         )}
 

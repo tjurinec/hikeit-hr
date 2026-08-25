@@ -18,6 +18,9 @@ export function clearAdminAuth() {
 
 export const excursionsApi = {
   getAll: () => api.get<Excursion[]>('/excursions').then(r => r.data),
+  // Admin: vraća i neobjavljene izlete
+  getAllForAdmin: () => api.get<Excursion[]>('/excursions/admin/all').then(r => r.data),
+  getByIdForAdmin: (id: number) => api.get<Excursion>(`/excursions/admin/${id}`).then(r => r.data),
   getBySlug: (slug: string) => api.get<Excursion>(`/excursions/${slug}`).then(r => r.data),
   getFeatured: () => api.get<Excursion[]>('/excursions/featured').then(r => r.data),
   create: (data: unknown) => api.post<Excursion>('/excursions', data).then(r => r.data),
@@ -27,6 +30,9 @@ export const excursionsApi = {
 
 export const galleryApi = {
   getAll: () => api.get<GalleryImage[]>('/gallery').then(r => r.data),
+  create: (data: unknown) => api.post<GalleryImage>('/gallery', data).then(r => r.data),
+  update: (id: number, data: unknown) => api.put<GalleryImage>(`/gallery/${id}`, data).then(r => r.data),
+  delete: (id: number) => api.delete(`/gallery/${id}`),
 };
 
 export const guidesApi = {

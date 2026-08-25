@@ -30,6 +30,8 @@ data class ExcursionSummaryDto(
     val startingPoint: String?,
     val guide: GuideDto?,
     val tags: Set<String>,
+    val featured: Boolean,
+    val published: Boolean,
     val publishedAt: OffsetDateTime?,
     val nextDeparture: LocalDate?,
 )
@@ -50,6 +52,8 @@ data class ExcursionDetailDto(
     val startingPoint: String?,
     val guide: GuideDto?,
     val tags: Set<String>,
+    val featured: Boolean,
+    val published: Boolean,
     val publishedAt: OffsetDateTime?,
     val nextDeparture: LocalDate?,
 )
@@ -67,13 +71,14 @@ fun Guide.toDto() = GuideDto(id, name, bio, avatarUrl, specialization)
 
 fun Excursion.toSummaryDto() = ExcursionSummaryDto(
     id, title, slug, description, difficulty, durationDays, maxParticipants,
-    price, coverImageUrl, location, startingPoint, guide?.toDto(), tags, publishedAt, nextDeparture,
+    price, coverImageUrl, location, startingPoint, guide?.toDto(), tags,
+    featured, published, publishedAt, nextDeparture,
 )
 
 fun Excursion.toDetailDto() = ExcursionDetailDto(
     id, title, slug, description, content, difficulty, durationDays, maxParticipants,
     price, coverImageUrl, images.map { it.url }, location, startingPoint,
-    guide?.toDto(), tags, publishedAt, nextDeparture,
+    guide?.toDto(), tags, featured, published, publishedAt, nextDeparture,
 )
 
 fun GalleryImage.toDto() = GalleryImageDto(id, url, caption, location, category, excursion?.title)

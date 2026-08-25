@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { Upload, X, ImagePlus, Loader2 } from 'lucide-react';
 import { excursionsApi, uploadApi } from '../../api';
+import type { Excursion } from '../../types';
 
 type Difficulty = 'EASY' | 'MODERATE' | 'HARD' | 'EXPERT';
 
@@ -12,6 +13,7 @@ const DIFFICULTIES: { value: Difficulty; label: string }[] = [
 ];
 
 interface FormState {
+  guideId: number | null;
   title: string;
   description: string;
   content: string;
@@ -29,18 +31,44 @@ interface FormState {
 }
 
 const EMPTY: FormState = {
+  guideId: null,
   title: '', description: '', content: '', difficulty: 'MODERATE',
   durationDays: 1, maxParticipants: 10, price: '', coverImageUrl: '',
   location: '', startingPoint: '', tags: '', featured: false,
   published: false, nextDeparture: '',
 };
 
-interface Props {
-  onSaved: () => void;
+// Izlet -> stanje forme. guideId se nosi kroz formu bez UI kontrole samo zato
+// da uređivanje ne obriše već dodijeljenog vodiča.
+function toFormState(e: Excursion): FormState {
+  return {
+    guideId: e.guide?.id ?? null,
+    title: e.title ?? '',
+    description: e.description ?? '',
+    content: e.content ?? '',
+    difficulty: e.difficulty,
+    durationDays: e.durationDays,
+    maxParticipants: e.maxParticipants,
+    price: e.price != null ? String(e.price) : '',
+    coverImageUrl: e.coverImageUrl ?? '',
+    location: e.location ?? '',
+    startingPoint: e.startingPoint ?? '',
+    tags: (e.tags ?? []).join(', '),
+    featured: e.featured ?? false,
+    published: e.published ?? false,
+    nextDeparture: e.nextDeparture ?? '',
+  };
 }
 
-export default function ExcursionForm({ onSaved }: Props) {
-  const [form, setForm] = useState<FormState>(EMPTY);
+interface Props {
+  onSaved: () => void;
+  excursion?: Excursion | null;
+  onCancel?: () => void;
+}
+
+export default function ExcursionForm({ onSaved, excursion, onCancel }: Props) {
+  const isEdit = !!excursion;
+  const [form, setForm] = useState<FormState>(excursion ? toFormState(excursion) : EMPTY);
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -75,17 +103,23 @@ export default function ExcursionForm({ onSaved }: Props) {
     setSaving(true);
     setError('');
     setSuccess('');
+    const payload = {
+      ...form,
+      price: form.price ? parseFloat(form.price) : null,
+      durationDays: Number(form.durationDays),
+      maxParticipants: Number(form.maxParticipants),
+      tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
+      nextDeparture: form.nextDeparture || null,
+    };
     try {
-      await excursionsApi.create({
-        ...form,
-        price: form.price ? parseFloat(form.price) : null,
-        durationDays: Number(form.durationDays),
-        maxParticipants: Number(form.maxParticipants),
-        tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
-        nextDeparture: form.nextDeparture || null,
-      });
-      setSuccess(`Izlet "${form.title}" je uspješno kreiran!`);
-      setForm(EMPTY);
+      if (excursion) {
+        await excursionsApi.update(excursion.id, payload);
+        setSuccess(`Izlet "${form.title}" je spremljen.`);
+      } else {
+        await excursionsApi.create(payload);
+        setSuccess(`Izlet "${form.title}" je uspješno kreiran!`);
+        setForm(EMPTY);
+      }
       onSaved();
     } catch (err: unknown) {
       const msg = (err as { response?: { data?: { message?: string } } })?.response?.data?.message;
@@ -258,16 +292,27 @@ export default function ExcursionForm({ onSaved }: Props) {
         </label>
       </div>
 
-      <button
-        type="submit"
-        disabled={saving || uploading}
-        className="w-full flex items-center justify-center gap-2 bg-[#2d5a27] hover:bg-[#1a3a16] text-white font-semibold py-3.5 rounded-xl transition-colors disabled:opacity-60 text-base"
-      >
-        {saving
-          ? <><Loader2 className="w-5 h-5 animate-spin" /> Spremanje...</>
-          : <><Upload className="w-5 h-5" /> Spremi izlet</>
-        }
-      </button>
+      <div className="flex gap-3">
+        {onCancel && (
+          <button
+            type="button"
+            onClick={onCancel}
+            className="px-6 py-3.5 rounded-xl border border-stone-300 text-stone-600 font-semibold hover:bg-stone-50 transition-colors"
+          >
+            Odustani
+          </button>
+        )}
+        <button
+          type="submit"
+          disabled={saving || uploading}
+          className="flex-1 flex items-center justify-center gap-2 bg-[#2d5a27] hover:bg-[#1a3a16] text-white font-semibold py-3.5 rounded-xl transition-colors disabled:opacity-60 text-base"
+        >
+          {saving
+            ? <><Loader2 className="w-5 h-5 animate-spin" /> Spremanje...</>
+            : <><Upload className="w-5 h-5" /> {isEdit ? 'Spremi promjene' : 'Spremi izlet'}</>
+          }
+        </button>
+      </div>
     </form>
   );
 }

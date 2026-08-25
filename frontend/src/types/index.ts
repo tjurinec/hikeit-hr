@@ -14,6 +14,9 @@ export interface Excursion {
   startingPoint: string;
   guide: Guide;
   tags: string[];
+  // Opcionalni jer ih demo podaci po stranicama nemaju; API ih uvijek vraća
+  featured?: boolean;
+  published?: boolean;
   publishedAt: string;
   nextDeparture?: string;
 }
@@ -29,9 +32,10 @@ export interface Guide {
 export interface GalleryImage {
   id: number;
   url: string;
-  caption: string;
-  excursionTitle?: string;
-  location: string;
+  caption: string | null;
+  location: string | null;
+  category: string | null;
+  excursionTitle?: string | null;
 }
 
 export type DifficultyLabel = {

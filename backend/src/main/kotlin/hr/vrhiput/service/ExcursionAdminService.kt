@@ -2,10 +2,13 @@ package hr.vrhiput.service
 
 import hr.vrhiput.dto.CreateExcursionRequest
 import hr.vrhiput.dto.ExcursionDetailDto
+import hr.vrhiput.dto.ExcursionSummaryDto
 import hr.vrhiput.dto.toDetailDto
+import hr.vrhiput.dto.toSummaryDto
 import hr.vrhiput.entity.Excursion
 import hr.vrhiput.repository.ExcursionRepository
 import hr.vrhiput.repository.GuideRepository
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.OffsetDateTime
@@ -15,6 +18,16 @@ class ExcursionAdminService(
     private val excursionRepo: ExcursionRepository,
     private val guideRepo: GuideRepository,
 ) {
+
+    /** Za razliku od javnog API-ja vraća i neobjavljene izlete. */
+    @Transactional(readOnly = true)
+    fun getAll(): List<ExcursionSummaryDto> =
+        excursionRepo.findAll(Sort.by(Sort.Direction.DESC, "createdAt")).map { it.toSummaryDto() }
+
+    /** Dohvat po id-u, bez filtera na objavljeno — potrebno za uređivanje. */
+    @Transactional(readOnly = true)
+    fun getById(id: Long): ExcursionDetailDto =
+        excursionRepo.findById(id).orElseThrow { NoSuchElementException("Izlet $id nije pronađen") }.toDetailDto()
 
     @Transactional
     fun create(req: CreateExcursionRequest): ExcursionDetailDto {

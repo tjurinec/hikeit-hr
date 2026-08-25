@@ -2,6 +2,7 @@ package hr.vrhiput.controller
 
 import hr.vrhiput.dto.CreateExcursionRequest
 import hr.vrhiput.dto.ExcursionDetailDto
+import hr.vrhiput.dto.ExcursionSummaryDto
 import hr.vrhiput.service.ExcursionAdminService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -11,6 +12,14 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/excursions")
 class AdminExcursionController(private val service: ExcursionAdminService) {
+
+    @GetMapping("/admin/all")
+    fun getAllForAdmin(): List<ExcursionSummaryDto> = service.getAll()
+
+    @GetMapping("/admin/{id}")
+    fun getByIdForAdmin(@PathVariable id: Long): ResponseEntity<ExcursionDetailDto> =
+        try { ResponseEntity.ok(service.getById(id)) }
+        catch (e: NoSuchElementException) { ResponseEntity.notFound().build() }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
