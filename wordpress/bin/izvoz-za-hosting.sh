@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Pakira lokalni sadržaj za hosting: build/hikeit.sql (adrese za produkciju, bez probnih korisnika i 2FA tajni)
 # i build/uploads.tgz. Lokalna baza se ne mijenja (radi se na kopiji).
-# Uporaba: bin/izvoz-za-hosting.sh [domena-agencije] [domena-razvoja]   (zadano hikeit.hr hikeit.dev)
+# Uporaba: bin/izvoz-za-hosting.sh [domena-agencije] [domena-razvoja]   (zadano hikeit.hr dev.hikeit.hr)
 set -euo pipefail
 cd "$(dirname "$0")/.."
-HR=${1:-hikeit.hr}; DEV=${2:-hikeit.dev}
+HR=${1:-hikeit.hr}; DEV=${2:-dev.hikeit.hr}
 mkdir -p build
 wp()  { docker compose run --rm -T -e WORDPRESS_DB_NAME=izvoz cli wp "$@"; }
 sql() { docker compose exec -T db mariadb -uroot -proot "$@"; }

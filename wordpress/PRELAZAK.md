@@ -1,11 +1,11 @@
-# Prelazak na cPanel hosting (hikeit.hr + hikeit.dev)
+# Prelazak na cPanel hosting (hikeit.hr + dev.hikeit.hr, kasnije hikeit.dev)
 
 Stanje (15. 10. 2026.): `hikeit.hr` ima DNS na Cloudflareu i A zapise na Render; **nema MX zapisa** (domena ne prima e-poštu);
 `hikeit.dev` nije registriran. WordPress sadržaj nema nijedne veze na R2 (provjereno u bazi).
 
 ## 0. Što je potrebno od vlasnika
 1. Hosting (vidi §1) i pristup cPanelu (ne u git, ne u razgovor).
-2. Registracija `hikeit.dev` (ili odustajanje; tada se hikeit.dev dio gasi).
+2. Dok `hikeit.dev` nije registriran, dio "razvoj" radi na **`dev.hikeit.hr`** (`$dev_domena` u `hosts.php`). Nakon registracije: promijeniti tu varijablu, dodati domenu kao alias istog direktorija i ponoviti `wp search-replace https://dev.hikeit.hr https://hikeit.dev`.
 3. Pristup Cloudflare računu (DNS) i Render dashboardu.
 
 ## 1. Zahtjevi za hosting
@@ -39,7 +39,7 @@ Sandučić `info@hikeit.hr` na hostingu; MX i SPF/DKIM po uputi hostinga; WP Mai
 
 ## 5. DNS (Cloudflare, `hikeit.hr`)
 Prije prelaska snizi TTL. Promijeni A zapise `@` i `www` s Rendera na IP hostinga (prvo test s `hosts` datotekom). Obrisati custom domene u Renderu.
-`hikeit.dev`: nameserveri/A zapis na isti IP. Provjere: `/izleti`, `/galerija`, 301 sa www, forme, `/prijava/`, `sitemap_index.xml`, Search Console.
+`dev.hikeit.hr`: A zapis `dev` na isti IP (u cPanelu poddomena/alias koji pokazuje u isti direktorij kao hikeit.hr). Kasnije `hikeit.dev` isto. Provjere: `/izleti`, `/galerija`, 301 sa www, forme, `/prijava/`, `sitemap_index.xml`, Search Console.
 
 ## 6. Gašenje (tek nakon 1–2 tjedna mirnog rada)
 Prije: s produkcije izvući poruke iz kontakta (traže admin prijavu) i dump Postgresa. Zatim: Render (backend, frontend, baza), **Cloudflare R2**
