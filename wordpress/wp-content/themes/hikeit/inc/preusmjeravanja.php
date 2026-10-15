@@ -46,3 +46,18 @@ add_action( 'template_redirect', function () {
 	wp_redirect( HIKEIT_SHEMA . '://' . $cilj . $uri, 301 );
 	exit;
 }, 1 );
+
+/**
+ * Yoast karta stranice po domeni: svaka domena navodi samo svoje stranice
+ * (adrese druge domene se ionako preusmjeravaju 301, pa u karti ne smiju biti).
+ */
+add_filter( 'wpseo_exclude_from_sitemap_by_post_ids', function ( $ids ) {
+	$tude = HIKEIT_DEV ? array( 'pocetna', 'o-nama', 'blog' ) : array( 'razvoj', 'usluge', 'usluge/web-stranice', 'usluge/aplikacije-po-mjeri', 'usluge/odrzavanje', 'reference', 'o-meni' );
+	foreach ( $tude as $putanja ) {
+		if ( $s = get_page_by_path( $putanja ) ) {
+			$ids[] = $s->ID;
+		}
+	}
+	return $ids;
+} );
+add_filter( 'wpseo_sitemap_exclude_post_type', fn( $iskljuci, $tip ) => $iskljuci || ( HIKEIT_DEV && in_array( $tip, array( 'galerija', 'izlet' ), true ) ), 10, 2 );
