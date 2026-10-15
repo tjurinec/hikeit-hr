@@ -81,6 +81,9 @@ foreach ( $citaj( 'excursions-detail.json' ) as $e ) {
 
 // --- galerije ---
 foreach ( $citaj( 'gallery.json' ) as $i => $g ) {
+	if ( in_array( $g['title'], array( 'Krk - Crna ovca', 'Test' ), true ) ) {
+		continue; // probne galerije sa stare stranice, ne prenose se
+	}
 	$slike = array();
 	foreach ( $g['images'] as $sl ) {
 		if ( $id_sl = hk_slika( $sl['url'], $sl['caption'] ?? '' ) ) {
