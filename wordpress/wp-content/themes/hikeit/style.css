@@ -162,3 +162,18 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 	.hk-mozaik { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 9rem; }
 	.hk-traka { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 11rem; }
 }
+
+/* --- razdjelnik među sekcijama: crvena crta s rombom (samo između svijetlih sekcija) --- */
+.hk-sekcija { position: relative; }
+.hk-sekcija:not(.hk-tamna) + .hk-sekcija:not(.hk-tamna)::before {
+	content: ""; position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%);
+	width: min(72rem, calc(100% - 2rem)); height: 2px; pointer-events: none;
+	background:
+		linear-gradient(var(--wp--preset--color--accent), var(--wp--preset--color--accent)) left center / calc(50% - 1.5rem) 2px no-repeat,
+		linear-gradient(var(--wp--preset--color--accent), var(--wp--preset--color--accent)) right center / calc(50% - 1.5rem) 2px no-repeat;
+}
+.hk-sekcija:not(.hk-tamna) + .hk-sekcija:not(.hk-tamna)::after {
+	content: ""; position: absolute; top: 0; left: 50%; width: .8rem; height: .8rem; box-sizing: border-box;
+	transform: translate(-50%, -50%) rotate(45deg); pointer-events: none;
+	border: 2px solid var(--wp--preset--color--accent); background: var(--wp--preset--color--base);
+}
