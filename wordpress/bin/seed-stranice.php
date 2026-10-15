@@ -74,6 +74,7 @@ if ( ! $forma && class_exists( 'WPCF7_ContactForm' ) ) {
 		'form'     => "<label>Ime i prezime *[text* ime autocomplete:name]</label>\n<label>E-mail *[email* email autocomplete:email]</label>\n<label>Telefon [tel telefon autocomplete:tel]</label>\n<label>Tema upita [select tema \"Rezervacija izleta\" \"Privatni / custom izlet\" \"Opće informacije\" \"Suradnja\" \"Web / softverska rješenja\" \"Ostalo\"]</label>\n<label>Poruka *[textarea* poruka]</label>\n[submit \"Pošaljite poruku\"]",
 		'mail'     => $mail,
 		'messages' => $poruke,
+		'additional_settings' => "flamingo_name: \"[ime]\"\nflamingo_email: \"[email]\"\nflamingo_subject: \"[tema]\"",
 	) );
 	$f->save();
 	WP_CLI::success( 'CF7 forma „Kontakt" stvorena' );
@@ -93,6 +94,7 @@ if ( ! $dev_forma && class_exists( 'WPCF7_ContactForm' ) ) {
 		'form'     => "<label>Ime i prezime *[text* ime autocomplete:name]</label>\n<label>E-mail *[email* email autocomplete:email]</label>\n<label>Što trebate? [select vrsta \"Web stranica\" \"Web trgovina\" \"Aplikacija po mjeri\" \"Održavanje postojeće stranice\" \"Nešto drugo\"]</label>\n<label>Opišite projekt *[textarea* poruka]</label>\n[submit \"Pošaljite upit\"]",
 		'mail'     => $mail,
 		'messages' => $poruke,
+		'additional_settings' => "flamingo_name: \"[ime]\"\nflamingo_email: \"[email]\"\nflamingo_subject: \"[vrsta]\"",
 	) );
 	$f->save();
 	WP_CLI::success( 'CF7 forma „Kontakt razvoj" stvorena' );

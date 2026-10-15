@@ -113,6 +113,7 @@ ne-radi auto-deploy, `r2.dev` rate limit.
   stranice usluga s vlastitim URL-om i SEO naslovima (`/usluge/`, `/usluge/web-stranice/`, `/usluge/aplikacije-po-mjeri/`, `/usluge/odrzavanje/`),
   hero sa snimkom stvarne stranice umjesto stock slike, „Tko stoji iza", opis uz logo, kontakt bez radnog vremena agencije, polje za zasebni e-mail razvoja.
 - ☑ O meni (`/o-meni/` na hikeit.dev): tekst, stručnosti, LinkedIn (polje u postavkama na stranici Kontakt), JSON-LD Person. Fotografija: dodaj `wordpress/seed-slike/portret.jpg` i pokreni seed, ili postavi u adminu.
+- ☑ Upravljanje u temi (`inc/panel.php`, `inc/dvofaktor.php`): `/prijava/` s obaveznim 2FA (TOTP + rezervni kodovi, ograničenje pokušaja; wp-login.php ne prima prijave) i `/upravljanje/` (izleti, galerije, vodiči, upiti iz Flaminga, kontakt podaci) bez wp-admina. Provjera: `wp eval-file bin/test-2fa.php`. Poništavanje 2FA: `wp user meta delete ID hk_totp_tajna`.
 - ☐ Ostaje: pregled na mobitelu, fino štimanje izgleda, SEO/OG podaci, 301 `/galerija/{id}`, SMTP,
   `hikeit.dev` sadržaj (tekst na stranici Razvoj je NACRT), uklanjanje izmišljenih brojki (vidi niže).
 - Sadržaj koji NISAM prenio jer je izmišljen u React kodu: „120+ putnika", „5★", „8+ godina", „5.0 (12 recenzija)".

@@ -33,19 +33,7 @@ function hk_odlomci( ?string $tekst ): string {
 	return $o;
 }
 
-/** Galerija slika kao core/gallery s core/image djecom (lightbox uključen u theme.json). */
-function hk_galerija_blok( array $slike ): string {
-	if ( ! $slike ) {
-		return '';
-	}
-	$o = "<!-- wp:gallery {\"linkTo\":\"none\"} -->\n<figure class=\"wp-block-gallery has-nested-images columns-default is-cropped\">";
-	foreach ( $slike as [ $id, $natpis ] ) {
-		$url = wp_get_attachment_url( $id );
-		$o  .= "<!-- wp:image {\"id\":$id,\"sizeSlug\":\"large\",\"linkDestination\":\"none\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"$url\" alt=\"\" class=\"wp-image-$id\"/>"
-			. ( $natpis ? '<figcaption class="wp-element-caption">' . esc_html( $natpis ) . '</figcaption>' : '' ) . "</figure>\n<!-- /wp:image -->";
-	}
-	return $o . "</figure>\n<!-- /wp:gallery -->\n";
-}
+// hk_galerija_blok() dolazi iz teme (inc/panel.php)
 
 // --- vodiči ---
 $vodic_wp = array();
