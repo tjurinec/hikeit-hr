@@ -20,7 +20,7 @@ $mozaik  = array_map( fn( $i ) => array( $foto( $i[0], $i[1] ), '', $i[1] ), arr
 	array( 'm10', 'Planinski prijevoj i livade' ),
 ) );
 $traka = array_map( fn( $i ) => array( $foto( $i[0], $i[1] ), '', $i[1] ), array(
-	array( 'o1', 'Tomislav na vrhu' ), array( 'o2', 'Penjanje po via ferrati' ), array( 'o3', 'Pogled na ledenjak' ), array( 'o4', 'Planinski greben' ),
+	array( 'm03', 'Uspon po ledenjaku' ), array( 'o2', 'Penjanje po via ferrati' ), array( 'o3', 'Pogled na ledenjak' ), array( 'o4', 'Planinski greben' ),
 ) );
 
 /* ---------- Početna ---------- */
