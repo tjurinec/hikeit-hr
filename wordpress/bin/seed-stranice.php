@@ -125,7 +125,7 @@ hk_postavi_sadrzaj( 'kontakt', $kontakt, $sili( 'kontakt' ), 'page-bez-naslova' 
 $vodic   = get_posts( array( 'post_type' => 'vodic', 'numberposts' => 1, 'orderby' => 'ID', 'order' => 'ASC' ) );
 $portret = hk_slika_datoteka( __DIR__ . '/../seed-slike/portret.jpg', 'Tomislav Jurinec' ) ?: ( $vodic ? get_post_thumbnail_id( $vodic[0]->ID ) : 0 ); // dodaj datoteku pa pokreni seed, ili postavi sliku u adminu
 
-$razvoj  = hk_naslovnica( $foto( 'kod', 'Programski kod' ),
+$razvoj  = hk_naslovnica( $foto( 'kod-java', 'Programski kod' ),
 	hk_p( 'WEB I SOFTVERSKA RJEŠENJA · ZAGREB', 'hk-oznaka', 'center' ) . hk_h( 'Web stranice za male obrte, udruge i agencije', 1, 'center' )
 	. hk_p( 'Dobivate stranicu koju možete sami uređivati, s jasnom cijenom prije početka rada. Bez agencijskih cijena i bez nepotrebne složenosti.', '', 'center' )
 	. hk_gumbi( array( array( 'Pošaljite upit', '/kontakt/' ), array( 'Pogledajte usluge', '/usluge/' ) ), true ), 75, 35 );
@@ -151,7 +151,7 @@ $tko_tekst = hk_p( 'TKO STOJI IZA', 'hk-oznaka' ) . hk_h( 'Mi smo hikeIT', 2 )
 	. hk_p( 'S nama razgovarate izravno, bez posrednika. Sve što vidite na hikeit.hr i hikeit.dev izradili smo sami.' )
 	. hk_p( '<a href="/o-meni/">Više o nama →</a>' );
 $razvoj .= hk_sekcija( hk_s_portretom( $portret, $tko_tekst ) );
-$razvoj .= hk_tamna( hk_h( 'Imate projekt na umu?', 2, 'center' ) . hk_p( 'Opišite ga u nekoliko rečenica i javit ćemo vam se u roku od 1–2 radna dana.', '', 'center' ) . hk_gumbi( array( array( 'Pošaljite upit', '/kontakt/' ) ) ) );
+$razvoj .= hk_naslovnica( $foto( 'kod-java-2', 'Programski kod' ), hk_h( 'Imate projekt na umu?', 2, 'center' ) . hk_p( 'Opišite ga u nekoliko rečenica i javit ćemo vam se u roku od 1–2 radna dana.', '', 'center' ) . hk_gumbi( array( array( 'Pošaljite upit', '/kontakt/' ) ) ), 45, 35 );
 hk_postavi_sadrzaj( 'razvoj', $razvoj, $sili( 'razvoj' ), 'page-bez-naslova' );
 hk_seo( 'razvoj', 'Izrada web stranica i aplikacija | hikeIT', 'Izrada web stranica na WordPressu i aplikacija po mjeri za male obrte, udruge i turističke agencije. Jasna cijena prije početka rada.' );
 
@@ -182,7 +182,7 @@ $ometi .= hk_sekcija( hk_p( 'NAČIN RADA', 'hk-oznaka', 'center' ) . hk_h( 'Što
 	'Stranicu možete sami uređivati — ne ovisite o nama za svaku sitnicu',
 	'Sve je pod kontrolom verzija i sigurnosnih kopija, pa se promjene mogu vratiti',
 ) ) );
-$ometi .= hk_tamna( hk_h( 'Imate projekt na umu?', 2, 'center' ) . hk_p( 'Opišite ga u nekoliko rečenica i javit ćemo vam se u roku od 1–2 radna dana.', '', 'center' ) . hk_gumbi( array( array( 'Pošaljite upit', '/kontakt/' ) ) ) );
+$ometi .= hk_naslovnica( $foto( 'kod-java-2', 'Programski kod' ), hk_h( 'Imate projekt na umu?', 2, 'center' ) . hk_p( 'Opišite ga u nekoliko rečenica i javit ćemo vam se u roku od 1–2 radna dana.', '', 'center' ) . hk_gumbi( array( array( 'Pošaljite upit', '/kontakt/' ) ) ), 45, 35 );
 hk_postavi_sadrzaj( 'o-meni', $ometi, $sili( 'o-meni' ), 'page-bez-naslova' );
 hk_seo( 'o-meni', 'Tko smo — hikeIT, Tomislav Jurinec', 'hikeIT je obrt za izradu web stranica na WordPressu i aplikacija po mjeri za male obrte, udruge i turističke agencije u Zagrebu. Iza njega stoji Tomislav Jurinec, programer.' );
 
