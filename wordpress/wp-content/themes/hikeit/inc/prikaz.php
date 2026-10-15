@@ -214,7 +214,7 @@ add_shortcode( 'hikeit_postavke', function () {
 /** Podnožje: isti kontakt podaci na obje domene, različita navigacija. */
 add_shortcode( 'hikeit_podnozje', function () {
 	$veze = HIKEIT_DEV
-		? array( '/#usluge' => 'Usluge', '/kontakt/' => 'Kontakt', 'https://hikeit.hr' => 'Planinski izleti' )
+		? array( '/#usluge' => 'Usluge', '/kontakt/' => 'Kontakt' )
 		: array( '/izleti/' => 'Izleti', '/galerija/' => 'Galerija', '/blog/' => 'Blog', '/o-nama/' => 'O nama', '/kontakt/' => 'Kontakt' );
 	$o = '<div class="hk-podnozje"><div><strong class="hk-podnozje__marka">' . ( HIKEIT_DEV ? 'hikeit.dev' : 'hikeIT.hr' ) . '</strong>';
 	$o .= '<p>' . ( HIKEIT_DEV ? 'Web stranice i programska rješenja po mjeri.' : 'Planinski i turistički izleti po mjeri — sigurno, odgovorno i nezaboravno.' ) . '</p></div>';
