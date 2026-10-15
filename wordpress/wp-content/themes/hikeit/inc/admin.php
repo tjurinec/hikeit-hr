@@ -73,3 +73,21 @@ add_action( 'wp_dashboard_setup', function () {
 		echo '</ul><p><a href="' . esc_url( admin_url( 'admin.php?page=flamingo_inbound' ) ) . '">Svi upiti →</a></p>';
 	} );
 } );
+
+// Slike s mobitela imaju 3–8 MB; WP uz original sprema još "scaled" kopiju i manje veličine.
+// Zato pri učitavanju original smanjujemo na 2000 px (JPEG ~82 %) i ne radimo "scaled" kopiju: ~0,5–0,8 MB po slici umjesto ~7 MB.
+add_filter( 'big_image_size_threshold', '__return_false' );
+add_filter( 'wp_handle_upload', function ( $u ) {
+	if ( empty( $u['file'] ) || ! in_array( $u['type'] ?? '', array( 'image/jpeg', 'image/png', 'image/webp' ), true ) ) {
+		return $u;
+	}
+	$ed = wp_get_image_editor( $u['file'] );
+	if ( is_wp_error( $ed ) ) {
+		return $u;
+	}
+	$ed->maybe_exif_rotate();
+	$ed->resize( 2000, 2000 ); // samo smanjuje, nikad ne povećava
+	$ed->set_quality( 82 );
+	$ed->save( $u['file'] );
+	return $u;
+} );
