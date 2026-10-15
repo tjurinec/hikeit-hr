@@ -50,7 +50,8 @@ Ovo treba potvrditi **prije** nego se izleti stvarno naplaćuju. Ne pretpostavlj
 - [ ] Pravne stranice: **politika privatnosti** (forma prikuplja podatke), **kolačići/analitika** ako se uključi, **uvjeti korištenja**.
 
 ## 4. Tehničko
-- [ ] **Prva prijava** na `https://hikeit.hr/prijava/`: lozinka iz `~/.hikeit_wp_admin_pass`, postaviti **2FA**, sačuvati rezervne kodove, promijeniti lozinku, napraviti korisnika za urednika.
+- [x] **Prva prijava i 2FA** na `https://hikeit.hr/prijava/` (16. 10. 2026.).
+- [ ] Provjeriti: lozinka administratora promijenjena, rezervni kodovi spremljeni, napravljen korisnik za urednika (rola Editor).
 - [ ] U **Upiti** obrisati probne poruke (PROBNI UPIT, TEST PREUSMJERAVANJA).
 - [ ] **Gmail "Send mail as"** za `info@hikeit.hr` (SMTP `mail.hikeit.hr:465`, SSL) u poslovnom Gmailu; filter da poruke ne idu u neželjenu poštu.
 - [ ] Obrisati **cPanel API token**, **SSH ključ** (`~/.ssh/hikeit_mdk`) i Cloudflare token (ako još postoji).
