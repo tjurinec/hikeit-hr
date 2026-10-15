@@ -32,4 +32,5 @@ sql -e "DROP DATABASE izvoz;"
 
 docker compose run --rm -T cli tar -C /var/www/html/wp-content -cz uploads > build/uploads.tgz
 echo; echo "Gotovo: $(du -h build/hikeit.sql | cut -f1) baza, $(du -h build/uploads.tgz | cut -f1) uploads u wordpress/build/"
-echo "Lozinka za 'admin' na produkciji (zapiši, promijeni nakon prijave): $LOZINKA"
+umask 077; printf %s "$LOZINKA" > ~/.hikeit_wp_admin_pass
+echo "Lozinka za 'admin' na produkciji spremljena u ~/.hikeit_wp_admin_pass (promijeni nakon prijave)."
