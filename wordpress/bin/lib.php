@@ -83,6 +83,9 @@ function hk_sekcija( string $unutra, string $pozadina = '', string $sidro = '' )
 	if ( 'traka' === $pozadina ) {
 		$atr['className'] = 'hk-sekcija hk-traka'; // tamna traka, vidi style.css
 		$kl              .= ' hk-traka';
+	} elseif ( 'cta' === $pozadina ) {
+		$atr['className'] = 'hk-sekcija hk-cta'; // crvena traka s pozivom na akciju
+		$kl              .= ' hk-cta';
 	} elseif ( $pozadina ) {
 		$atr['backgroundColor'] = $pozadina;
 		$kl                    .= " has-$pozadina-background-color has-background";

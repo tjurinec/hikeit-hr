@@ -20,9 +20,9 @@ Text Domain: hikeit
 .hikeit-footer a:hover { color: var(--hk-traka-akcent); }
 .hk-podnozje { display: grid; gap: 2rem; grid-template-columns: 2fr 1fr 1.5fr; }
 .hk-podnozje ul { list-style: none; padding: 0; margin: .5rem 0 0; display: grid; gap: .4rem; }
-.hk-podnozje p, .hk-podnozje small, .hikeit-footer .hk-kontakt small { color: rgba(255,255,255,.65); }
+.hk-podnozje p, .hk-podnozje small, .hikeit-footer .hk-kontakt small { color: color-mix(in srgb, var(--hk-traka-tekst) 70%, transparent); }
 .hk-podnozje__marka { font-family: var(--wp--preset--font-family--display); font-size: 1.25rem; }
-.hk-podnozje__kraj { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,.15); font-size: .8rem; }
+.hk-podnozje__kraj { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid color-mix(in srgb, var(--hk-traka-tekst) 20%, transparent); font-size: .8rem; }
 @media (max-width: 782px) { .hk-podnozje { grid-template-columns: 1fr; } }
 
 /* --- sekcije --- */
@@ -106,12 +106,17 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 .hikeit-logo__dev { font-family: var(--wp--preset--font-family--display); font-weight: 700; color: var(--wp--preset--color--accent); }
 .hk-sekcija-naslov { text-align: center; margin-bottom: 2rem; }
 
-/* tamna traka (sekcije i podnožje): crna u svijetlom načinu, malo svjetlija od podloge u tamnom */
+/* traka (sekcije i podnožje): crna u svijetlom načinu, svijetla u tamnom — uvijek oštar kontrast prema podlozi */
 :root { --hk-traka: #1A1718; --hk-traka-tekst: #fff; --hk-traka-akcent: #F05648; }
-html[data-mode="dark"] { --hk-traka: #26211f; --hk-traka-tekst: #EFEBEA; }
+html[data-mode="dark"] { --hk-traka: #F1EFEE; --hk-traka-tekst: #1A1718; --hk-traka-akcent: #CC2A1E; }
 .hk-traka { background: var(--hk-traka); color: var(--hk-traka-tekst); }
 .hk-traka .hk-oznaka { color: var(--hk-traka-akcent); }
 .hk-traka a:not(.wp-block-button__link) { color: var(--hk-traka-akcent); }
 .hk-sekcija:not(:has(*)) { display: none; }
 .hk-sekcija { margin-block-start: 0 !important; }
 .hikeit-footer, footer.wp-block-template-part { margin-block-start: 0 !important; }
+
+/* crvena traka s pozivom na akciju: odvaja se od tamne trake i podnožja */
+.hk-cta { background: #B8241A; color: #fff; }
+.hk-cta .wp-block-button__link { background: #fff; color: #B8241A; }
+.hk-cta .wp-block-button__link:hover { background: #F1EFEE; }

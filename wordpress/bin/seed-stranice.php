@@ -122,7 +122,7 @@ $razvoj .= hk_sekcija( hk_p( 'KAKO RADIMO', 'hk-oznaka', 'center' ) . hk_h( 'Od 
 	hk_kartica( '4. Lansiranje', 'Pokrećemo stranicu, educiramo te i ostajemo na raspolaganju.' ),
 ) ), 'traka' );
 $razvoj .= hk_sekcija( hk_shortcode( '[hikeit_reference]' ) );
-$razvoj .= hk_sekcija( hk_h( 'Imaš projekt na umu?', 2, 'center' ) . hk_p( 'Opiši nam ga u par rečenica i javit ćemo ti se u roku od 1–2 radna dana.', '', 'center' ) . hk_gumbi( array( array( 'Pošalji upit', '/kontakt/' ) ) ), 'traka' );
+$razvoj .= hk_sekcija( hk_h( 'Imaš projekt na umu?', 2, 'center' ) . hk_p( 'Opiši nam ga u par rečenica i javit ćemo ti se u roku od 1–2 radna dana.', '', 'center' ) . hk_gumbi( array( array( 'Pošalji upit', '/kontakt/' ) ) ), 'cta' );
 hk_postavi_sadrzaj( 'razvoj', $razvoj, $sili( 'razvoj' ), 'page-bez-naslova' );
 
 /* ---------- Reference: nacrti (objavi ih u adminu kad ih potvrdiš) ---------- */
