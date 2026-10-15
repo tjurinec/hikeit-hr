@@ -104,6 +104,10 @@ ne-radi auto-deploy, `r2.dev` rate limit.
 - ☑ Faza 3: uvoz provjeren — produkcija ima 1 izlet, 1 vodiča, 2 galerije (ukupno 9 slika, ~5 MB s thumbnailima), sve je uvezeno;
   ponovno pokretanje ne duplicira zapise. 301 sa starih adresa (`/galerija/{id}`, `/galerija?stranica=N`) u `inc/preusmjeravanja.php`.
   Poruke iz kontakta nisu uvožene (traže admin prijavu; po potrebi ručni CSV).
+- ☑ Faza 4: dva dijela stranice. hikeit.dev ima vlastitu naslovnicu (usluge, kako radimo, reference, poziv na upit), vlastitu
+  kontakt formu („Kontakt razvoj"), tip sadržaja `referenca` (2 nacrta: hikeit.hr i PD Pinklec; sekcija se ne prikazuje dok
+  nijedna nije objavljena) i opis stranice po domeni. Sadržaj jedne domene preusmjerava (301) na drugu
+  (`/izleti`, `/galerija`, `/o-nama`, `/blog` s .dev na .hr; `/razvoj` s .hr na .dev; www → bez www).
 - ☐ Ostaje: pregled na mobitelu, fino štimanje izgleda, SEO/OG podaci, 301 `/galerija/{id}`, SMTP,
   `hikeit.dev` sadržaj (tekst na stranici Razvoj je NACRT), uklanjanje izmišljenih brojki (vidi niže).
 - Sadržaj koji NISAM prenio jer je izmišljen u React kodu: „120+ putnika", „5★", „8+ godina", „5.0 (12 recenzija)".

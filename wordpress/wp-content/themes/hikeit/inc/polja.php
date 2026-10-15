@@ -50,6 +50,16 @@ add_action( 'acf/init', function () {
 		'fields'   => array( $tekst( 'vanjski_link', 'Vanjski link (npr. album s drugih fotografija)', array( 'type' => 'url' ) ) ),
 	) );
 
+	acf_add_local_field_group( array(
+		'key'      => 'group_hk_referenca',
+		'title'    => 'Referenca',
+		'location' => array( array( array( 'param' => 'post_type', 'operator' => '==', 'value' => 'referenca' ) ) ),
+		'fields'   => array(
+			$tekst( 'adresa', 'Adresa stranice (https://…)', array( 'type' => 'url' ) ),
+			$tekst( 'tehnologije', 'Tehnologije (odvojene zarezom)' ),
+		),
+	) );
+
 	// Postavke stranice žive na stranici "Kontakt" (ACF options traži Pro).
 	$p = fn( $n, $o, $e = array() ) => $tekst( $n, $o, array_merge( array( 'key' => "field_hk_p_$n" ), $e ) );
 	$kontakt = get_page_by_path( 'kontakt' );

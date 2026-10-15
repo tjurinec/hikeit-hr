@@ -196,7 +196,7 @@ add_shortcode( 'hikeit_postavke', function () {
 		}
 		$o .= '</p>';
 	}
-	$napomena = fn( $k ) => $s( $k ) ? '<br><small>' . esc_html( $s( $k ) ) . '</small>' : '';
+	$napomena = fn( $k ) => ! HIKEIT_DEV && $s( $k ) ? '<br><small>' . esc_html( $s( $k ) ) . '</small>' : '';
 	if ( $l = $s( 'lokacija' ) ) {
 		$o .= '<p><small>Lokacija</small><br>' . esc_html( $l ) . $napomena( 'lokacija_napomena' ) . '</p>';
 	}
@@ -226,3 +226,27 @@ add_shortcode( 'hikeit_podnozje', function () {
 	$o .= '<p class="hk-podnozje__kraj">© ' . gmdate( 'Y' ) . ' hikeIT · Sva prava pridržana.</p>';
 	return $o;
 } );
+
+/** Reference (hikeit.dev). Bez objavljenih referenci ne ispisuje ništa, ni naslov. */
+add_shortcode( 'hikeit_reference', function ( $a ) {
+	$a = shortcode_atts( array( 'limit' => 6 ), $a );
+	$r = get_posts( array( 'post_type' => 'referenca', 'numberposts' => (int) $a['limit'], 'orderby' => 'menu_order date', 'order' => 'ASC' ) );
+	if ( ! $r ) {
+		return '';
+	}
+	$o = '<div class="hk-sekcija-naslov"><p class="hk-oznaka">REFERENCE</p><h2>Što smo napravili</h2></div><div class="hk-mreza">';
+	foreach ( $r as $p ) {
+		$url  = hikeit_meta( $p->ID, 'adresa' );
+		$sl   = get_the_post_thumbnail( $p->ID, 'large', array( 'loading' => 'lazy' ) ) ?: '<span class="hk-kartica__prazno"></span>';
+		$o   .= '<article class="hk-kartica">' . ( $url ? '<a class="hk-kartica__slika" href="' . esc_url( $url ) . '" target="_blank" rel="noopener">' . $sl . '</a>' : '<div class="hk-kartica__slika">' . $sl . '</div>' );
+		$o   .= '<div class="hk-kartica__tijelo"><h3>' . esc_html( $p->post_title ) . '</h3><p>' . esc_html( $p->post_excerpt ) . '</p>';
+		if ( $t = hikeit_meta( $p->ID, 'tehnologije' ) ) {
+			$o .= '<p class="hk-kartica__meta">' . esc_html( $t ) . '</p>';
+		}
+		$o .= ( $url ? '<p><a href="' . esc_url( $url ) . '" target="_blank" rel="noopener">Pogledaj stranicu ↗</a></p>' : '' ) . '</div></article>';
+	}
+	return $o . '</div>';
+} );
+
+/** Kontakt forma ovisi o dijelu stranice (agencija / razvoj). */
+add_shortcode( 'hikeit_kontakt_forma', fn() => do_shortcode( HIKEIT_DEV ? '[contact-form-7 title="Kontakt razvoj"]' : '[contact-form-7 title="Kontakt"]' ) );

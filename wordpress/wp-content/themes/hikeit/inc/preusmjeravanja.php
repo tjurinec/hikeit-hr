@@ -21,3 +21,28 @@ add_action( 'template_redirect', function () {
 		}
 	}
 } );
+
+/**
+ * Dva dijela, dvije domene: sadržaj jedne domene ne smije biti dostupan na drugoj
+ * (dupli sadržaj za tražilice). www → bez www.
+ */
+add_action( 'template_redirect', function () {
+	$host     = strtolower( $_SERVER['HTTP_HOST'] ?? '' );
+	$uri      = $_SERVER['REQUEST_URI'] ?? '/';
+	$putanja  = trim( (string) wp_parse_url( $uri, PHP_URL_PATH ), '/' );
+	$prvi     = explode( '/', $putanja )[0];
+	$agencija = array( 'izleti', 'galerija', 'o-nama', 'blog', 'oznaka' );
+
+	if ( str_starts_with( $host, 'www.' ) ) {
+		$cilj = substr( $host, 4 );
+	} elseif ( HIKEIT_DEV && in_array( $prvi, $agencija, true ) ) {
+		$cilj = HIKEIT_HOST_AGENCIJA;
+	} elseif ( ! HIKEIT_DEV && 'razvoj' === $prvi ) {
+		$cilj = HIKEIT_HOST_DEV;
+		$uri  = '/';
+	} else {
+		return;
+	}
+	wp_redirect( HIKEIT_SHEMA . '://' . $cilj . $uri, 301 );
+	exit;
+}, 1 );

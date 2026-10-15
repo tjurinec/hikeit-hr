@@ -104,3 +104,4 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 .hikeit-logo-veza { display: inline-flex; align-items: baseline; gap: .15rem; color: var(--wp--preset--color--contrast); text-decoration: none; }
 .hikeit-logo { height: 2.4rem; width: auto; display: block; }
 .hikeit-logo__dev { font-family: var(--wp--preset--font-family--display); font-weight: 700; color: var(--wp--preset--color--accent); }
+.hk-sekcija-naslov { text-align: center; margin-bottom: 2rem; }

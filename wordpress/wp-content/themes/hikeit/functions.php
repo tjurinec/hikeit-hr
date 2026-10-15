@@ -32,6 +32,9 @@ add_filter( 'pre_option_page_on_front', function ( $zadano ) {
 	return $stranica ? $stranica->ID : $zadano;
 } );
 
+// Opis stranice ovisi o domeni.
+add_filter( 'pre_option_blogdescription', fn( $v ) => HIKEIT_DEV ? 'Web stranice i programska rješenja po mjeri' : $v );
+
 // Zaglavlje ovisi o domeni.
 add_filter( 'render_block_data', function ( $blok ) {
 	if ( HIKEIT_DEV && 'core/template-part' === $blok['blockName'] && 'header' === ( $blok['attrs']['slug'] ?? '' ) ) {

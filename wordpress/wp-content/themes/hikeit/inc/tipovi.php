@@ -49,6 +49,17 @@ add_action( 'init', function () {
 		'show_in_rest' => true,
 	) );
 
+	// Reference za hikeit.dev: samo se prikazuju shortcodeom, bez vlastitih adresa.
+	register_post_type( 'referenca', array(
+		'labels'       => $natpisi( 'Reference', 'Referenca', 'Nova referenca' ),
+		'public'       => false,
+		'show_ui'      => true,
+		'menu_icon'    => 'dashicons-portfolio',
+		'menu_position' => 8,
+		'supports'     => array( 'title', 'excerpt', 'thumbnail', 'page-attributes' ),
+		'show_in_rest' => true,
+	) );
+
 	register_taxonomy( 'oznaka', 'izlet', array(
 		'labels'       => $natpisi( 'Oznake', 'Oznaka', 'Nova oznaka' ),
 		'public'       => true,
