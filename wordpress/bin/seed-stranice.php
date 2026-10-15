@@ -128,33 +128,33 @@ $portret = hk_slika_datoteka( __DIR__ . '/../seed-slike/portret.jpg', 'Tomislav 
 
 $razvoj  = hk_tamna( hk_stupci( array(
 	hk_p( 'WEB I SOFTVERSKA RJEŠENJA · ZAGREB', 'hk-oznaka' ) . hk_h( 'Web stranice za male obrte, udruge i agencije', 1 )
-	. hk_p( 'Napravit ću vam stranicu koju možete sami uređivati, s jasnom cijenom prije početka rada. Bez agencijskih cijena i bez nepotrebne složenosti.' )
+	. hk_p( 'Dobivate stranicu koju možete sami uređivati, s jasnom cijenom prije početka rada. Bez agencijskih cijena i bez nepotrebne složenosti.' )
 	. hk_gumbi( array( array( 'Pošaljite upit', '/kontakt/' ), array( 'Pogledajte usluge', '/usluge/' ) ), true, 'left' ),
 	$snimka ? hk_prozor( $snimka, 'Primjer: web stranica planinarskog društva' ) : '',
 ) ) );
-$razvoj .= hk_sekcija( hk_p( 'ZA KOGA RADIM', 'hk-oznaka', 'center' ) . hk_h( 'Mali timovi s jasnom potrebom', 2, 'center' ) . hk_stupci( array(
+$razvoj .= hk_sekcija( hk_p( 'ZA KOGA RADIMO', 'hk-oznaka', 'center' ) . hk_h( 'Mali timovi s jasnom potrebom', 2, 'center' ) . hk_stupci( array(
 	hk_kartica( 'Obrti i male tvrtke', 'Stranica koja vas predstavlja, prikuplja upite i na kojoj sami mijenjate tekstove i cijene.' ),
-	hk_kartica( 'Udruge i društva', 'Najave događanja, izvještaji, galerije i članovi na jednom mjestu. Napravio sam stranicu za planinarsko društvo.' ),
-	hk_kartica( 'Turističke agencije', 'Izleti, galerije, upiti i, kad dođe vrijeme, online plaćanje. Napravio sam stranicu za turističku agenciju.' ),
+	hk_kartica( 'Udruge i društva', 'Najave događanja, izvještaji, galerije i članovi na jednom mjestu. Izradili smo stranicu za planinarsko društvo.' ),
+	hk_kartica( 'Turističke agencije', 'Izleti, galerije, upiti i, kad dođe vrijeme, online plaćanje. Izradili smo stranicu za turističku agenciju.' ),
 ) ) );
-$razvoj .= hk_sekcija( hk_p( 'USLUGE', 'hk-oznaka', 'center' ) . hk_h( 'Što radim', 2, 'center' ) . hk_stupci( array(
+$razvoj .= hk_sekcija( hk_p( 'USLUGE', 'hk-oznaka', 'center' ) . hk_h( 'Što radimo', 2, 'center' ) . hk_stupci( array(
 	hk_kartica_usluge( 'Web stranice', 'WordPress stranica koju možete sami uređivati, prilagođena mobitelu i tražilicama.', 'od 590 €', '/usluge/web-stranice/' ),
 	hk_kartica_usluge( 'Aplikacije po mjeri', 'Interni alati, integracije i web aplikacije prema vašim procesima.', 'po dogovoru', '/usluge/aplikacije-po-mjeri/' ),
 	hk_kartica_usluge( 'Održavanje', 'Ažuriranja, sigurnosne kopije i manje izmjene, da stranica ostane brza i sigurna.', 'od 30 € mjesečno', '/usluge/odrzavanje/' ),
 ) ) . hk_p( 'Cijene su orijentacijske. Točnu ponudu dobit ćete nakon kratkog razgovora, prije početka rada.', 'hk-biljeska', 'center' ), '', 'usluge' );
-$razvoj .= hk_sekcija( hk_p( 'KAKO RADIM', 'hk-oznaka', 'center' ) . hk_h( 'Od upita do lansiranja', 2, 'center' ) . hk_stupci( array(
+$razvoj .= hk_sekcija( hk_p( 'KAKO RADIMO', 'hk-oznaka', 'center' ) . hk_h( 'Od upita do lansiranja', 2, 'center' ) . hk_stupci( array(
 	hk_kartica( '1. Razgovor', 'Kratko pojasnite što trebate i što želite postići. Bez obveze.' ),
 	hk_kartica( '2. Ponuda', 'Jasan opseg, rok i cijena prije početka rada.' ),
-	hk_kartica( '3. Izrada', 'Gradim u koracima i redovito vam pokazujem napredak.' ),
-	hk_kartica( '4. Lansiranje', 'Pokrećem stranicu, educiram vas i ostajem na raspolaganju.' ),
+	hk_kartica( '3. Izrada', 'Gradimo u koracima i redovito vam pokazujemo napredak.' ),
+	hk_kartica( '4. Lansiranje', 'Pokrećemo stranicu, educiramo vas i ostajemo na raspolaganju.' ),
 ) ) );
 $razvoj .= hk_sekcija( hk_shortcode( '[hikeit_reference]' ) );
-$tko_tekst = hk_p( 'TKO STOJI IZA', 'hk-oznaka' ) . hk_h( 'Zovem se Tomislav', 2 )
-	. hk_p( 'Programiram i radim web stranice za male organizacije — od planinarskog društva do turističke agencije. Stranice pišem na WordPressu jer ih tako možete sami uređivati, a kad treba nešto što WordPress ne zna, napišem to po mjeri.' )
-	. hk_p( 'Sa mnom razgovarate izravno, bez posrednika. Sve što vidite na hikeit.hr i hikeit.dev napravio sam sam.' )
-	. hk_p( '<a href="/o-meni/">Više o meni →</a>' );
+$tko_tekst = hk_p( 'TKO STOJI IZA', 'hk-oznaka' ) . hk_h( 'Mi smo hikeIT', 2 )
+	. hk_p( 'Programiramo i izrađujemo web stranice za male organizacije — od planinarskog društva do turističke agencije. Stranice pišemo na WordPressu jer ih tako možete sami uređivati, a kad treba nešto što WordPress ne zna, napišemo to po mjeri.' )
+	. hk_p( 'S nama razgovarate izravno, bez posrednika. Sve što vidite na hikeit.hr i hikeit.dev izradili smo sami.' )
+	. hk_p( '<a href="/o-meni/">Više o nama →</a>' );
 $razvoj .= hk_sekcija( hk_s_portretom( $portret, $tko_tekst ) );
-$razvoj .= hk_tamna( hk_h( 'Imate projekt na umu?', 2, 'center' ) . hk_p( 'Opišite ga u nekoliko rečenica i javit ću vam se u roku od 1–2 radna dana.', '', 'center' ) . hk_gumbi( array( array( 'Pošaljite upit', '/kontakt/' ) ) ) );
+$razvoj .= hk_tamna( hk_h( 'Imate projekt na umu?', 2, 'center' ) . hk_p( 'Opišite ga u nekoliko rečenica i javit ćemo vam se u roku od 1–2 radna dana.', '', 'center' ) . hk_gumbi( array( array( 'Pošaljite upit', '/kontakt/' ) ) ) );
 hk_postavi_sadrzaj( 'razvoj', $razvoj, $sili( 'razvoj' ), 'page-bez-naslova' );
 hk_seo( 'razvoj', 'Izrada web stranica i aplikacija | hikeIT', 'Izrada web stranica na WordPressu i aplikacija po mjeri za male obrte, udruge i turističke agencije. Jasna cijena prije početka rada.' );
 
@@ -165,37 +165,37 @@ if ( $kontakt_str = get_page_by_path( 'kontakt' ) ) {
 		update_field( 'linkedin', $linkedin, $kontakt_str->ID );
 	}
 }
-hk_stranica_ili_nova( 'o-meni', 'O meni' );
+hk_stranica_ili_nova( 'o-meni', 'Tko smo' );
 $ometi = hk_sekcija( hk_s_portretom( $portret,
-	hk_p( 'O MENI', 'hk-oznaka' ) . hk_h( 'Tomislav Jurinec', 1 )
-	. hk_p( 'Programer sam i web stranice radim za male organizacije — od planinarskog društva do turističke agencije.' )
-	. hk_p( 'Zanima me da stvari rade jednostavno: da stranicu možete sami uređivati, da je brza i da vas ne košta više nego što mora. Kad treba nešto što gotovo rješenje ne zna, napišem to po mjeri.' )
-	. hk_p( 'Izvan ekrana planinarim, penjem ferrate i bavim se ljetnim alpinizmom — otud i ime hikeIT.' )
-	. hk_gumbi( array( array( 'Moj LinkedIn profil', $linkedin ), array( 'Pošaljite upit', '/kontakt/' ) ), true, 'left' ) ) );
-$ometi .= hk_sekcija( hk_p( 'IZVAN EKRANA', 'hk-oznaka', 'center' ) . hk_h( 'Gdje se najradije nađem', 2, 'center' ) . hk_galerija_blok( $traka, 'hk-traka' ) );
-$ometi .= hk_sekcija( hk_p( 'STRUČNOSTI', 'hk-oznaka', 'center' ) . hk_h( 'Čime se bavim', 2, 'center' ) . hk_stupci( array(
+	hk_p( 'TKO SMO', 'hk-oznaka' ) . hk_h( 'Mali tim, jasan dogovor', 1 )
+	. hk_p( 'hikeIT je obrt za izradu web stranica i softverskih rješenja. Iza njega stoji Tomislav Jurinec, programer koji web stranice izrađuje za male organizacije — od planinarskog društva do turističke agencije.' )
+	. hk_p( 'Zanima nas da stvari rade jednostavno: da stranicu možete sami uređivati, da je brza i da vas ne košta više nego što mora. Kad treba nešto što gotovo rješenje ne zna, napišemo to po mjeri.' )
+	. hk_p( 'Izvan ekrana planiniramo, penjemo ferrate i bavimo se ljetnim alpinizmom — otud i ime hikeIT.' )
+	. hk_gumbi( array( array( 'LinkedIn profil', $linkedin ), array( 'Pošaljite upit', '/kontakt/' ) ), true, 'left' ) ) );
+$ometi .= hk_sekcija( hk_p( 'IZVAN EKRANA', 'hk-oznaka', 'center' ) . hk_h( 'Gdje se najradije nalazimo', 2, 'center' ) . hk_galerija_blok( $traka, 'hk-traka' ) );
+$ometi .= hk_sekcija( hk_p( 'STRUČNOSTI', 'hk-oznaka', 'center' ) . hk_h( 'Čime se bavimo', 2, 'center' ) . hk_stupci( array(
 	hk_kartica( 'Web stranice', 'WordPress: vlastite teme i blokovi, prilagođena polja, WP-CLI i selidbe sadržaja između sustava.' ),
 	hk_kartica( 'Aplikacije po mjeri', 'Kotlin i Spring Boot na poslužitelju, React i TypeScript u pregledniku, PostgreSQL i verzionirane migracije baze.' ),
 	hk_kartica( 'Infrastruktura', 'Docker, deploy i hosting (Render, Cloudflare), sigurnosne kopije i e-pošta (SMTP).' ),
-	hk_kartica( 'Kvaliteta', 'Git, testovi i pregled koda — da ono što isporučim radi i nakon prve izmjene.' ),
+	hk_kartica( 'Kvaliteta', 'Git, testovi i pregled koda — da ono što isporučimo radi i nakon prve izmjene.' ),
 ) ) );
 $ometi .= hk_sekcija( hk_p( 'NAČIN RADA', 'hk-oznaka', 'center' ) . hk_h( 'Što to znači za vas', 2, 'center' ) . hk_lista( array(
-	'Razgovarate izravno sa mnom, bez posrednika',
+	'Razgovarate izravno s nama, bez posrednika',
 	'Jasna ponuda prije početka rada: opseg, rok i cijena',
-	'Stranicu možete sami uređivati — ne ovisite o meni za svaku sitnicu',
+	'Stranicu možete sami uređivati — ne ovisite o nama za svaku sitnicu',
 	'Sve je pod kontrolom verzija i sigurnosnih kopija, pa se promjene mogu vratiti',
 ) ) );
-$ometi .= hk_tamna( hk_h( 'Imate projekt na umu?', 2, 'center' ) . hk_p( 'Opišite ga u nekoliko rečenica i javit ću vam se u roku od 1–2 radna dana.', '', 'center' ) . hk_gumbi( array( array( 'Pošaljite upit', '/kontakt/' ) ) ) );
+$ometi .= hk_tamna( hk_h( 'Imate projekt na umu?', 2, 'center' ) . hk_p( 'Opišite ga u nekoliko rečenica i javit ćemo vam se u roku od 1–2 radna dana.', '', 'center' ) . hk_gumbi( array( array( 'Pošaljite upit', '/kontakt/' ) ) ) );
 hk_postavi_sadrzaj( 'o-meni', $ometi, $sili( 'o-meni' ), 'page-bez-naslova' );
-hk_seo( 'o-meni', 'O meni — Tomislav Jurinec | hikeIT', 'Tomislav Jurinec: programer i izrada web stranica na WordPressu i aplikacija po mjeri za male obrte, udruge i turističke agencije u Zagrebu.' );
+hk_seo( 'o-meni', 'Tko smo — hikeIT, Tomislav Jurinec', 'hikeIT je obrt za izradu web stranica na WordPressu i aplikacija po mjeri za male obrte, udruge i turističke agencije u Zagrebu. Iza njega stoji Tomislav Jurinec, programer.' );
 
 /* ---------- Usluge: pregled i tri stranice (SEO: svaka usluga ima svoj URL) ---------- */
 $usluge_stranice = array(
 	'usluge' => array(
 		'Usluge', 'Usluge: web stranice, aplikacije i održavanje | hikeIT',
 		'Izrada web stranica, aplikacije po mjeri i održavanje WordPress stranica. Orijentacijske cijene i jasna ponuda prije početka rada.',
-		hk_sekcija( hk_p( 'USLUGE', 'hk-oznaka', 'center' ) . hk_h( 'Što radim', 1, 'center' )
-			. hk_p( 'Tri stvari koje radim najčešće. Za sve je prvi korak kratki razgovor, bez obveze.', '', 'center' )
+		hk_sekcija( hk_p( 'USLUGE', 'hk-oznaka', 'center' ) . hk_h( 'Što radimo', 1, 'center' )
+			. hk_p( 'Tri stvari koje radimo najčešće. Za sve je prvi korak kratki razgovor, bez obveze.', '', 'center' )
 			. hk_stupci( array(
 				hk_kartica_usluge( 'Web stranice', 'WordPress stranica koju možete sami uređivati, prilagođena mobitelu i tražilicama.', 'od 590 €', '/usluge/web-stranice/' ),
 				hk_kartica_usluge( 'Aplikacije po mjeri', 'Interni alati, integracije i web aplikacije prema vašim procesima.', 'po dogovoru', '/usluge/aplikacije-po-mjeri/' ),
@@ -219,18 +219,18 @@ $usluge_stranice = array(
 		'Aplikacije i integracije po mjeri', 'Web aplikacije i integracije po mjeri | hikeIT',
 		'Izrada web aplikacija, internih alata i integracija po mjeri za male tvrtke i udruge. Cijena po dogovoru, jasna ponuda prije početka rada.',
 		hk_sekcija( hk_p( 'USLUGE', 'hk-oznaka', 'center' ) . hk_h( 'Aplikacije i integracije po mjeri', 1, 'center' )
-			. hk_p( 'Kad gotovo rješenje ne odgovara vašem procesu, napišem ono koje odgovara.', '', 'center' )
-			. hk_h( 'Što radim', 2, 'center' )
+			. hk_p( 'Kad gotovo rješenje ne odgovara vašem procesu, napravimo ono koje odgovara.', '', 'center' )
+			. hk_h( 'Što radimo', 2, 'center' )
 			. hk_lista( array( 'Interne alate: evidencije, narudžbe, rezervacije, izvještaji', 'Integracije između stranice i drugih sustava (e-pošta, plaćanje, kalendari)', 'Web aplikacije s prijavom korisnika i ulogama', 'Prebacivanje postojećih sustava na jednostavnije i jeftinije za održavanje' ) )
 			. hk_h( 'Cijena', 2, 'center' )
-			. hk_p( 'Cijena ovisi o opsegu pa je <strong>po dogovoru</strong>. Nakon razgovora dobit ćete ponudu s opsegom, rokom i cijenom, prije nego išta počnem raditi.', '', 'center' )
+			. hk_p( 'Cijena ovisi o opsegu pa je <strong>po dogovoru</strong>. Nakon razgovora dobit ćete ponudu s opsegom, rokom i cijenom, prije nego išta počnemo raditi.', '', 'center' )
 			. hk_gumbi( array( array( 'Opišite svoj projekt', '/kontakt/' ) ) ) ),
 	),
 	'usluge/odrzavanje' => array(
 		'Održavanje web stranica', 'Održavanje WordPress stranica | od 30 € mjesečno | hikeIT',
 		'Održavanje WordPress stranica: ažuriranja, sigurnosne kopije, nadzor i manje izmjene sadržaja. Od 30 € mjesečno.',
 		hk_sekcija( hk_p( 'USLUGE', 'hk-oznaka', 'center' ) . hk_h( 'Održavanje web stranica', 1, 'center' )
-			. hk_p( 'Stranica koja se ne održava postaje spora i nesigurna. Brinem se da ostane brza, sigurna i ažurna.', '', 'center' )
+			. hk_p( 'Stranica koja se ne održava postaje spora i nesigurna. Brinemo se da ostane brza, sigurna i ažurna.', '', 'center' )
 			. hk_h( 'Što je uključeno', 2, 'center' )
 			. hk_lista( array( 'Redovita ažuriranja WordPressa, teme i dodataka', 'Sigurnosne kopije i provjera da se mogu vratiti', 'Nadzor dostupnosti i sigurnosti', 'Manje izmjene sadržaja po dogovoru' ) )
 			. hk_h( 'Cijena', 2, 'center' )

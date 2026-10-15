@@ -214,7 +214,7 @@ add_shortcode( 'hikeit_postavke', function () {
 /** Podnožje: isti kontakt podaci na obje domene, različita navigacija. */
 add_shortcode( 'hikeit_podnozje', function () {
 	$veze = HIKEIT_DEV
-		? array( '/usluge/' => 'Usluge', '/reference/' => 'Reference', '/o-meni/' => 'O meni', '/kontakt/' => 'Kontakt' )
+		? array( '/usluge/' => 'Usluge', '/reference/' => 'Reference', '/o-meni/' => 'Tko smo', '/kontakt/' => 'Kontakt' )
 		: array( '/izleti/' => 'Izleti', '/galerija/' => 'Galerija', '/blog/' => 'Blog', '/o-nama/' => 'O nama', '/kontakt/' => 'Kontakt' );
 	$o = '<div class="hk-podnozje"><div><strong class="hk-podnozje__marka">' . ( HIKEIT_DEV ? 'hikeit.dev' : 'hikeIT.hr' ) . '</strong>';
 	$o .= '<p>' . ( HIKEIT_DEV ? 'Web stranice i programska rješenja po mjeri.' : 'Planinski i turistički izleti po mjeri — sigurno, odgovorno i nezaboravno.' ) . '</p></div>';
@@ -234,7 +234,7 @@ add_shortcode( 'hikeit_reference', function ( $a ) {
 	if ( ! $r ) {
 		return $a['prazno'] ? '<p class="hk-prazno">' . esc_html( $a['prazno'] ) . '</p>' : '';
 	}
-	$o = ( $a['naslov'] ? '<div class="hk-sekcija-naslov"><p class="hk-oznaka">REFERENCE</p><h2>Što sam napravio</h2></div>' : '' ) . '<div class="hk-mreza">';
+	$o = ( $a['naslov'] ? '<div class="hk-sekcija-naslov"><p class="hk-oznaka">REFERENCE</p><h2>Što smo napravili</h2></div>' : '' ) . '<div class="hk-mreza">';
 	foreach ( $r as $p ) {
 		$url  = hikeit_meta( $p->ID, 'adresa' );
 		$sl   = get_the_post_thumbnail( $p->ID, 'large', array( 'loading' => 'lazy' ) ) ?: '<span class="hk-kartica__prazno"></span>';
@@ -251,7 +251,7 @@ add_shortcode( 'hikeit_reference', function ( $a ) {
 /** Kontakt forma ovisi o dijelu stranice (agencija / razvoj). */
 add_shortcode( 'hikeit_kontakt_forma', fn() => do_shortcode( HIKEIT_DEV ? '[contact-form-7 title="Kontakt razvoj"]' : '[contact-form-7 title="Kontakt"]' ) );
 
-/** Strukturirani podaci o osobi (Google) na stranici "O meni". */
+/** Strukturirani podaci o osobi (Google) na stranici "Tko smo". */
 add_action( 'wp_head', function () {
 	if ( ! is_page( 'o-meni' ) ) {
 		return;
