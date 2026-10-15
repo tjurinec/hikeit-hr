@@ -35,3 +35,6 @@ postgres_data/
 /*.jpg
 /*.jpeg
 /*.webp
+
+# ===== WordPress izvoz za hosting (baza + uploads) =====
+wordpress/build/
