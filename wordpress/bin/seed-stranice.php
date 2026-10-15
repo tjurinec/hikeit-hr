@@ -106,7 +106,8 @@ hk_postavi_sadrzaj( 'kontakt', $kontakt, $sili( 'kontakt' ), 'page-bez-naslova' 
 
 /* ---------- Razvoj (hikeit.dev) — PRIJEDLOG TEKSTOVA: cijene, ciljna skupina i opis osobe su za potvrdu ---------- */
 $snimka  = hk_slika_datoteka( __DIR__ . '/../seed-slike/pd-pinklec.jpg', 'Stranica PD Pinklec' );
-$portret = hk_slika_datoteka( __DIR__ . '/../seed-slike/portret.jpg', 'Tomislav Jurinec' ); // dodaj datoteku pa pokreni seed, ili postavi sliku u adminu
+$vodic   = get_posts( array( 'post_type' => 'vodic', 'numberposts' => 1, 'orderby' => 'ID', 'order' => 'ASC' ) );
+$portret = hk_slika_datoteka( __DIR__ . '/../seed-slike/portret.jpg', 'Tomislav Jurinec' ) ?: ( $vodic ? get_post_thumbnail_id( $vodic[0]->ID ) : 0 ); // dodaj datoteku pa pokreni seed, ili postavi sliku u adminu
 
 $razvoj  = hk_tamna( hk_stupci( array(
 	hk_p( 'WEB I SOFTVERSKA RJEŠENJA · ZAGREB', 'hk-oznaka' ) . hk_h( 'Web stranice za male obrte, udruge i agencije', 1 )
