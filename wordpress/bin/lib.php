@@ -80,7 +80,10 @@ function hk_sekcija( string $unutra, string $pozadina = '', string $sidro = '' )
 	$atr = array( 'align' => 'full', 'className' => 'hk-sekcija', 'layout' => array( 'type' => 'constrained', 'wideSize' => '72rem' ),
 		'style' => array( 'spacing' => array( 'padding' => array( 'top' => 'var:preset|spacing|50', 'bottom' => 'var:preset|spacing|50' ) ) ) );
 	$kl = 'wp-block-group alignfull hk-sekcija';
-	if ( $pozadina ) {
+	if ( 'traka' === $pozadina ) {
+		$atr['className'] = 'hk-sekcija hk-traka'; // tamna traka, vidi style.css
+		$kl              .= ' hk-traka';
+	} elseif ( $pozadina ) {
 		$atr['backgroundColor'] = $pozadina;
 		$kl                    .= " has-$pozadina-background-color has-background";
 	}
