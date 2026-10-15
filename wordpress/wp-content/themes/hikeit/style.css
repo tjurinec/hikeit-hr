@@ -1,0 +1,106 @@
+/*
+Theme Name: hikeIT
+Description: Tema za hikeit.hr (turistička agencija) i hikeit.dev (web i softverska rješenja) — jedna instalacija, dvije domene.
+Version: 0.1.0
+Requires at least: 6.5
+Requires PHP: 8.1
+Text Domain: hikeit
+*/
+
+.hikeit-header { border-bottom: 1px solid var(--wp--preset--color--base-2); }
+.hikeit-header .wp-block-site-title a { text-decoration: none; }
+.hikeit-footer { border-top: 1px solid var(--wp--preset--color--base-2); }
+
+/* --- zaglavlje / podnožje --- */
+.hikeit-header { background: var(--wp--preset--color--base); position: sticky; top: 0; z-index: 20; }
+.hikeit-header .wp-block-site-title { font-weight: 700; margin: 0; }
+.hikeit-header .wp-block-site-title a { color: var(--wp--preset--color--accent); }
+.hikeit-footer { background: var(--wp--preset--color--base-2); color: var(--wp--preset--color--contrast); border-top: 1px solid var(--wp--preset--color--base-2); }
+.hikeit-footer a { color: var(--wp--preset--color--contrast); }
+.hikeit-footer a:hover { color: var(--wp--preset--color--accent); }
+.hk-podnozje { display: grid; gap: 2rem; grid-template-columns: 2fr 1fr 1.5fr; }
+.hk-podnozje ul { list-style: none; padding: 0; margin: .5rem 0 0; display: grid; gap: .4rem; }
+.hk-podnozje p, .hk-podnozje small { color: var(--wp--preset--color--contrast-2); }
+.hk-podnozje__marka { font-family: var(--wp--preset--font-family--display); font-size: 1.25rem; }
+.hk-podnozje__kraj { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--wp--preset--color--contrast-2); font-size: .8rem; }
+@media (max-width: 782px) { .hk-podnozje { grid-template-columns: 1fr; } }
+
+/* --- sekcije --- */
+.hk-hero { text-align: center; color: #fff; }
+.hk-hero h1, .hk-hero p { color: #fff; }
+.hk-oznaka { text-transform: uppercase; letter-spacing: .14em; font-size: .8rem; font-weight: 600; color: var(--wp--preset--color--accent); margin: 0; }
+.hk-hero .hk-oznaka { color: #fff; opacity: .85; }
+.hk-sredina { text-align: center; }
+.hk-ploha { background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--base-2); border-radius: 1rem; padding: 1.5rem; height: 100%; }
+.wp-block-button__link { border-radius: 999px; font-weight: 600; padding: .85rem 1.8rem; }
+.is-style-outline > .wp-block-button__link { background: transparent; border: 2px solid currentColor; }
+
+/* --- kartice izleta, galerija, vodiča --- */
+.hk-mreza { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); }
+.hk-mreza--2 { grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr)); }
+.hk-kartica { background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--base-2); border-radius: 1rem; overflow: hidden; display: flex; flex-direction: column; }
+.hk-kartica__slika { display: block; aspect-ratio: 4/3; background: var(--wp--preset--color--base-2); overflow: hidden; }
+.hk-kartica__slika img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+.hk-kartica:hover .hk-kartica__slika img { transform: scale(1.04); }
+.hk-vodic .hk-kartica__slika { aspect-ratio: 16/10; }
+.hk-vodic .hk-kartica__slika img { object-position: top; }
+.hk-kartica__prazno { display: block; width: 100%; height: 100%; }
+.hk-kartica__tijelo { padding: 1.25rem 1.5rem 1.5rem; }
+.hk-kartica__tijelo h3 { margin: .5rem 0; font-size: 1.25rem; }
+.hk-kartica__tijelo h3 a { color: inherit; text-decoration: none; }
+.hk-kartica__tijelo p { margin: .4rem 0; font-size: .95rem; }
+.hk-kartica__meta { color: var(--wp--preset--color--contrast-2); font-size: .85rem !important; }
+.hk-kartica__red { display: flex; justify-content: space-between; align-items: center; }
+.hk-cijena { color: var(--wp--preset--color--accent); }
+.hk-vodic__spec { color: var(--wp--preset--color--accent); font-weight: 600; }
+.hk-prazno { text-align: center; color: var(--wp--preset--color--contrast-2); padding: 2rem 0; }
+
+.hk-znacka { display: inline-block; padding: .15rem .7rem; border-radius: 999px; font-size: .75rem; font-weight: 600; background: #fef3c7; color: #92400e; }
+.hk-znacka--lagano { background: #d1fae5; color: #065f46; }
+.hk-znacka--tesko { background: #ffedd5; color: #9a3412; }
+.hk-znacka--ekspert { background: #fee2e2; color: #991b1b; }
+
+/* --- filter, straničenje, gumbi --- */
+.hk-filter { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2rem; }
+.hk-filter input, .hk-filter select, .wpcf7 input:not([type=submit]), .wpcf7 select, .wpcf7 textarea { padding: .65rem .9rem; border: 1px solid var(--wp--preset--color--base-2); border-radius: .6rem; font: inherit; background: var(--wp--preset--color--surface); max-width: 100%; }
+.hk-filter input { flex: 1 1 14rem; }
+.hk-gumb, .wpcf7 input[type=submit] { display: inline-block; background: var(--wp--preset--color--accent); color: #fff !important; border: 0; border-radius: 999px; padding: .75rem 1.6rem; font: inherit; font-weight: 600; cursor: pointer; text-decoration: none; }
+.hk-gumb:hover, .wpcf7 input[type=submit]:hover { background: var(--wp--preset--color--accent-2); }
+.hk-stranicenje { margin-top: 2rem; display: flex; gap: .4rem; justify-content: center; }
+.hk-stranicenje .page-numbers { padding: .4rem .8rem; border-radius: .5rem; border: 1px solid var(--wp--preset--color--base-2); text-decoration: none; background: var(--wp--preset--color--surface); }
+.hk-stranicenje .current { background: var(--wp--preset--color--accent); color: #fff; border-color: transparent; }
+
+/* --- stranica izleta --- */
+.hk-podaci { background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--base-2); border-radius: 1rem; padding: 1.5rem; position: sticky; top: 6rem; }
+.hk-podaci__cijena { font-family: var(--wp--preset--font-family--display); font-size: 2rem; font-weight: 700; color: var(--wp--preset--color--accent); }
+.hk-podaci__cijena small { font-family: var(--wp--preset--font-family--body); font-size: .85rem; font-weight: 400; color: var(--wp--preset--color--contrast-2); }
+.hk-podaci dl { display: grid; grid-template-columns: auto 1fr; gap: .4rem 1rem; margin: 1rem 0 1.5rem; font-size: .95rem; }
+.hk-podaci dt { font-weight: 600; } .hk-podaci dd { margin: 0; }
+.hk-podaci__vodic { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--wp--preset--color--base-2); }
+
+/* --- kontakt --- */
+.hk-kontakt small { text-transform: uppercase; letter-spacing: .08em; color: var(--wp--preset--color--contrast-2); font-weight: 600; font-size: .7rem; }
+.hk-kontakt p { margin: 0 0 1rem; }
+.wpcf7 label { display: block; font-weight: 500; margin-bottom: 1rem; }
+.wpcf7 input:not([type=submit]), .wpcf7 select, .wpcf7 textarea { width: 100%; display: block; margin-top: .3rem; }
+
+/* --- tamni način (gumb u zaglavlju; paleta se mijenja u inc/tamno.php) --- */
+.hikeit-nacin { background: none; border: 1px solid var(--wp--preset--color--base-2); color: var(--wp--preset--color--contrast); border-radius: 999px; width: 2.4rem; height: 2.4rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+.hikeit-nacin:hover { border-color: var(--wp--preset--color--accent); color: var(--wp--preset--color--accent); }
+.hikeit-nacin .sunce, html[data-mode="dark"] .hikeit-nacin .mjesec { display: none; }
+html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
+.hk-filter input, .hk-filter select, .wpcf7 input:not([type=submit]), .wpcf7 select, .wpcf7 textarea { color: var(--wp--preset--color--contrast); }
+.hikeit-header .wp-block-navigation { margin-left: auto; }
+
+/* početna i stranice bez naslova: sekcije idu do ruba, razmak unutra */
+.hk-bleed { padding-left: 0 !important; padding-right: 0 !important; }
+.hk-sekcija { padding-left: var(--wp--preset--spacing--30); padding-right: var(--wp--preset--spacing--30); }
+.hikeit-header .wp-block-site-title { font-size: 1.4rem; }
+.hikeit-header .wp-block-site-title a { color: var(--wp--preset--color--accent) !important; }
+.hikeit-header .wp-block-navigation a { text-decoration: none; }
+.hk-kartica__tijelo h3 a:hover { color: var(--wp--preset--color--accent); }
+.hk-hero p { max-width: 44rem; margin-left: auto; margin-right: auto; }
+
+.hikeit-logo-veza { display: inline-flex; align-items: baseline; gap: .15rem; color: var(--wp--preset--color--contrast); text-decoration: none; }
+.hikeit-logo { height: 2.4rem; width: auto; display: block; }
+.hikeit-logo__dev { font-family: var(--wp--preset--font-family--display); font-weight: 700; color: var(--wp--preset--color--accent); }

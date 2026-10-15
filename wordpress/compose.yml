@@ -1,0 +1,42 @@
+services:
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: wordpress
+      MARIADB_ROOT_PASSWORD: root
+    volumes: [db:/var/lib/mysql]
+
+  wp:
+    image: wordpress:php8.3-apache
+    ports: ["8089:80"]
+    environment: &wpenv
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DEBUG: 1
+      # jedna instalacija, dvije domene — vidi hosts.php
+      WORDPRESS_CONFIG_EXTRA: "require '/var/www/hosts.php';"
+    volumes: &wpvol
+      - wp:/var/www/html
+      - ./wp-content/themes/hikeit:/var/www/html/wp-content/themes/hikeit
+      - ./docker/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
+      - ./hosts.php:/var/www/hosts.php:ro
+      - ./bin:/var/www/html/bin:ro
+      - ./import:/var/www/html/import:ro
+    depends_on: [db]
+
+  # docker compose run --rm cli wp <naredba>
+  cli:
+    image: wordpress:cli
+    profiles: [tools]
+    user: "33:33"
+    environment: *wpenv
+    volumes: *wpvol
+    depends_on: [db]
+
+volumes:
+  db:
+  wp:

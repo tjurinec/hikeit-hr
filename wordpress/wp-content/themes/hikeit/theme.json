@@ -1,0 +1,263 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"settings": {
+		"appearanceTools": true,
+		"layout": {
+			"contentSize": "46rem",
+			"wideSize": "72rem"
+		},
+		"useRootPaddingAwareAlignments": true,
+		"color": {
+			"defaultPalette": false,
+			"defaultGradients": false,
+			"palette": [
+				{
+					"slug": "base",
+					"name": "Bijela",
+					"color": "#FFFFFF"
+				},
+				{
+					"slug": "base-2",
+					"name": "Rub",
+					"color": "#F1EFEE"
+				},
+				{
+					"slug": "contrast",
+					"name": "Tinta",
+					"color": "#1A1718"
+				},
+				{
+					"slug": "contrast-2",
+					"name": "Tinta meka",
+					"color": "#6B6465"
+				},
+				{
+					"slug": "accent",
+					"name": "Markacija",
+					"color": "#CC2A1E"
+				},
+				{
+					"slug": "accent-2",
+					"name": "Markacija tamna",
+					"color": "#A81F15"
+				},
+				{
+					"slug": "surface",
+					"name": "Ploha",
+					"color": "#FFFFFF"
+				}
+			]
+		},
+		"typography": {
+			"fluid": true,
+			"defaultFontSizes": false,
+			"fontFamilies": [
+				{
+					"slug": "display",
+					"name": "Naslovi",
+					"fontFamily": "\"Playfair Display\", Georgia, serif",
+					"fontFace": [
+						{
+							"fontFamily": "Playfair Display",
+							"fontWeight": "500 800",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/playfair-display-latin-ext.woff2"
+							],
+							"unicodeRange": "U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF"
+						},
+						{
+							"fontFamily": "Playfair Display",
+							"fontWeight": "500 800",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/playfair-display-latin.woff2"
+							],
+							"unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+						}
+					]
+				},
+				{
+					"slug": "body",
+					"name": "Tekst",
+					"fontFamily": "Inter, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+					"fontFace": [
+						{
+							"fontFamily": "Inter",
+							"fontWeight": "400 700",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/inter-latin-ext.woff2"
+							],
+							"unicodeRange": "U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF"
+						},
+						{
+							"fontFamily": "Inter",
+							"fontWeight": "400 700",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/inter-latin.woff2"
+							],
+							"unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+						}
+					]
+				}
+			],
+			"fontSizes": [
+				{
+					"slug": "small",
+					"name": "Malo",
+					"size": "0.875rem"
+				},
+				{
+					"slug": "medium",
+					"name": "Normalno",
+					"size": "1.0625rem"
+				},
+				{
+					"slug": "large",
+					"name": "Veliko",
+					"size": "clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem)"
+				},
+				{
+					"slug": "x-large",
+					"name": "Naslov",
+					"size": "clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem)"
+				},
+				{
+					"slug": "xx-large",
+					"name": "Veliki naslov",
+					"size": "clamp(2.25rem, 1.6rem + 2.4vw, 3.75rem)"
+				}
+			]
+		},
+		"spacing": {
+			"spacingSizes": [
+				{
+					"slug": "20",
+					"name": "S",
+					"size": "0.75rem"
+				},
+				{
+					"slug": "30",
+					"name": "M",
+					"size": "1.25rem"
+				},
+				{
+					"slug": "40",
+					"name": "L",
+					"size": "2rem"
+				},
+				{
+					"slug": "50",
+					"name": "XL",
+					"size": "clamp(2.5rem, 2rem + 2vw, 4rem)"
+				}
+			]
+		},
+		"blocks": {
+			"core/image": {
+				"lightbox": {
+					"enabled": true
+				}
+			}
+		}
+	},
+	"styles": {
+		"color": {
+			"background": "var(--wp--preset--color--base)",
+			"text": "var(--wp--preset--color--contrast)"
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--body)",
+			"fontSize": "var(--wp--preset--font-size--medium)",
+			"lineHeight": "1.65"
+		},
+		"spacing": {
+			"padding": {
+				"left": "var(--wp--preset--spacing--30)",
+				"right": "var(--wp--preset--spacing--30)"
+			},
+			"blockGap": "1.25rem"
+		},
+		"elements": {
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--display)",
+					"fontWeight": "700",
+					"lineHeight": "1.15"
+				}
+			},
+			"h1": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--xx-large)"
+				}
+			},
+			"h2": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--x-large)"
+				}
+			},
+			"h3": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)"
+				}
+			},
+			"link": {
+				"color": {
+					"text": "var(--wp--preset--color--accent)"
+				},
+				":hover": {
+					"color": {
+						"text": "var(--wp--preset--color--accent-2)"
+					}
+				}
+			},
+			"button": {
+				"color": {
+					"background": "var(--wp--preset--color--accent)",
+					"text": "var(--wp--preset--color--base)"
+				},
+				"border": {
+					"radius": "0.5rem"
+				},
+				":hover": {
+					"color": {
+						"background": "var(--wp--preset--color--accent-2)"
+					}
+				}
+			}
+		}
+	},
+	"templateParts": [
+		{
+			"name": "header",
+			"title": "Zaglavlje (agencija)",
+			"area": "header"
+		},
+		{
+			"name": "header-dev",
+			"title": "Zaglavlje (hikeit.dev)",
+			"area": "header"
+		},
+		{
+			"name": "footer",
+			"title": "Podnožje",
+			"area": "footer"
+		}
+	],
+	"customTemplates": [
+		{
+			"name": "page-bez-naslova",
+			"title": "Bez naslova (širok sadržaj)",
+			"postTypes": [
+				"page"
+			]
+		}
+	]
+}
