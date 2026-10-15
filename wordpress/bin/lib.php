@@ -97,11 +97,6 @@ function hk_naslovnica( int $slika_id, string $unutra, int $visina_vh = 70, int 
 	return '<!-- wp:cover ' . wp_json_encode( $atr, JSON_UNESCAPED_SLASHES ) . " -->\n<div class=\"wp-block-cover alignfull hk-hero\" style=\"min-height:{$visina_vh}vh\"><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim-$tamnjenje has-background-dim\"></span><img class=\"wp-block-cover__image-background wp-image-$slika_id\" alt=\"\" src=\"$url\" data-object-fit=\"cover\"/><div class=\"wp-block-cover__inner-container\">$unutra</div></div>\n<!-- /wp:cover -->\n";
 }
 
-/** Kartica s obrubom (npr. poziv na akciju): odvaja se oblikom, ne bojom pozadine. */
-function hk_okvir( string $unutra ): string {
-	return "<!-- wp:group {\"className\":\"hk-okvir\",\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group hk-okvir\">$unutra</div>\n<!-- /wp:group -->\n";
-}
-
 function hk_shortcode( string $kod ): string {
 	return "<!-- wp:shortcode -->\n$kod\n<!-- /wp:shortcode -->\n";
 }

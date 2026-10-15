@@ -111,8 +111,5 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 .hikeit-footer, footer.wp-block-template-part { margin-block-start: 0 !important; }
 
 
-/* sekcije imaju istu podlogu kao zaglavlje; odvaja ih tanka crta, poziv na akciju je kartica s obrubom */
+/* sekcije imaju istu podlogu kao zaglavlje; odvaja ih tanka crta, poziv na akciju na naslovnici je jedina tamna traka (slika) */
 .hk-sekcija + .hk-sekcija { border-top: 1px solid var(--wp--preset--color--base-2); }
-.hk-okvir { background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--base-2); border-radius: 1rem; padding: 2.5rem 1.5rem; max-width: 46rem; margin-left: auto; margin-right: auto; }
-.hk-okvir > * { margin-top: 0; }
-.hk-okvir > * + * { margin-top: 1rem; }
