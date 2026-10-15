@@ -37,7 +37,7 @@ add_action( 'template_redirect', function () {
 		$cilj = substr( $host, 4 );
 	} elseif ( HIKEIT_DEV && in_array( $prvi, $agencija, true ) ) {
 		$cilj = HIKEIT_HOST_AGENCIJA;
-	} elseif ( ! HIKEIT_DEV && in_array( $prvi, array( 'razvoj', 'usluge', 'reference' ), true ) ) {
+	} elseif ( ! HIKEIT_DEV && in_array( $prvi, array( 'razvoj', 'usluge', 'reference', 'o-meni' ), true ) ) {
 		$cilj = HIKEIT_HOST_DEV;
 		$uri  = 'razvoj' === $prvi ? '/' : $uri;
 	} else {

@@ -106,8 +106,7 @@ hk_postavi_sadrzaj( 'kontakt', $kontakt, $sili( 'kontakt' ), 'page-bez-naslova' 
 
 /* ---------- Razvoj (hikeit.dev) — PRIJEDLOG TEKSTOVA: cijene, ciljna skupina i opis osobe su za potvrdu ---------- */
 $snimka  = hk_slika_datoteka( __DIR__ . '/../seed-slike/pd-pinklec.jpg', 'Stranica PD Pinklec' );
-$vodic   = get_posts( array( 'post_type' => 'vodic', 'numberposts' => 1, 'title' => 'Tomislav' ) );
-$portret = $vodic ? get_post_thumbnail_id( $vodic[0]->ID ) : 0;
+$portret = hk_slika_datoteka( __DIR__ . '/../seed-slike/portret.jpg', 'Tomislav Jurinec' ); // dodaj datoteku pa pokreni seed, ili postavi sliku u adminu
 
 $razvoj  = hk_tamna( hk_stupci( array(
 	hk_p( 'WEB I SOFTVERSKA RJEŠENJA · ZAGREB', 'hk-oznaka' ) . hk_h( 'Web stranice za male obrte, udruge i agencije', 1 )
@@ -132,15 +131,44 @@ $razvoj .= hk_sekcija( hk_p( 'KAKO RADIM', 'hk-oznaka', 'center' ) . hk_h( 'Od u
 	hk_kartica( '4. Lansiranje', 'Pokrećem stranicu, educiram te i ostajem na raspolaganju.' ),
 ) ) );
 $razvoj .= hk_sekcija( hk_shortcode( '[hikeit_reference]' ) );
-$razvoj .= hk_sekcija( hk_stupci( array(
-	$portret ? "<!-- wp:image {\"id\":$portret,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"className\":\"hk-portret\"} -->\n<figure class=\"wp-block-image size-large hk-portret\"><img src=\"" . wp_get_attachment_url( $portret ) . "\" alt=\"Tomislav Jurinec\" class=\"wp-image-$portret\"/></figure>\n<!-- /wp:image -->\n" : '',
-	hk_p( 'TKO STOJI IZA', 'hk-oznaka' ) . hk_h( 'Zovem se Tomislav', 2 )
+$tko_tekst = hk_p( 'TKO STOJI IZA', 'hk-oznaka' ) . hk_h( 'Zovem se Tomislav', 2 )
 	. hk_p( 'Programiram i radim web stranice za male organizacije — od planinarskog društva do turističke agencije. Stranice pišem na WordPressu jer ih tako možeš sam uređivati, a kad treba nešto što WordPress ne zna, napišem to po mjeri.' )
-	. hk_p( 'Sa mnom razgovaraš izravno, bez posrednika. Sve što vidiš na hikeit.hr i hikeit.dev napravio sam sam.' ),
-) ) );
+	. hk_p( 'Sa mnom razgovaraš izravno, bez posrednika. Sve što vidiš na hikeit.hr i hikeit.dev napravio sam sam.' )
+	. hk_p( '<a href="/o-meni/">Više o meni →</a>' );
+$razvoj .= hk_sekcija( hk_s_portretom( $portret, $tko_tekst ) );
 $razvoj .= hk_tamna( hk_h( 'Imaš projekt na umu?', 2, 'center' ) . hk_p( 'Opiši ga u par rečenica i javim ti se u roku od 1–2 radna dana.', '', 'center' ) . hk_gumbi( array( array( 'Pošalji upit', '/kontakt/' ) ) ) );
 hk_postavi_sadrzaj( 'razvoj', $razvoj, $sili( 'razvoj' ), 'page-bez-naslova' );
 hk_seo( 'razvoj', 'Izrada web stranica i aplikacija | hikeIT', 'Izrada web stranica na WordPressu i aplikacija po mjeri za male obrte, udruge i turističke agencije. Jasna cijena prije početka rada.' );
+
+/* ---------- O meni (hikeit.dev) — PRIJEDLOG TEKSTA; stručnosti su izvedene iz tehnologija u ovim projektima, provjeri ih ---------- */
+$linkedin = 'https://www.linkedin.com/in/tomislav-jurinec-a376aaa5/';
+if ( $kontakt_str = get_page_by_path( 'kontakt' ) ) {
+	if ( ! get_post_meta( $kontakt_str->ID, 'linkedin', true ) ) {
+		update_field( 'linkedin', $linkedin, $kontakt_str->ID );
+	}
+}
+hk_stranica_ili_nova( 'o-meni', 'O meni' );
+$ometi = hk_sekcija( hk_s_portretom( $portret,
+	hk_p( 'O MENI', 'hk-oznaka' ) . hk_h( 'Tomislav Jurinec', 1 )
+	. hk_p( 'Programer sam i web stranice radim za male organizacije — od planinarskog društva do turističke agencije.' )
+	. hk_p( 'Zanima me da stvari rade jednostavno: da stranicu možeš sam uređivati, da je brza i da te ne košta više nego što mora. Kad treba nešto što gotovo rješenje ne zna, napišem to po mjeri.' )
+	. hk_p( 'Izvan ekrana planinarim, penjem ferrate i bavim se ljetnim alpinizmom — otud i ime hikeIT.' )
+	. hk_gumbi( array( array( 'Moj LinkedIn profil', $linkedin ), array( 'Pošalji upit', '/kontakt/' ) ), true, 'left' ) ) );
+$ometi .= hk_sekcija( hk_p( 'STRUČNOSTI', 'hk-oznaka', 'center' ) . hk_h( 'Čime se bavim', 2, 'center' ) . hk_stupci( array(
+	hk_kartica( 'Web stranice', 'WordPress: vlastite teme i blokovi, prilagođena polja, WP-CLI i selidbe sadržaja između sustava.' ),
+	hk_kartica( 'Aplikacije po mjeri', 'Kotlin i Spring Boot na poslužitelju, React i TypeScript u pregledniku, PostgreSQL i verzionirane migracije baze.' ),
+	hk_kartica( 'Infrastruktura', 'Docker, deploy i hosting (Render, Cloudflare), sigurnosne kopije i e-pošta (SMTP).' ),
+	hk_kartica( 'Kvaliteta', 'Git, testovi i pregled koda — da ono što isporučim radi i nakon prve izmjene.' ),
+) ) );
+$ometi .= hk_sekcija( hk_p( 'NAČIN RADA', 'hk-oznaka', 'center' ) . hk_h( 'Što to znači za tebe', 2, 'center' ) . hk_lista( array(
+	'Razgovaraš izravno sa mnom, bez posrednika',
+	'Jasna ponuda prije početka rada: opseg, rok i cijena',
+	'Stranicu možeš sam uređivati — ne ovisiš o meni za svaku sitnicu',
+	'Sve je pod kontrolom verzija i sigurnosnih kopija, pa se promjene mogu vratiti',
+) ) );
+$ometi .= hk_tamna( hk_h( 'Imaš projekt na umu?', 2, 'center' ) . hk_p( 'Opiši ga u par rečenica i javim ti se u roku od 1–2 radna dana.', '', 'center' ) . hk_gumbi( array( array( 'Pošalji upit', '/kontakt/' ) ) ) );
+hk_postavi_sadrzaj( 'o-meni', $ometi, $sili( 'o-meni' ), 'page-bez-naslova' );
+hk_seo( 'o-meni', 'O meni — Tomislav Jurinec | hikeIT', 'Tomislav Jurinec: programer i izrada web stranica na WordPressu i aplikacija po mjeri za male obrte, udruge i turističke agencije u Zagrebu.' );
 
 /* ---------- Usluge: pregled i tri stranice (SEO: svaka usluga ima svoj URL) ---------- */
 $usluge_stranice = array(

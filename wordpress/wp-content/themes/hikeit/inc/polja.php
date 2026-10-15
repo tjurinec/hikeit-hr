@@ -78,6 +78,7 @@ add_action( 'acf/init', function () {
 				$p( 'radno_vrijeme_napomena', 'Napomena uz radno vrijeme' ),
 				$p( 'instagram', 'Instagram (adresa)', array( 'type' => 'url' ) ),
 				$p( 'facebook', 'Facebook (adresa)', array( 'type' => 'url' ) ),
+				$p( 'linkedin', 'LinkedIn (adresa)', array( 'type' => 'url' ) ),
 				$p( 'galerija_uvod', 'Uvodni tekst na stranici Galerija', array( 'type' => 'textarea', 'rows' => 3 ) ),
 			),
 		) );

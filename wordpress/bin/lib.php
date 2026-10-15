@@ -133,6 +133,15 @@ function hk_prozor( int $id, string $alt ): string {
 	return "<!-- wp:image {\"id\":$id,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"className\":\"hk-prozor\"} -->\n<figure class=\"wp-block-image size-large hk-prozor\"><img src=\"$url\" alt=\"" . esc_attr( $alt ) . "\" class=\"wp-image-$id\"/></figure>\n<!-- /wp:image -->\n";
 }
 
+/** Tekst uz portret; bez portreta samo tekst (užeg stupca, poravnan lijevo). */
+function hk_s_portretom( int $portret, string $tekst ): string {
+	if ( ! $portret ) {
+		return $tekst;
+	}
+	$slika = "<!-- wp:image {\"id\":$portret,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"className\":\"hk-portret\"} -->\n<figure class=\"wp-block-image size-large hk-portret\"><img src=\"" . wp_get_attachment_url( $portret ) . "\" alt=\"Tomislav Jurinec\" class=\"wp-image-$portret\"/></figure>\n<!-- /wp:image -->\n";
+	return hk_stupci( array( $slika, $tekst ) );
+}
+
 function hk_lista( array $stavke ): string {
 	$o = "<!-- wp:list -->\n<ul class=\"wp-block-list\">";
 	foreach ( $stavke as $st ) {

@@ -145,3 +145,5 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 .hk-portret { max-width: 20rem; margin: 0 auto; }
 .hk-portret img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: top; border-radius: 1rem; }
 .hk-sekcija > * + h2 { margin-top: 3rem; }
+.hk-gumb-linkedin { margin-top: 1rem; }
+.hk-sekcija > p:not(.has-text-align-center) { max-width: 46rem; }

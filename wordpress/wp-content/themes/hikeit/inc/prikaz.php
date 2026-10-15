@@ -203,7 +203,7 @@ add_shortcode( 'hikeit_postavke', function () {
 	if ( ! HIKEIT_DEV && $r = $s( 'radno_vrijeme' ) ) {
 		$o .= '<p><small>Radno vrijeme</small><br>' . nl2br( esc_html( $r ) ) . $napomena( 'radno_vrijeme_napomena' ) . '</p>';
 	}
-	foreach ( array( 'instagram' => 'Instagram', 'facebook' => 'Facebook' ) as $k => $n ) {
+	foreach ( array( 'instagram' => 'Instagram', 'facebook' => 'Facebook', 'linkedin' => 'LinkedIn' ) as $k => $n ) {
 		if ( $u = $s( $k ) ) {
 			$o .= '<a class="hk-mreza-link" href="' . esc_url( $u ) . '" target="_blank" rel="noopener">' . $n . '</a> ';
 		}
@@ -214,7 +214,7 @@ add_shortcode( 'hikeit_postavke', function () {
 /** Podnožje: isti kontakt podaci na obje domene, različita navigacija. */
 add_shortcode( 'hikeit_podnozje', function () {
 	$veze = HIKEIT_DEV
-		? array( '/usluge/' => 'Usluge', '/reference/' => 'Reference', '/kontakt/' => 'Kontakt' )
+		? array( '/usluge/' => 'Usluge', '/reference/' => 'Reference', '/o-meni/' => 'O meni', '/kontakt/' => 'Kontakt' )
 		: array( '/izleti/' => 'Izleti', '/galerija/' => 'Galerija', '/blog/' => 'Blog', '/o-nama/' => 'O nama', '/kontakt/' => 'Kontakt' );
 	$o = '<div class="hk-podnozje"><div><strong class="hk-podnozje__marka">' . ( HIKEIT_DEV ? 'hikeit.dev' : 'hikeIT.hr' ) . '</strong>';
 	$o .= '<p>' . ( HIKEIT_DEV ? 'Web stranice i programska rješenja po mjeri.' : 'Planinski i turistički izleti po mjeri — sigurno, odgovorno i nezaboravno.' ) . '</p></div>';
@@ -250,3 +250,19 @@ add_shortcode( 'hikeit_reference', function ( $a ) {
 
 /** Kontakt forma ovisi o dijelu stranice (agencija / razvoj). */
 add_shortcode( 'hikeit_kontakt_forma', fn() => do_shortcode( HIKEIT_DEV ? '[contact-form-7 title="Kontakt razvoj"]' : '[contact-form-7 title="Kontakt"]' ) );
+
+/** Strukturirani podaci o osobi (Google) na stranici "O meni". */
+add_action( 'wp_head', function () {
+	if ( ! is_page( 'o-meni' ) ) {
+		return;
+	}
+	$sameas = array_values( array_filter( array( hikeit_postavka( 'linkedin' ) ) ) );
+	echo '<script type="application/ld+json">' . wp_json_encode( array(
+		'@context' => 'https://schema.org',
+		'@type'    => 'Person',
+		'name'     => 'Tomislav Jurinec',
+		'jobTitle' => 'Programer, izrada web stranica i aplikacija',
+		'url'      => home_url( '/o-meni/' ),
+		'sameAs'   => $sameas,
+	), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . "</script>\n";
+} );
