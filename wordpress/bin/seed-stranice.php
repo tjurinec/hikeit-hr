@@ -17,7 +17,7 @@ $mozaik  = array_map( fn( $i ) => array( $foto( $i[0], $i[1] ), '', $i[1] ), arr
 	array( 'm01', 'Planinsko jezero viđeno odozgo' ), array( 'm02', 'Jezero uokvireno borom' ), array( 'm03', 'Planinari na snježnoj padini' ),
 	array( 'm04', 'Grupa planinara na proplanku' ), array( 'm05', 'Via ferrata kroz klanac' ), array( 'm06', 'Stjenoviti tornjevi uz stazu' ),
 	array( 'm07', 'Jezero u dolini među planinama' ), array( 'm08', 'Zalazak sunca nad planinama' ), array( 'm09', 'Tirkizno planinsko jezero' ),
-	array( 'm10', 'Plaža i obala s brda' ),
+	array( 'm10', 'Planinski prijevoj i livade' ),
 ) );
 $traka = array_map( fn( $i ) => array( $foto( $i[0], $i[1] ), '', $i[1] ), array(
 	array( 'o1', 'Tomislav na vrhu' ), array( 'o2', 'Penjanje po via ferrati' ), array( 'o3', 'Pogled na ledenjak' ), array( 'o4', 'Planinski greben' ),
