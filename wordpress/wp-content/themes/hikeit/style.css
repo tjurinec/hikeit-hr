@@ -177,3 +177,47 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 	transform: translate(-50%, -50%) rotate(45deg); pointer-events: none;
 	border: 2px solid var(--wp--preset--color--accent); background: var(--wp--preset--color--base);
 }
+
+/* --- hover i fokus --- */
+a, .wp-block-button__link, .hk-gumb, .hk-kartica, .hk-ploha { transition: color .2s, background-color .2s, border-color .2s, box-shadow .25s, transform .25s, text-decoration-thickness .2s; }
+.wp-block-post-content a:not(.wp-element-button):not(.hk-gumb):not(.wp-block-button__link), .hk-sekcija-naslov a { text-underline-offset: .2em; text-decoration-thickness: 1px; }
+.wp-block-post-content a:not(.wp-element-button):not(.hk-gumb):not(.wp-block-button__link):hover { color: var(--wp--preset--color--accent-2); text-decoration-thickness: 2px; }
+.hikeit-footer a { text-underline-offset: .2em; }
+.hikeit-footer a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+.wp-block-button__link:hover, .hk-gumb:hover, .wpcf7 input[type=submit]:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(204, 42, 30, .3); }
+.is-style-outline > .wp-block-button__link:hover { background: var(--wp--preset--color--accent); border-color: var(--wp--preset--color--accent); color: #fff; }
+.hk-kartica:hover, .hk-ploha:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0, 0, 0, .12); }
+html[data-mode="dark"] .hk-kartica:hover, html[data-mode="dark"] .hk-ploha:hover { box-shadow: 0 14px 30px rgba(0, 0, 0, .5); }
+:focus-visible { outline: 2px solid var(--wp--preset--color--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* navigacija: crvena crta se uvlači ispod poveznice */
+.hikeit-header .wp-block-navigation-item__content { padding: .3rem 0; background: linear-gradient(var(--wp--preset--color--accent), var(--wp--preset--color--accent)) left bottom / 0 2px no-repeat; transition: background-size .25s, color .2s; }
+.hikeit-header .wp-block-navigation-item__content:hover, .hikeit-header .current-menu-item > .wp-block-navigation-item__content { color: var(--wp--preset--color--accent); background-size: 100% 2px; }
+
+/* mobilni izbornik (hamburger): tamna pozadina, velika slova, razdjelnici i oznaka u kutu */
+.wp-block-navigation__responsive-container-open { border-radius: .6rem; padding: .35rem; }
+.wp-block-navigation__responsive-container-open:hover { color: var(--wp--preset--color--accent); background: var(--wp--preset--color--base-2); }
+.wp-block-navigation__responsive-container.is-menu-open { background: linear-gradient(160deg, #1A1718 0%, #2c1411 100%) !important; color: #fff !important; animation: hk-izbornik .25s ease-out; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; padding: 4.5rem 1.75rem 2.5rem; position: relative; box-sizing: border-box; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog::before { content: ""; position: absolute; top: 1.4rem; left: 1.75rem; width: 2.2rem; height: 2.2rem;
+	background: conic-gradient(#E3242B 0 25%, #fff 0 50%, #E3242B 0 75%, #fff 0); background-size: 100% 100%; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); opacity: .95; transform: rotate(0deg); border-radius: 2px; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content { align-items: stretch; padding: 0; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container { gap: 0 !important; width: 100%; align-items: stretch !important; text-align: center; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item { border-top: 1px solid rgba(255, 255, 255, .14); width: 100%; animation: hk-stavka .45s ease-out both; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item:last-child { border-bottom: 1px solid rgba(255, 255, 255, .14); }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item:nth-child(2) { animation-delay: .05s; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item:nth-child(3) { animation-delay: .1s; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item:nth-child(4) { animation-delay: .15s; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item:nth-child(5) { animation-delay: .2s; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content { display: block; text-align: center; padding: 1.1rem 0; font-family: var(--wp--preset--font-family--display); font-size: 1.9rem; font-weight: 700; color: #fff; background: none; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content:hover { color: #F05648; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close { top: 1.1rem; right: 1.4rem; color: #fff; border-radius: 50%; padding: .35rem; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close:hover { background: rgba(255, 255, 255, .12); }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog::after { content: ""; display: block; width: 3rem; height: 3px; margin: 2.5rem auto 0; background: #E3242B; }
+.hk-nav-izleti .is-menu-open .wp-block-navigation__responsive-container-content::after, .hk-nav-razvoj .is-menu-open .wp-block-navigation__responsive-container-content::after { display: block; margin-top: 2.5rem; text-align: center; font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255, 255, 255, .6); }
+.hk-nav-izleti .is-menu-open .wp-block-navigation__responsive-container-content::after { content: "Planinski i turistički izleti"; }
+.hk-nav-razvoj .is-menu-open .wp-block-navigation__responsive-container-content::after { content: "Web i softverska rješenja"; }
+@keyframes hk-izbornik { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hk-stavka { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item, .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content { text-align: center !important; justify-content: center !important; align-items: center !important; }
