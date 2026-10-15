@@ -65,11 +65,13 @@ $onama .= hk_sekcija( hk_stupci( array(
 	. hk_p( 'Tako je nastao <strong>hikeIT.hr</strong> — mali, strastveni tim koji vjeruje da prava avantura mijenja ljude iznutra.' ),
 	"<!-- wp:image {\"id\":$onama_slika,\"sizeSlug\":\"large\",\"style\":{\"border\":{\"radius\":\"1rem\"}}} -->\n<figure class=\"wp-block-image size-large has-custom-border\"><img src=\"" . wp_get_attachment_url( $onama_slika ) . "\" alt=\"Planinar na grebenu\" class=\"wp-image-$onama_slika\" style=\"border-radius:1rem\"/></figure>\n<!-- /wp:image -->\n",
 ) ) );
+$onama .= hk_naslovnica( $foto( 'm06', 'Stjenoviti tornjevi uz stazu' ), '', 24, 15 );
 $onama .= hk_sekcija( hk_h( 'Naše vrijednosti', 2, 'center' ) . hk_stupci( array(
 	hk_kartica( 'Autentičnost', 'Skrivene staze, lokalna hrana, prave priče — bez turističkih klišeja i masovnih grupnih izleta.' ),
 	hk_kartica( 'Strast', 'Volimo ono što radimo. I to se osjeti. Svaki izlet planiramo kao da ga organiziramo za sebe.' ),
 	hk_kartica( 'Profesionalnost', 'Certifikati, iskustvo i oprema — sve da bi vaša sigurnost i ugoda bili na prvom mjestu.' ),
 ) ) );
+$onama .= hk_naslovnica( $foto( 'm09', 'Tirkizno planinsko jezero' ), '', 24, 15 );
 $onama .= hk_sekcija( hk_p( 'UPOZNAJTE NAS', 'hk-oznaka', 'center' ) . hk_h( 'Naš tim', 2, 'center' ) . hk_shortcode( '[hikeit_vodici]' ) );
 hk_postavi_sadrzaj( 'o-nama', $onama, $sili( 'o-nama' ), 'page-bez-naslova' );
 

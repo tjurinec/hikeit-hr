@@ -227,3 +227,18 @@ html[data-mode="dark"] .hk-kartica:hover, html[data-mode="dark"] .hk-ploha:hover
 .hikeit-logo-veza:hover { color: var(--wp--preset--color--accent); }
 .hikeit-logo-veza:hover rect:nth-of-type(1), .hikeit-logo-veza:hover rect:nth-of-type(4) { fill: #fff; }
 .hikeit-logo-veza:hover rect:nth-of-type(2), .hikeit-logo-veza:hover rect:nth-of-type(3) { fill: #E3242B; }
+
+/* --- pozadine svijetlih sekcija: agencija = izohipse, razvoj = točkasta mreža --- */
+body.hk-agencija .hk-sekcija:not(.hk-tamna) { background: url("assets/izohipse-svijetla.svg") center / cover no-repeat; }
+body.hk-agencija .hk-sekcija:not(.hk-tamna):nth-of-type(even) { background-position: center bottom; transform: none; }
+html[data-mode="dark"] body.hk-agencija .hk-sekcija:not(.hk-tamna) { background-image: url("assets/izohipse-tamna.svg"); }
+body.hk-dev .hk-sekcija:not(.hk-tamna) {
+	background:
+		linear-gradient(var(--wp--preset--color--base), transparent 22%, transparent 78%, var(--wp--preset--color--base)),
+		radial-gradient(rgba(26, 23, 24, .13) 1px, transparent 1.4px) 0 0 / 22px 22px;
+}
+html[data-mode="dark"] body.hk-dev .hk-sekcija:not(.hk-tamna) {
+	background:
+		linear-gradient(var(--wp--preset--color--base), transparent 22%, transparent 78%, var(--wp--preset--color--base)),
+		radial-gradient(rgba(255, 255, 255, .12) 1px, transparent 1.4px) 0 0 / 22px 22px;
+}

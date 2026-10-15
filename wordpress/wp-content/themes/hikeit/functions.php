@@ -57,3 +57,6 @@ add_filter( 'comments_array', '__return_empty_array', 20 );
 add_action( 'admin_menu', function () {
 	remove_menu_page( 'edit-comments.php' );
 } );
+
+// Razredi na <body> za CSS po domeni (pozadine sekcija razlikuju agenciju i razvoj).
+add_filter( 'body_class', fn( $c ) => array_merge( $c, array( HIKEIT_DEV ? 'hk-dev' : 'hk-agencija' ) ) );
