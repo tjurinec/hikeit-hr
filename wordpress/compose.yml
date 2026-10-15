@@ -26,6 +26,7 @@ services:
       - ./hosts.php:/var/www/hosts.php:ro
       - ./bin:/var/www/html/bin:ro
       - ./import:/var/www/html/import:ro
+      - ./seed-slike:/var/www/html/seed-slike:ro
     depends_on: [db]
 
   # docker compose run --rm cli wp <naredba>

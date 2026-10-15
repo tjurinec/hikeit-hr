@@ -108,6 +108,7 @@ ne-radi auto-deploy, `r2.dev` rate limit.
   kontakt formu („Kontakt razvoj"), tip sadržaja `referenca` (2 nacrta: hikeit.hr i PD Pinklec; sekcija se ne prikazuje dok
   nijedna nije objavljena) i opis stranice po domeni. Sadržaj jedne domene preusmjerava (301) na drugu
   (`/izleti`, `/galerija`, `/o-nama`, `/blog` s .dev na .hr; `/razvoj` s .hr na .dev; www → bez www).
+- ☑ Portfolio: stranica `/reference/` na hikeit.dev (tip sadržaja Reference, snimke zaslona u `wordpress/seed-slike/`; reference su nacrti dok ih ne objaviš u adminu).
 - ☐ Ostaje: pregled na mobitelu, fino štimanje izgleda, SEO/OG podaci, 301 `/galerija/{id}`, SMTP,
   `hikeit.dev` sadržaj (tekst na stranici Razvoj je NACRT), uklanjanje izmišljenih brojki (vidi niže).
 - Sadržaj koji NISAM prenio jer je izmišljen u React kodu: „120+ putnika", „5★", „8+ godina", „5.0 (12 recenzija)".

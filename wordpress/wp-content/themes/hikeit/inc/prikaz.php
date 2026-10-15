@@ -214,7 +214,7 @@ add_shortcode( 'hikeit_postavke', function () {
 /** Podnožje: isti kontakt podaci na obje domene, različita navigacija. */
 add_shortcode( 'hikeit_podnozje', function () {
 	$veze = HIKEIT_DEV
-		? array( '/#usluge' => 'Usluge', '/kontakt/' => 'Kontakt' )
+		? array( '/#usluge' => 'Usluge', '/reference/' => 'Reference', '/kontakt/' => 'Kontakt' )
 		: array( '/izleti/' => 'Izleti', '/galerija/' => 'Galerija', '/blog/' => 'Blog', '/o-nama/' => 'O nama', '/kontakt/' => 'Kontakt' );
 	$o = '<div class="hk-podnozje"><div><strong class="hk-podnozje__marka">' . ( HIKEIT_DEV ? 'hikeit.dev' : 'hikeIT.hr' ) . '</strong>';
 	$o .= '<p>' . ( HIKEIT_DEV ? 'Web stranice i programska rješenja po mjeri.' : 'Planinski i turistički izleti po mjeri — sigurno, odgovorno i nezaboravno.' ) . '</p></div>';
@@ -229,16 +229,16 @@ add_shortcode( 'hikeit_podnozje', function () {
 
 /** Reference (hikeit.dev). Bez objavljenih referenci ne ispisuje ništa, ni naslov. */
 add_shortcode( 'hikeit_reference', function ( $a ) {
-	$a = shortcode_atts( array( 'limit' => 6 ), $a );
+	$a = shortcode_atts( array( 'limit' => 6, 'naslov' => 1, 'prazno' => '' ), $a );
 	$r = get_posts( array( 'post_type' => 'referenca', 'numberposts' => (int) $a['limit'], 'orderby' => 'menu_order date', 'order' => 'ASC' ) );
 	if ( ! $r ) {
-		return '';
+		return $a['prazno'] ? '<p class="hk-prazno">' . esc_html( $a['prazno'] ) . '</p>' : '';
 	}
-	$o = '<div class="hk-sekcija-naslov"><p class="hk-oznaka">REFERENCE</p><h2>Što smo napravili</h2></div><div class="hk-mreza">';
+	$o = ( $a['naslov'] ? '<div class="hk-sekcija-naslov"><p class="hk-oznaka">REFERENCE</p><h2>Što smo napravili</h2></div>' : '' ) . '<div class="hk-mreza">';
 	foreach ( $r as $p ) {
 		$url  = hikeit_meta( $p->ID, 'adresa' );
 		$sl   = get_the_post_thumbnail( $p->ID, 'large', array( 'loading' => 'lazy' ) ) ?: '<span class="hk-kartica__prazno"></span>';
-		$o   .= '<article class="hk-kartica">' . ( $url ? '<a class="hk-kartica__slika" href="' . esc_url( $url ) . '" target="_blank" rel="noopener">' . $sl . '</a>' : '<div class="hk-kartica__slika">' . $sl . '</div>' );
+		$o   .= '<article class="hk-kartica hk-referenca">' . ( $url ? '<a class="hk-kartica__slika" href="' . esc_url( $url ) . '" target="_blank" rel="noopener">' . $sl . '</a>' : '<div class="hk-kartica__slika">' . $sl . '</div>' );
 		$o   .= '<div class="hk-kartica__tijelo"><h3>' . esc_html( $p->post_title ) . '</h3><p>' . esc_html( $p->post_excerpt ) . '</p>';
 		if ( $t = hikeit_meta( $p->ID, 'tehnologije' ) ) {
 			$o .= '<p class="hk-kartica__meta">' . esc_html( $t ) . '</p>';

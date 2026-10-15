@@ -31,6 +31,27 @@ function hk_slika( string $url, string $opis = '' ): int {
 	return (int) $id;
 }
 
+/** Slika iz lokalne datoteke (npr. wordpress/seed-slike); idempotentno po putanji. */
+function hk_slika_datoteka( string $putanja, string $opis = '' ): int {
+	$kljuc = 'datoteka:' . basename( $putanja );
+	$postojeca = get_posts( array( 'post_type' => 'attachment', 'post_status' => 'any', 'numberposts' => 1, 'fields' => 'ids', 'meta_key' => '_hikeit_izvor', 'meta_value' => $kljuc ) );
+	if ( $postojeca ) {
+		return (int) $postojeca[0];
+	}
+	if ( ! is_file( $putanja ) ) {
+		return 0;
+	}
+	$tmp = wp_tempnam( basename( $putanja ) );
+	copy( $putanja, $tmp );
+	$id = media_handle_sideload( array( 'name' => basename( $putanja ), 'tmp_name' => $tmp ), 0, $opis );
+	if ( is_wp_error( $id ) ) {
+		@unlink( $tmp );
+		return 0;
+	}
+	update_post_meta( $id, '_hikeit_izvor', $kljuc );
+	return (int) $id;
+}
+
 function hk_p( string $tekst, string $klasa = '', string $poravnanje = '' ): string {
 	$atr = array();
 	if ( $poravnanje ) {

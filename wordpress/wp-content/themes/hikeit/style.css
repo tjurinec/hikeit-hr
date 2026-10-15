@@ -40,7 +40,8 @@ Text Domain: hikeit
 .hk-mreza--2 { grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr)); }
 .hk-kartica { background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--base-2); border-radius: 1rem; overflow: hidden; display: flex; flex-direction: column; }
 .hk-kartica__slika { display: block; aspect-ratio: 4/3; background: var(--wp--preset--color--base-2); overflow: hidden; }
-.hk-kartica__slika img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+.hk-kartica__slika { position: relative; }
+.hk-kartica__slika img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
 .hk-kartica:hover .hk-kartica__slika img { transform: scale(1.04); }
 .hk-vodic .hk-kartica__slika { aspect-ratio: 16/10; }
 .hk-vodic .hk-kartica__slika img { object-position: top; }
@@ -119,3 +120,8 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 .hk-sekcija h2 { margin-top: .5rem; margin-bottom: 2rem; font-size: clamp(2.1rem, 1.6rem + 1.8vw, 3rem); }
 .hk-sekcija h3 { font-size: 1.75rem; }
 .hk-sekcija .wp-block-columns { margin-top: 1rem; }
+.hk-mreza + .wp-block-buttons { margin-top: 2.5rem; }
+
+/* reference: snimke zaslona su 16:10 i važan im je vrh stranice */
+.hk-referenca .hk-kartica__slika { aspect-ratio: 16/10; }
+.hk-referenca .hk-kartica__slika img { object-position: top center; }

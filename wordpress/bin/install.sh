@@ -28,6 +28,7 @@ mk razvoj "Razvoj" >/dev/null
 mk o-nama "O nama" >/dev/null
 mk kontakt "Kontakt" >/dev/null
 mk blog "Blog" >/dev/null
+mk reference "Reference" >/dev/null
 id() { wp post list --post_type=page --name="$1" --field=ID; }
 wp option update show_on_front page
 wp option update page_on_front "$(id pocetna)"

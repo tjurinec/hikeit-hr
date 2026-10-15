@@ -127,13 +127,27 @@ hk_postavi_sadrzaj( 'razvoj', $razvoj, $sili( 'razvoj' ), 'page-bez-naslova' );
 
 /* ---------- Reference: nacrti (objavi ih u adminu kad ih potvrdiš) ---------- */
 foreach ( array(
-	array( 'hikeit.hr', 'Turistička agencija: izleti, galerije, blog i kontakt forma na WordPressu.', 'https://hikeit.hr', 'WordPress, PHP, MariaDB' ),
-	array( 'PD Pinklec', 'Stranica planinarskog društva: najave izleta, izvještaji, škole, oružarstvo i uloge članova.', 'https://novi.pd-pinklec.hr', 'WordPress, PHP, MariaDB' ),
-) as $i => [ $naslov, $opis, $adresa, $teh ] ) {
-	if ( ! get_posts( array( 'post_type' => 'referenca', 'post_status' => 'any', 'title' => $naslov, 'numberposts' => 1 ) ) ) {
+	array( 'hikeit.hr', 'Turistička agencija: izleti, galerije, blog i kontakt forma na WordPressu.', 'https://hikeit.hr', 'WordPress, PHP, MariaDB', 'hikeit-hr.jpg' ),
+	array( 'PD Pinklec', 'Stranica planinarskog društva: najave izleta, izvještaji, škole, oružarstvo i uloge članova.', 'https://novi.pd-pinklec.hr', 'WordPress, PHP, MariaDB', 'pd-pinklec.jpg' ),
+) as $i => [ $naslov, $opis, $adresa, $teh, $slika ] ) {
+	$postojeca = get_posts( array( 'post_type' => 'referenca', 'post_status' => 'any', 'title' => $naslov, 'numberposts' => 1, 'fields' => 'ids' ) );
+	if ( ! $postojeca ) {
 		$id = wp_insert_post( array( 'post_type' => 'referenca', 'post_status' => 'draft', 'post_title' => $naslov, 'post_excerpt' => $opis, 'menu_order' => $i ) );
 		update_field( 'adresa', $adresa, $id );
 		update_field( 'tehnologije', $teh, $id );
 		WP_CLI::log( "referenca (nacrt): $naslov" );
+	} else {
+		$id = $postojeca[0];
+	}
+	if ( ! has_post_thumbnail( $id ) && ( $sl = hk_slika_datoteka( __DIR__ . "/../seed-slike/$slika", $naslov ) ) ) {
+		set_post_thumbnail( $id, $sl );
 	}
 }
+
+/* ---------- Reference (portfolio, hikeit.dev) ---------- */
+$ref = hk_sekcija(
+	hk_p( 'PORTFOLIO', 'hk-oznaka', 'center' ) . hk_h( 'Reference', 1, 'center' )
+	. hk_p( 'Stranice i aplikacije koje smo napravili.', '', 'center' )
+	. hk_shortcode( '[hikeit_reference limit="50" naslov="0" prazno="Reference uskoro."]' )
+	. hk_gumbi( array( array( 'Pošalji upit', '/kontakt/' ) ) ) );
+hk_postavi_sadrzaj( 'reference', $ref, $sili( 'reference' ), 'page-bez-naslova' );
