@@ -8,7 +8,7 @@ if ( ! defined( 'HIKEIT_DEV' ) ) {
 	define( 'HIKEIT_DEV', false );
 }
 
-foreach ( array( 'tipovi', 'polja', 'prikaz', 'tamno' ) as $modul ) {
+foreach ( array( 'tipovi', 'polja', 'prikaz', 'tamno', 'preusmjeravanja' ) as $modul ) {
 	require_once get_theme_file_path( "inc/$modul.php" );
 }
 

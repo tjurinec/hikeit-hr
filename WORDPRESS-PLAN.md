@@ -101,6 +101,9 @@ ne-radi auto-deploy, `r2.dev` rate limit.
   (`bin/izvoz.sh` + `bin/uvoz.php`: 1 izlet, 1 vodič, 2 galerije, postavke kontakta).
 - ☑ Izgled: bijela tema, paleta „Markacija" kao u pd-pinklec (crvena + tinta), tamni način (gumb u zaglavlju),
   lokalni fontovi Playfair Display i Inter.
+- ☑ Faza 3: uvoz provjeren — produkcija ima 1 izlet, 1 vodiča, 2 galerije (ukupno 9 slika, ~5 MB s thumbnailima), sve je uvezeno;
+  ponovno pokretanje ne duplicira zapise. 301 sa starih adresa (`/galerija/{id}`, `/galerija?stranica=N`) u `inc/preusmjeravanja.php`.
+  Poruke iz kontakta nisu uvožene (traže admin prijavu; po potrebi ručni CSV).
 - ☐ Ostaje: pregled na mobitelu, fino štimanje izgleda, SEO/OG podaci, 301 `/galerija/{id}`, SMTP,
   `hikeit.dev` sadržaj (tekst na stranici Razvoj je NACRT), uklanjanje izmišljenih brojki (vidi niže).
 - Sadržaj koji NISAM prenio jer je izmišljen u React kodu: „120+ putnika", „5★", „8+ godina", „5.0 (12 recenzija)".
