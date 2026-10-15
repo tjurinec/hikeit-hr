@@ -80,13 +80,7 @@ function hk_sekcija( string $unutra, string $pozadina = '', string $sidro = '' )
 	$atr = array( 'align' => 'full', 'className' => 'hk-sekcija', 'layout' => array( 'type' => 'constrained', 'wideSize' => '72rem' ),
 		'style' => array( 'spacing' => array( 'padding' => array( 'top' => 'var:preset|spacing|50', 'bottom' => 'var:preset|spacing|50' ) ) ) );
 	$kl = 'wp-block-group alignfull hk-sekcija';
-	if ( 'traka' === $pozadina ) {
-		$atr['className'] = 'hk-sekcija hk-traka'; // tamna traka, vidi style.css
-		$kl              .= ' hk-traka';
-	} elseif ( 'cta' === $pozadina ) {
-		$atr['className'] = 'hk-sekcija hk-cta'; // crvena traka s pozivom na akciju
-		$kl              .= ' hk-cta';
-	} elseif ( $pozadina ) {
+	if ( $pozadina ) {
 		$atr['backgroundColor'] = $pozadina;
 		$kl                    .= " has-$pozadina-background-color has-background";
 	}
@@ -101,6 +95,11 @@ function hk_naslovnica( int $slika_id, string $unutra, int $visina_vh = 70, int 
 	$url = wp_get_attachment_url( $slika_id );
 	$atr = array( 'url' => $url, 'id' => $slika_id, 'dimRatio' => $tamnjenje, 'minHeight' => $visina_vh, 'minHeightUnit' => 'vh', 'align' => 'full', 'className' => 'hk-hero' );
 	return '<!-- wp:cover ' . wp_json_encode( $atr, JSON_UNESCAPED_SLASHES ) . " -->\n<div class=\"wp-block-cover alignfull hk-hero\" style=\"min-height:{$visina_vh}vh\"><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim-$tamnjenje has-background-dim\"></span><img class=\"wp-block-cover__image-background wp-image-$slika_id\" alt=\"\" src=\"$url\" data-object-fit=\"cover\"/><div class=\"wp-block-cover__inner-container\">$unutra</div></div>\n<!-- /wp:cover -->\n";
+}
+
+/** Kartica s obrubom (npr. poziv na akciju): odvaja se oblikom, ne bojom pozadine. */
+function hk_okvir( string $unutra ): string {
+	return "<!-- wp:group {\"className\":\"hk-okvir\",\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group hk-okvir\">$unutra</div>\n<!-- /wp:group -->\n";
 }
 
 function hk_shortcode( string $kod ): string {

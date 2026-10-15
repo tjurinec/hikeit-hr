@@ -31,7 +31,7 @@ $home .= hk_sekcija(
 		hk_kartica( 'Sigurnost na prvom mjestu', 'Profesionalna oprema, osiguranje i protokoli za svaki izlet.' ),
 		hk_kartica( 'Male grupe', 'Maksimalno 12 osoba po grupi — pravi doživljaj, ne masovni turizam.' ),
 		hk_kartica( 'Autentično iskustvo', 'Lokalna znanja, skrivene staze i priče koje ne naći u vodiču.' ),
-	) ), 'traka' );
+	) ) );
 $home .= hk_naslovnica( $staza,
 	hk_h( 'Spreman za avanturu?', 2, 'center' )
 	. hk_p( 'Kontaktiraj nas i osmislimo tvoj savršeni izlet — prilagođen tebi, tvom tempu i tvojim snovima.', '', 'center' )
@@ -54,7 +54,7 @@ $onama .= hk_sekcija( hk_h( 'Naše vrijednosti', 2, 'center' ) . hk_stupci( arra
 	hk_kartica( 'Autentičnost', 'Skrivene staze, lokalna hrana, prave priče — bez turističkih klišeja i masovnih grupnih izleta.' ),
 	hk_kartica( 'Strast', 'Volimo ono što radimo. I to se osjeti. Svaki izlet planiramo kao da ga organiziramo za sebe.' ),
 	hk_kartica( 'Profesionalnost', 'Certifikati, iskustvo i oprema — sve da bi tvoja sigurnost i ugoda bili na prvom mjestu.' ),
-) ), 'traka' );
+) ) );
 $onama .= hk_sekcija( hk_p( 'UPOZNAJ NAS', 'hk-oznaka', 'center' ) . hk_h( 'Naš tim', 2, 'center' ) . hk_shortcode( '[hikeit_vodici]' ) );
 hk_postavi_sadrzaj( 'o-nama', $onama, $sili( 'o-nama' ), 'page-bez-naslova' );
 
@@ -120,9 +120,9 @@ $razvoj .= hk_sekcija( hk_p( 'KAKO RADIMO', 'hk-oznaka', 'center' ) . hk_h( 'Od 
 	hk_kartica( '2. Ponuda', 'Jasan opseg, rok i cijena prije početka rada.' ),
 	hk_kartica( '3. Izrada', 'Gradimo u koracima i redovito ti pokazujemo napredak.' ),
 	hk_kartica( '4. Lansiranje', 'Pokrećemo stranicu, educiramo te i ostajemo na raspolaganju.' ),
-) ), 'traka' );
+) ) );
 $razvoj .= hk_sekcija( hk_shortcode( '[hikeit_reference]' ) );
-$razvoj .= hk_sekcija( hk_h( 'Imaš projekt na umu?', 2, 'center' ) . hk_p( 'Opiši nam ga u par rečenica i javit ćemo ti se u roku od 1–2 radna dana.', '', 'center' ) . hk_gumbi( array( array( 'Pošalji upit', '/kontakt/' ) ) ), 'cta' );
+$razvoj .= hk_sekcija( hk_okvir( hk_h( 'Imaš projekt na umu?', 2, 'center' ) . hk_p( 'Opiši nam ga u par rečenica i javit ćemo ti se u roku od 1–2 radna dana.', '', 'center' ) . hk_gumbi( array( array( 'Pošalji upit', '/kontakt/' ) ) ) ) );
 hk_postavi_sadrzaj( 'razvoj', $razvoj, $sili( 'razvoj' ), 'page-bez-naslova' );
 
 /* ---------- Reference: nacrti (objavi ih u adminu kad ih potvrdiš) ---------- */
