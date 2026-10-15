@@ -76,7 +76,7 @@ add_shortcode( 'hikeit_izleti', function ( $a ) {
 	) );
 	$o = '';
 	if ( $a['filter'] ) {
-		$o .= '<form class="hk-filter" method="get"><input type="search" name="q" value="' . esc_attr( $q ) . '" placeholder="Pretraži izlete, lokacije…"><select name="tezina"><option value="">Sve težine</option>';
+		$o .= '<form class="hk-filter" method="get"><input type="search" name="q" value="' . esc_attr( $q ) . '" placeholder="Pretražite izlete, lokacije…"><select name="tezina"><option value="">Sve težine</option>';
 		foreach ( hikeit_tezine() as $k => $n ) {
 			$o .= '<option value="' . esc_attr( $k ) . '"' . selected( $t, $k, false ) . '>' . esc_html( $n ) . '</option>';
 		}
@@ -119,7 +119,7 @@ add_shortcode( 'hikeit_izlet_podaci', function () {
 	foreach ( array_filter( $redovi ) as $k => $v ) {
 		$o .= '<dt>' . esc_html( $k ) . '</dt><dd>' . esc_html( $v ) . '</dd>';
 	}
-	$o .= '</dl><a class="hk-gumb" href="' . esc_url( home_url( '/kontakt/' ) ) . '">Pošalji upit za rezervaciju</a>';
+	$o .= '</dl><a class="hk-gumb" href="' . esc_url( home_url( '/kontakt/' ) ) . '">Pošaljite upit za rezervaciju</a>';
 	if ( $vodic = (int) hikeit_meta( $id, 'vodic' ) ) {
 		$o .= '<div class="hk-podaci__vodic"><strong>Vaš vodič</strong><br>' . esc_html( get_the_title( $vodic ) );
 		if ( $s = hikeit_meta( $vodic, 'specijalizacija' ) ) {
@@ -179,7 +179,7 @@ add_shortcode( 'hikeit_galerija_uvod', fn() => wpautop( esc_html( hikeit_postavk
 
 add_shortcode( 'hikeit_galerija_link', function () {
 	$l = hikeit_meta( get_the_ID(), 'vanjski_link' );
-	return $l ? '<p><a class="hk-gumb" href="' . esc_url( $l ) . '" target="_blank" rel="noopener">Pogledaj sve fotografije ↗</a></p>' : '';
+	return $l ? '<p><a class="hk-gumb" href="' . esc_url( $l ) . '" target="_blank" rel="noopener">Pogledajte sve fotografije ↗</a></p>' : '';
 } );
 
 /** Kontakt podaci: stranica Kontakt. */
@@ -243,7 +243,7 @@ add_shortcode( 'hikeit_reference', function ( $a ) {
 		if ( $t = hikeit_meta( $p->ID, 'tehnologije' ) ) {
 			$o .= '<p class="hk-kartica__meta">' . esc_html( $t ) . '</p>';
 		}
-		$o .= ( $url ? '<p><a href="' . esc_url( $url ) . '" target="_blank" rel="noopener">Pogledaj stranicu ↗</a></p>' : '' ) . '</div></article>';
+		$o .= ( $url ? '<p><a href="' . esc_url( $url ) . '" target="_blank" rel="noopener">Pogledajte stranicu ↗</a></p>' : '' ) . '</div></article>';
 	}
 	return $o . '</div>';
 } );
