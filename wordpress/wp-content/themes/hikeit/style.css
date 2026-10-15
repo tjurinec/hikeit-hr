@@ -28,7 +28,7 @@ Text Domain: hikeit
 /* --- sekcije --- */
 .hk-hero { text-align: center; color: #fff; }
 .hk-hero h1, .hk-hero p { color: #fff; }
-.hk-oznaka { text-transform: uppercase; letter-spacing: .14em; font-size: .8rem; font-weight: 600; color: var(--wp--preset--color--accent); margin: 0; }
+.hk-oznaka { text-transform: uppercase; letter-spacing: .16em; font-size: 1.05rem; font-weight: 700; color: var(--wp--preset--color--accent); margin: 0; }
 .hk-hero .hk-oznaka { color: #fff; opacity: .85; }
 .hk-sredina { text-align: center; }
 .hk-ploha { background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--base-2); border-radius: 1rem; padding: 1.5rem; height: 100%; }
@@ -111,5 +111,11 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 .hikeit-footer, footer.wp-block-template-part { margin-block-start: 0 !important; }
 
 
-/* sekcije imaju istu podlogu kao zaglavlje; odvaja ih tanka crta, poziv na akciju na naslovnici je jedina tamna traka (slika) */
-.hk-sekcija + .hk-sekcija { border-top: 1px solid var(--wp--preset--color--base-2); }
+/* sekcije imaju istu podlogu kao zaglavlje, bez crta među njima, poziv na akciju na naslovnici je jedina tamna traka (slika) */
+
+/* podnaslovi u heroju i pozivu na akciju: veći i podebljani da se čitaju preko slike */
+.hk-hero p:not(.hk-oznaka) { font-size: clamp(1.2rem, 1.05rem + .7vw, 1.55rem); font-weight: 600; line-height: 1.5; text-shadow: 0 1px 14px rgba(0,0,0,.55); }
+.hk-hero .hk-oznaka { font-size: 1.05rem; }
+.hk-sekcija h2 { margin-top: .5rem; margin-bottom: 2rem; font-size: clamp(2.1rem, 1.6rem + 1.8vw, 3rem); }
+.hk-sekcija h3 { font-size: 1.75rem; }
+.hk-sekcija .wp-block-columns { margin-top: 1rem; }
