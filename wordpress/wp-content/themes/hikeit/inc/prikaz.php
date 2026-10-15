@@ -186,7 +186,7 @@ add_shortcode( 'hikeit_galerija_link', function () {
 add_shortcode( 'hikeit_postavke', function () {
 	$s = fn( $k ) => hikeit_postavka( $k );
 	$o = '<div class="hk-kontakt">';
-	if ( $e = $s( 'email' ) ) {
+	if ( $e = ( HIKEIT_DEV && $s( 'email_razvoj' ) ? $s( 'email_razvoj' ) : $s( 'email' ) ) ) {
 		$o .= '<p><small>E-mail</small><br><a href="mailto:' . esc_attr( $e ) . '">' . esc_html( $e ) . '</a></p>';
 	}
 	if ( $tel = hikeit_telefoni() ) {
@@ -200,7 +200,7 @@ add_shortcode( 'hikeit_postavke', function () {
 	if ( $l = $s( 'lokacija' ) ) {
 		$o .= '<p><small>Lokacija</small><br>' . esc_html( $l ) . $napomena( 'lokacija_napomena' ) . '</p>';
 	}
-	if ( $r = $s( 'radno_vrijeme' ) ) {
+	if ( ! HIKEIT_DEV && $r = $s( 'radno_vrijeme' ) ) {
 		$o .= '<p><small>Radno vrijeme</small><br>' . nl2br( esc_html( $r ) ) . $napomena( 'radno_vrijeme_napomena' ) . '</p>';
 	}
 	foreach ( array( 'instagram' => 'Instagram', 'facebook' => 'Facebook' ) as $k => $n ) {
@@ -214,7 +214,7 @@ add_shortcode( 'hikeit_postavke', function () {
 /** Podnožje: isti kontakt podaci na obje domene, različita navigacija. */
 add_shortcode( 'hikeit_podnozje', function () {
 	$veze = HIKEIT_DEV
-		? array( '/#usluge' => 'Usluge', '/reference/' => 'Reference', '/kontakt/' => 'Kontakt' )
+		? array( '/usluge/' => 'Usluge', '/reference/' => 'Reference', '/kontakt/' => 'Kontakt' )
 		: array( '/izleti/' => 'Izleti', '/galerija/' => 'Galerija', '/blog/' => 'Blog', '/o-nama/' => 'O nama', '/kontakt/' => 'Kontakt' );
 	$o = '<div class="hk-podnozje"><div><strong class="hk-podnozje__marka">' . ( HIKEIT_DEV ? 'hikeit.dev' : 'hikeIT.hr' ) . '</strong>';
 	$o .= '<p>' . ( HIKEIT_DEV ? 'Web stranice i programska rješenja po mjeri.' : 'Planinski i turistički izleti po mjeri — sigurno, odgovorno i nezaboravno.' ) . '</p></div>';
@@ -234,7 +234,7 @@ add_shortcode( 'hikeit_reference', function ( $a ) {
 	if ( ! $r ) {
 		return $a['prazno'] ? '<p class="hk-prazno">' . esc_html( $a['prazno'] ) . '</p>' : '';
 	}
-	$o = ( $a['naslov'] ? '<div class="hk-sekcija-naslov"><p class="hk-oznaka">REFERENCE</p><h2>Što smo napravili</h2></div>' : '' ) . '<div class="hk-mreza">';
+	$o = ( $a['naslov'] ? '<div class="hk-sekcija-naslov"><p class="hk-oznaka">REFERENCE</p><h2>Što sam napravio</h2></div>' : '' ) . '<div class="hk-mreza">';
 	foreach ( $r as $p ) {
 		$url  = hikeit_meta( $p->ID, 'adresa' );
 		$sl   = get_the_post_thumbnail( $p->ID, 'large', array( 'loading' => 'lazy' ) ) ?: '<span class="hk-kartica__prazno"></span>';

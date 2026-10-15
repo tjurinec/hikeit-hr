@@ -70,6 +70,7 @@ add_action( 'acf/init', function () {
 			'location' => array( array( array( 'param' => 'post', 'operator' => '==', 'value' => $kontakt->ID ) ) ),
 			'fields'   => array(
 				$p( 'email', 'E-mail', array( 'type' => 'email' ) ),
+				$p( 'email_razvoj', 'E-mail za hikeit.dev (ako je drukčiji)', array( 'type' => 'email' ) ),
 				$p( 'telefoni', 'Telefoni (jedan po retku: Oznaka | broj)', array( 'type' => 'textarea', 'rows' => 3 ) ),
 				$p( 'lokacija', 'Lokacija' ),
 				$p( 'lokacija_napomena', 'Napomena uz lokaciju' ),

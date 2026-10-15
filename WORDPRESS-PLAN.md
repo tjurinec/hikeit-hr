@@ -109,6 +109,9 @@ ne-radi auto-deploy, `r2.dev` rate limit.
   nijedna nije objavljena) i opis stranice po domeni. Sadržaj jedne domene preusmjerava (301) na drugu
   (`/izleti`, `/galerija`, `/o-nama`, `/blog` s .dev na .hr; `/razvoj` s .hr na .dev; www → bez www).
 - ☑ Portfolio: stranica `/reference/` na hikeit.dev (tip sadržaja Reference, snimke zaslona u `wordpress/seed-slike/`; reference su nacrti dok ih ne objaviš u adminu).
+- ☑ hikeit.dev landing (prijedlog tekstova, treba potvrdu): ciljna skupina (obrti, udruge, agencije), cijene „od" (590 € / 1.200 € / 30 € mjesečno — PRIJEDLOG),
+  stranice usluga s vlastitim URL-om i SEO naslovima (`/usluge/`, `/usluge/web-stranice/`, `/usluge/aplikacije-po-mjeri/`, `/usluge/odrzavanje/`),
+  hero sa snimkom stvarne stranice umjesto stock slike, „Tko stoji iza", opis uz logo, kontakt bez radnog vremena agencije, polje za zasebni e-mail razvoja.
 - ☐ Ostaje: pregled na mobitelu, fino štimanje izgleda, SEO/OG podaci, 301 `/galerija/{id}`, SMTP,
   `hikeit.dev` sadržaj (tekst na stranici Razvoj je NACRT), uklanjanje izmišljenih brojki (vidi niže).
 - Sadržaj koji NISAM prenio jer je izmišljen u React kodu: „120+ putnika", „5★", „8+ godina", „5.0 (12 recenzija)".

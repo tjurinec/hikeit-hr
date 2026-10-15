@@ -74,8 +74,8 @@ function hk_h( string $tekst, int $razina = 2, string $poravnanje = '' ): string
 	return '<!-- wp:heading ' . wp_json_encode( $atr ) . " -->\n<h$razina class=\"$c\">$tekst</h$razina>\n<!-- /wp:heading -->\n";
 }
 
-function hk_gumbi( array $gumbi, bool $obrub_zadnji = false ): string {
-	$o = "<!-- wp:buttons {\"layout\":{\"type\":\"flex\",\"justifyContent\":\"center\"}} -->\n<div class=\"wp-block-buttons\">";
+function hk_gumbi( array $gumbi, bool $obrub_zadnji = false, string $poravnanje = 'center' ): string {
+	$o = "<!-- wp:buttons {\"layout\":{\"type\":\"flex\",\"justifyContent\":\"$poravnanje\"}} -->\n<div class=\"wp-block-buttons\">";
 	foreach ( $gumbi as $i => [ $naslov, $url ] ) {
 		$obrub = $obrub_zadnji && $i === count( $gumbi ) - 1;
 		$o    .= '<!-- wp:button' . ( $obrub ? ' {"className":"is-style-outline"}' : '' ) . " -->\n<div class=\"wp-block-button" . ( $obrub ? ' is-style-outline' : '' ) . "\"><a class=\"wp-block-button__link wp-element-button\" href=\"$url\">$naslov</a></div>\n<!-- /wp:button -->";
@@ -116,6 +116,53 @@ function hk_naslovnica( int $slika_id, string $unutra, int $visina_vh = 70, int 
 	$url = wp_get_attachment_url( $slika_id );
 	$atr = array( 'url' => $url, 'id' => $slika_id, 'dimRatio' => $tamnjenje, 'minHeight' => $visina_vh, 'minHeightUnit' => 'vh', 'align' => 'full', 'className' => 'hk-hero' );
 	return '<!-- wp:cover ' . wp_json_encode( $atr, JSON_UNESCAPED_SLASHES ) . " -->\n<div class=\"wp-block-cover alignfull hk-hero\" style=\"min-height:{$visina_vh}vh\"><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim-$tamnjenje has-background-dim\"></span><img class=\"wp-block-cover__image-background wp-image-$slika_id\" alt=\"\" src=\"$url\" data-object-fit=\"cover\"/><div class=\"wp-block-cover__inner-container\">$unutra</div></div>\n<!-- /wp:cover -->\n";
+}
+
+/** Tamna traka (hero i poziv na akciju na hikeit.dev): gradijent umjesto stock fotografije. */
+function hk_tamna( string $unutra, string $sidro = '' ): string {
+	$atr = array( 'align' => 'full', 'className' => 'hk-sekcija hk-tamna', 'layout' => array( 'type' => 'constrained', 'wideSize' => '72rem' ) );
+	if ( $sidro ) {
+		$atr['anchor'] = $sidro;
+	}
+	return '<!-- wp:group ' . wp_json_encode( $atr ) . " -->\n<div" . ( $sidro ? " id=\"$sidro\"" : '' ) . " class=\"wp-block-group alignfull hk-sekcija hk-tamna\">$unutra</div>\n<!-- /wp:group -->\n";
+}
+
+/** Slika s okvirom preglednika (snimka zaslona). */
+function hk_prozor( int $id, string $alt ): string {
+	$url = wp_get_attachment_url( $id );
+	return "<!-- wp:image {\"id\":$id,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"className\":\"hk-prozor\"} -->\n<figure class=\"wp-block-image size-large hk-prozor\"><img src=\"$url\" alt=\"" . esc_attr( $alt ) . "\" class=\"wp-image-$id\"/></figure>\n<!-- /wp:image -->\n";
+}
+
+function hk_lista( array $stavke ): string {
+	$o = "<!-- wp:list -->\n<ul class=\"wp-block-list\">";
+	foreach ( $stavke as $st ) {
+		$o .= "<!-- wp:list-item --><li>$st</li><!-- /wp:list-item -->";
+	}
+	return $o . "</ul>\n<!-- /wp:list -->\n";
+}
+
+/** Kartica usluge: naslov, opis, cijena "od" i poveznica. */
+function hk_kartica_usluge( string $naslov, string $opis, string $cijena, string $url ): string {
+	return hk_h( $naslov, 3, 'center' ) . hk_p( $opis, '', 'center' ) . hk_p( "<strong>$cijena</strong>", 'hk-cijena-oznaka', 'center' ) . hk_p( "<a href=\"$url\">Saznaj više →</a>", '', 'center' );
+}
+
+/** Stranica po putanji (npr. usluge/web-stranice); stvara je ako ne postoji. */
+function hk_stranica_ili_nova( string $putanja, string $naslov ): ?WP_Post {
+	if ( $s = get_page_by_path( $putanja ) ) {
+		return $s;
+	}
+	$dijelovi = explode( '/', $putanja );
+	$slug     = array_pop( $dijelovi );
+	$roditelj = $dijelovi ? get_page_by_path( implode( '/', $dijelovi ) ) : null;
+	$id       = wp_insert_post( array( 'post_type' => 'page', 'post_status' => 'publish', 'post_name' => $slug, 'post_title' => $naslov, 'post_parent' => $roditelj ? $roditelj->ID : 0 ) );
+	return $id ? get_post( $id ) : null;
+}
+
+function hk_seo( string $putanja, string $naslov, string $opis ): void {
+	if ( $s = get_page_by_path( $putanja ) ) {
+		update_post_meta( $s->ID, '_yoast_wpseo_title', $naslov );
+		update_post_meta( $s->ID, '_yoast_wpseo_metadesc', $opis );
+	}
 }
 
 function hk_shortcode( string $kod ): string {

@@ -125,3 +125,23 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 /* reference: snimke zaslona su 16:10 i važan im je vrh stranice */
 .hk-referenca .hk-kartica__slika { aspect-ratio: 16/10; }
 .hk-referenca .hk-kartica__slika img { object-position: top center; }
+
+/* hikeit.dev: tamna traka (hero, poziv na akciju), snimka u okviru preglednika, cijene */
+.hk-tamna { background: linear-gradient(135deg, #1A1718 0%, #2c1411 100%); color: #fff; padding-top: var(--wp--preset--spacing--50); padding-bottom: var(--wp--preset--spacing--50); padding-left: var(--wp--preset--spacing--30); padding-right: var(--wp--preset--spacing--30); }
+.hk-tamna .hk-oznaka { color: #F05648; }
+.hk-tamna h1, .hk-tamna h2, .hk-tamna p { color: #fff; }
+.hk-tamna p:not(.hk-oznaka) { font-size: clamp(1.15rem, 1rem + .6vw, 1.4rem); font-weight: 600; line-height: 1.5; }
+.hk-tamna .wp-block-columns { align-items: center; gap: 3rem; }
+.hk-prozor { margin: 0; }
+.hk-prozor img { display: block; width: 100%; height: auto; border-radius: .75rem; border: 1px solid rgba(255,255,255,.18); box-shadow: 0 30px 60px -20px rgba(0,0,0,.7); }
+.hk-cijena-oznaka { color: var(--wp--preset--color--accent); font-size: 1.15rem; margin: .25rem 0 !important; }
+.hikeit-logo__opis { display: none; margin-left: .75rem; padding-left: .75rem; border-left: 1px solid var(--wp--preset--color--base-2); font-size: .8rem; color: var(--wp--preset--color--contrast-2); }
+@media (min-width: 900px) { .hikeit-logo__opis { display: inline; } }
+.hk-sekcija .wp-block-list { max-width: 40rem; margin-left: auto; margin-right: auto; }
+.hk-sekcija .wp-block-list li { margin-bottom: .5rem; }
+.hk-kontakt-o-meni { align-items: center; }
+.hk-kontakt-o-meni img { border-radius: 1rem; }
+.hk-biljeska { color: var(--wp--preset--color--contrast-2); font-size: .9rem !important; margin-top: 1.5rem; }
+.hk-portret { max-width: 20rem; margin: 0 auto; }
+.hk-portret img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: top; border-radius: 1rem; }
+.hk-sekcija > * + h2 { margin-top: 3rem; }
