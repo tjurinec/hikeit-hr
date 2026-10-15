@@ -354,13 +354,14 @@ function hk_odlomci_blokovi( string $tekst ): string {
 	return $o;
 }
 
-function hk_galerija_blok( array $slike ): string {
+function hk_galerija_blok( array $slike, string $klasa = '' ): string {
 	if ( ! $slike ) {
 		return '';
 	}
-	$o = "<!-- wp:gallery {\"linkTo\":\"none\"} -->\n<figure class=\"wp-block-gallery has-nested-images columns-default is-cropped\">";
-	foreach ( $slike as [ $id, $natpis ] ) {
-		$o .= "<!-- wp:image {\"id\":$id,\"sizeSlug\":\"large\",\"linkDestination\":\"none\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"" . esc_url( wp_get_attachment_url( $id ) ) . "\" alt=\"\" class=\"wp-image-$id\"/>"
+	$o = '<!-- wp:gallery ' . wp_json_encode( array( 'linkTo' => 'none' ) + ( $klasa ? array( 'className' => $klasa ) : array() ) ) . " -->\n<figure class=\"wp-block-gallery has-nested-images columns-default is-cropped" . ( $klasa ? " $klasa" : '' ) . '">';
+	foreach ( $slike as $s ) {
+		[ $id, $natpis ] = $s;
+		$o .= "<!-- wp:image {\"id\":$id,\"sizeSlug\":\"large\",\"linkDestination\":\"none\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"" . esc_url( wp_get_attachment_url( $id ) ) . "\" alt=\"" . esc_attr( $s[2] ?? '' ) . "\" class=\"wp-image-$id\"/>"
 			. ( $natpis ? '<figcaption class="wp-element-caption">' . esc_html( $natpis ) . '</figcaption>' : '' ) . "</figure>\n<!-- /wp:image -->";
 	}
 	return $o . "</figure>\n<!-- /wp:gallery -->\n";

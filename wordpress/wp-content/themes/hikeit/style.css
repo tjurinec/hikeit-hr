@@ -149,3 +149,16 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 .hk-gumb-linkedin { margin-top: 1rem; }
 .hk-sekcija > p:not(.has-text-align-center) { max-width: 46rem; }
 .wpcf7 input:not([type=submit]), .wpcf7 select, .wpcf7 textarea, .hk-filter input, .hk-filter select { box-sizing: border-box; max-width: 100%; }
+
+/* --- mozaik i traka fotografija (core/gallery s klasom) --- */
+.wp-block-gallery.hk-mozaik, .wp-block-gallery.hk-traka { display: grid !important; gap: .6rem; margin-top: 1.5rem; }
+.hk-mozaik { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 13rem; grid-auto-flow: dense; }
+.hk-traka { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 14rem; }
+.hk-mozaik .wp-block-image, .hk-traka .wp-block-image { width: auto !important; margin: 0 !important; position: relative; overflow: hidden; border-radius: .75rem; }
+.hk-mozaik .wp-block-image img, .hk-traka .wp-block-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+.hk-mozaik .wp-block-image:hover img, .hk-traka .wp-block-image:hover img { transform: scale(1.04); }
+.hk-mozaik .wp-block-image:nth-child(1), .hk-mozaik .wp-block-image:nth-child(8) { grid-column: span 2; grid-row: span 2; }
+@media (max-width: 782px) {
+	.hk-mozaik { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 9rem; }
+	.hk-traka { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 11rem; }
+}

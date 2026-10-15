@@ -10,8 +10,18 @@ $sile  = $args ?? array();
 $force = in_array( 'force', $sile, true );
 $sili  = fn( $slug ) => $force || in_array( $slug, $sile, true );
 
-$planina = hk_slika( 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&q=85', 'Planinski pejzaž' );
-$staza   = hk_slika( 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=1400&q=80', 'Planinar na stazi' );
+$foto = fn( $ime, $alt = '' ) => hk_slika_datoteka( __DIR__ . "/../seed-slike/foto/$ime.jpg", $alt ); // fotografije s terena (bez EXIF-a)
+$planina = $foto( 'hero', 'Planinski pejzaž' );
+$staza   = $foto( 'cta', 'Planinari na grebenu' );
+$mozaik  = array_map( fn( $i ) => array( $foto( $i[0], $i[1] ), '', $i[1] ), array(
+	array( 'm01', 'Planinsko jezero viđeno odozgo' ), array( 'm02', 'Jezero uokvireno borom' ), array( 'm03', 'Planinari na snježnoj padini' ),
+	array( 'm04', 'Grupa planinara na proplanku' ), array( 'm05', 'Via ferrata kroz klanac' ), array( 'm06', 'Stjenoviti tornjevi uz stazu' ),
+	array( 'm07', 'Jezero u dolini među planinama' ), array( 'm08', 'Zalazak sunca nad planinama' ), array( 'm09', 'Tirkizno planinsko jezero' ),
+	array( 'm10', 'Plaža i obala s brda' ),
+) );
+$traka = array_map( fn( $i ) => array( $foto( $i[0], $i[1] ), '', $i[1] ), array(
+	array( 'o1', 'Tomislav na vrhu' ), array( 'o2', 'Penjanje po via ferrati' ), array( 'o3', 'Pogled na ledenjak' ), array( 'o4', 'Planinski greben' ),
+) );
 
 /* ---------- Početna ---------- */
 $home  = hk_naslovnica( $planina,
@@ -24,6 +34,10 @@ $home .= hk_sekcija(
 	. hk_p( 'Odaberite svoju sljedeću avanturu.', '', 'center' )
 	. hk_shortcode( '[hikeit_izleti istaknuti="1" limit="3"]' )
 	. hk_gumbi( array( array( 'Svi izleti', '/izleti/' ) ) ), '', 'izleti' );
+$home .= hk_sekcija(
+	hk_p( 'S NAŠIH STAZA', 'hk-oznaka', 'center' ) . hk_h( 'Trenuci s terena', 2, 'center' )
+	. hk_p( 'Fotografije s tura po planinama, jezerima i obali.', '', 'center' )
+	. hk_galerija_blok( $mozaik, 'hk-mozaik' ) );
 $home .= hk_sekcija(
 	hk_p( 'NAŠE PREDNOSTI', 'hk-oznaka', 'center' ) . hk_h( 'Zašto baš mi?', 2, 'center' )
 	. hk_stupci( array(
@@ -40,6 +54,7 @@ $home .= hk_naslovnica( $staza,
 hk_postavi_sadrzaj( 'pocetna', $home, $sili( 'pocetna' ) );
 
 /* ---------- O nama ---------- */
+$onama_slika = $foto( 'onama', 'Planinar na grebenu' );
 $onama  = hk_naslovnica( $staza,
 	hk_p( 'NAŠA PRIČA', 'hk-oznaka', 'center' ) . hk_h( 'O nama', 1, 'center' )
 	. hk_p( 'hikeIT.hr je nastao iz jednostavne ideje — dijeliti ljubav prema prirodi, kulturi i pustolovini s ljudima koji žele nešto više od prosječnog godišnjeg odmora.', '', 'center' ), 45, 65 );
@@ -48,7 +63,7 @@ $onama .= hk_sekcija( hk_stupci( array(
 	. hk_p( 'Dvoje prijatelja, zajednička ljubav prema planinama i moru, i uvjerenje da Hrvatska i regija nude nešto nevjerojatno — to je bio početak. Tomislav je godinama vodio planinare po Velebitu i Alpama, Ana je upoznavala putnike s tajnama dalmatinskih gradova i otoka.' )
 	. hk_p( 'Jednog dana smo se pitali: zašto ne spojimo te dvije perspektive? Zašto ne napravimo agenciju koja nudi i visoko planinarenje i kulturne ture — sve s istom razinom strasti i profesionalnosti?' )
 	. hk_p( 'Tako je nastao <strong>hikeIT.hr</strong> — mali, strastveni tim koji vjeruje da prava avantura mijenja ljude iznutra.' ),
-	"<!-- wp:image {\"id\":$planina,\"sizeSlug\":\"large\",\"style\":{\"border\":{\"radius\":\"1rem\"}}} -->\n<figure class=\"wp-block-image size-large has-custom-border\"><img src=\"" . wp_get_attachment_url( $planina ) . "\" alt=\"Planinski pejzaž\" class=\"wp-image-$planina\" style=\"border-radius:1rem\"/></figure>\n<!-- /wp:image -->\n",
+	"<!-- wp:image {\"id\":$onama_slika,\"sizeSlug\":\"large\",\"style\":{\"border\":{\"radius\":\"1rem\"}}} -->\n<figure class=\"wp-block-image size-large has-custom-border\"><img src=\"" . wp_get_attachment_url( $onama_slika ) . "\" alt=\"Planinar na grebenu\" class=\"wp-image-$onama_slika\" style=\"border-radius:1rem\"/></figure>\n<!-- /wp:image -->\n",
 ) ) );
 $onama .= hk_sekcija( hk_h( 'Naše vrijednosti', 2, 'center' ) . hk_stupci( array(
 	hk_kartica( 'Autentičnost', 'Skrivene staze, lokalna hrana, prave priče — bez turističkih klišeja i masovnih grupnih izleta.' ),
@@ -99,7 +114,7 @@ if ( ! $dev_forma && class_exists( 'WPCF7_ContactForm' ) ) {
 	$f->save();
 	WP_CLI::success( 'CF7 forma „Kontakt razvoj" stvorena' );
 }
-$kontakt  = hk_naslovnica( $planina, hk_p( 'JAVITE NAM SE', 'hk-oznaka', 'center' ) . hk_h( 'Kontakt', 1, 'center' ), 30, 65 );
+$kontakt  = hk_naslovnica( $foto( 'kontakt', 'Planinski masiv' ), hk_p( 'JAVITE NAM SE', 'hk-oznaka', 'center' ) . hk_h( 'Kontakt', 1, 'center' ), 30, 65 );
 $kontakt .= hk_sekcija( hk_stupci( array(
 	hk_h( 'Pronađite nas', 2 ) . hk_shortcode( '[hikeit_postavke]' ),
 	hk_h( 'Pošaljite poruku', 2 ) . hk_shortcode( '[hikeit_kontakt_forma]' ),
@@ -157,6 +172,7 @@ $ometi = hk_sekcija( hk_s_portretom( $portret,
 	. hk_p( 'Zanima me da stvari rade jednostavno: da stranicu možete sami uređivati, da je brza i da vas ne košta više nego što mora. Kad treba nešto što gotovo rješenje ne zna, napišem to po mjeri.' )
 	. hk_p( 'Izvan ekrana planinarim, penjem ferrate i bavim se ljetnim alpinizmom — otud i ime hikeIT.' )
 	. hk_gumbi( array( array( 'Moj LinkedIn profil', $linkedin ), array( 'Pošaljite upit', '/kontakt/' ) ), true, 'left' ) ) );
+$ometi .= hk_sekcija( hk_p( 'IZVAN EKRANA', 'hk-oznaka', 'center' ) . hk_h( 'Gdje se najradije nađem', 2, 'center' ) . hk_galerija_blok( $traka, 'hk-traka' ) );
 $ometi .= hk_sekcija( hk_p( 'STRUČNOSTI', 'hk-oznaka', 'center' ) . hk_h( 'Čime se bavim', 2, 'center' ) . hk_stupci( array(
 	hk_kartica( 'Web stranice', 'WordPress: vlastite teme i blokovi, prilagođena polja, WP-CLI i selidbe sadržaja između sustava.' ),
 	hk_kartica( 'Aplikacije po mjeri', 'Kotlin i Spring Boot na poslužitelju, React i TypeScript u pregledniku, PostgreSQL i verzionirane migracije baze.' ),
