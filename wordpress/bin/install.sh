@@ -8,7 +8,7 @@ wp() { docker compose run --rm -T cli wp "$@"; }
 until wp db check >/dev/null 2>&1; do echo "čekam bazu…"; sleep 3; done
 
 wp core is-installed 2>/dev/null || wp core install --url=http://localhost:8089 \
-  --title="hikeIT" --admin_user=admin --admin_password=hikeit --admin_email=tomi.jurinec@gmail.com --skip-email
+  --title="hikeIT" --admin_user=admin --admin_password=hikeit --admin_email=info@hikeit.hr --skip-email
 
 wp language core install hr --activate
 wp option update timezone_string Europe/Zagreb
