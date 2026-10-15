@@ -228,8 +228,9 @@ html[data-mode="dark"] .hk-kartica:hover, html[data-mode="dark"] .hk-ploha:hover
 .hikeit-logo-veza:hover rect:nth-of-type(1), .hikeit-logo-veza:hover rect:nth-of-type(4) { fill: #fff; }
 .hikeit-logo-veza:hover rect:nth-of-type(2), .hikeit-logo-veza:hover rect:nth-of-type(3) { fill: #E3242B; }
 
-/* --- pozadina cijele stranice (i podnožja): agencija = izohipse, razvoj = IT motivi (strujne staze, serveri, kod) --- */
-body.hk-agencija::before, body.hk-dev::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: center / cover no-repeat; }
+/* --- pozadina cijele stranice (i podnožja), pomiče se sa stranicom: agencija = izohipse, razvoj = IT motivi --- */
+body.hk-agencija, body.hk-dev { position: relative; }
+body.hk-agencija::before, body.hk-dev::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: center top / max(100%, 1400px) auto repeat-y; }
 body.hk-agencija::before { background-image: url("assets/izohipse-svijetla.svg"); }
 body.hk-dev::before { background-image: url("assets/it-svijetla.svg"); }
 html[data-mode="dark"] body.hk-agencija::before { background-image: url("assets/izohipse-tamna.svg"); }
