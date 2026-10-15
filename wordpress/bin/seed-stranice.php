@@ -122,16 +122,13 @@ $kontakt .= hk_sekcija( hk_stupci( array(
 hk_postavi_sadrzaj( 'kontakt', $kontakt, $sili( 'kontakt' ), 'page-bez-naslova' );
 
 /* ---------- Razvoj (hikeit.dev) — PRIJEDLOG TEKSTOVA: cijene, ciljna skupina i opis osobe su za potvrdu ---------- */
-$snimka  = hk_slika_datoteka( __DIR__ . '/../seed-slike/pd-pinklec.jpg', 'Stranica PD Pinklec' );
 $vodic   = get_posts( array( 'post_type' => 'vodic', 'numberposts' => 1, 'orderby' => 'ID', 'order' => 'ASC' ) );
 $portret = hk_slika_datoteka( __DIR__ . '/../seed-slike/portret.jpg', 'Tomislav Jurinec' ) ?: ( $vodic ? get_post_thumbnail_id( $vodic[0]->ID ) : 0 ); // dodaj datoteku pa pokreni seed, ili postavi sliku u adminu
 
-$razvoj  = hk_tamna( hk_stupci( array(
-	hk_p( 'WEB I SOFTVERSKA RJEŠENJA · ZAGREB', 'hk-oznaka' ) . hk_h( 'Web stranice za male obrte, udruge i agencije', 1 )
-	. hk_p( 'Dobivate stranicu koju možete sami uređivati, s jasnom cijenom prije početka rada. Bez agencijskih cijena i bez nepotrebne složenosti.' )
-	. hk_gumbi( array( array( 'Pošaljite upit', '/kontakt/' ), array( 'Pogledajte usluge', '/usluge/' ) ), true, 'left' ),
-	$snimka ? hk_prozor( $snimka, 'Primjer: web stranica planinarskog društva' ) : '',
-) ) );
+$razvoj  = hk_naslovnica( $foto( 'kod', 'Programski kod' ),
+	hk_p( 'WEB I SOFTVERSKA RJEŠENJA · ZAGREB', 'hk-oznaka', 'center' ) . hk_h( 'Web stranice za male obrte, udruge i agencije', 1, 'center' )
+	. hk_p( 'Dobivate stranicu koju možete sami uređivati, s jasnom cijenom prije početka rada. Bez agencijskih cijena i bez nepotrebne složenosti.', '', 'center' )
+	. hk_gumbi( array( array( 'Pošaljite upit', '/kontakt/' ), array( 'Pogledajte usluge', '/usluge/' ) ), true ), 75, 35 );
 $razvoj .= hk_sekcija( hk_p( 'ZA KOGA RADIMO', 'hk-oznaka', 'center' ) . hk_h( 'Mali timovi s jasnom potrebom', 2, 'center' ) . hk_stupci( array(
 	hk_kartica( 'Obrti i male tvrtke', 'Stranica koja vas predstavlja, prikuplja upite i na kojoj sami mijenjate tekstove i cijene.' ),
 	hk_kartica( 'Udruge i društva', 'Najave događanja, izvještaji, galerije i članovi na jednom mjestu. Izradili smo stranicu za planinarsko društvo.' ),

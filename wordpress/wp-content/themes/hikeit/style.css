@@ -167,15 +167,15 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 .hk-sekcija { position: relative; }
 .hk-sekcija:not(.hk-tamna) + .hk-sekcija:not(.hk-tamna)::before {
 	content: ""; position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%);
-	width: min(72rem, calc(100% - 2rem)); height: 2px; pointer-events: none;
+	width: min(72rem, calc(100% - 2rem)); height: 1px; pointer-events: none;
 	background:
-		linear-gradient(var(--wp--preset--color--accent), var(--wp--preset--color--accent)) left center / calc(50% - 1.5rem) 2px no-repeat,
-		linear-gradient(var(--wp--preset--color--accent), var(--wp--preset--color--accent)) right center / calc(50% - 1.5rem) 2px no-repeat;
+		linear-gradient(var(--wp--preset--color--accent), var(--wp--preset--color--accent)) left center / calc(50% - 1.4rem) 1px no-repeat,
+		linear-gradient(var(--wp--preset--color--accent), var(--wp--preset--color--accent)) right center / calc(50% - 1.4rem) 1px no-repeat;
 }
 .hk-sekcija:not(.hk-tamna) + .hk-sekcija:not(.hk-tamna)::after {
-	content: ""; position: absolute; top: 0; left: 50%; width: .8rem; height: .8rem; box-sizing: border-box;
+	content: ""; position: absolute; top: 0; left: 50%; width: .6rem; height: .6rem; box-sizing: border-box;
 	transform: translate(-50%, -50%) rotate(45deg); pointer-events: none;
-	border: 2px solid var(--wp--preset--color--accent); background: var(--wp--preset--color--base);
+	border: 1px solid var(--wp--preset--color--accent); background: var(--wp--preset--color--base);
 }
 
 /* --- hover i fokus --- */
