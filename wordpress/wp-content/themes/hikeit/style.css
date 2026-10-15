@@ -197,7 +197,7 @@ html[data-mode="dark"] .hk-kartica:hover, html[data-mode="dark"] .hk-ploha:hover
 /* mobilni izbornik (hamburger): tamna pozadina, velika slova, razdjelnici i oznaka u kutu */
 .wp-block-navigation__responsive-container-open { border-radius: .6rem; padding: .35rem; }
 .wp-block-navigation__responsive-container-open:hover { color: var(--wp--preset--color--accent); background: var(--wp--preset--color--base-2); }
-.wp-block-navigation__responsive-container.is-menu-open { background: linear-gradient(160deg, #1A1718 0%, #2c1411 100%) !important; color: #fff !important; animation: hk-izbornik .25s ease-out; }
+.wp-block-navigation__responsive-container.is-menu-open { background: linear-gradient(160deg, #08090b 0%, #11151c 55%, #1a2230 100%) !important; color: #fff !important; animation: hk-izbornik .25s ease-out; }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; padding: 4.5rem 1.75rem 2.5rem; position: relative; box-sizing: border-box; }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog::before { content: ""; position: absolute; top: 1.4rem; left: 1.75rem; width: 2.2rem; height: 2.2rem;
 	background: conic-gradient(#E3242B 0 25%, #fff 0 50%, #E3242B 0 75%, #fff 0); background-size: 100% 100%; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); opacity: .95; transform: rotate(0deg); border-radius: 2px; }
@@ -221,3 +221,9 @@ html[data-mode="dark"] .hk-kartica:hover, html[data-mode="dark"] .hk-ploha:hover
 @keyframes hk-stavka { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item, .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content { text-align: center !important; justify-content: center !important; align-items: center !important; }
+
+/* logo mijenja boju na hover: slova postaju crvena, a polja šahovnice zamijene mjesta */
+.hikeit-logo-veza, .hikeit-logo-veza .hikeit-logo, .hikeit-logo path, .hikeit-logo rect { transition: color .3s, fill .3s; }
+.hikeit-logo-veza:hover { color: var(--wp--preset--color--accent); }
+.hikeit-logo-veza:hover rect:nth-of-type(1), .hikeit-logo-veza:hover rect:nth-of-type(4) { fill: #fff; }
+.hikeit-logo-veza:hover rect:nth-of-type(2), .hikeit-logo-veza:hover rect:nth-of-type(3) { fill: #E3242B; }
