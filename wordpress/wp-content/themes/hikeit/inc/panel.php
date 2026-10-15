@@ -103,7 +103,7 @@ function hk_css(): string {
 	. '.neproc td{font-weight:700}.mala{color:var(--t2);font-size:.85rem}.kutija{max-width:26rem;margin:10vh auto 0;padding:1.5rem;border:1px solid var(--b2);border-radius:1rem;background:var(--p)}'
 	. '.kodovi{font:1.1rem ui-monospace,monospace;columns:2;background:var(--b2);padding:1rem;border-radius:.6rem;list-style:none}.tajna{font:1rem ui-monospace,monospace;word-break:break-all;background:var(--b2);padding:.5rem;border-radius:.4rem}#qr{display:flex;justify-content:center;margin:1rem 0;background:#fff;padding:.75rem;border-radius:.6rem}'
 	. 'dl{display:grid;grid-template-columns:9rem 1fr;gap:.4rem 1rem}dt{color:var(--t2)}dd{margin:0;white-space:pre-wrap;word-break:break-word}'
-	. '@media(max-width:600px){.slike li{grid-template-columns:4rem 1fr}.desno{margin-left:0}}';
+	. '@media(max-width:600px){.slike li{grid-template-columns:4rem 1fr}.desno{margin-left:0}.izl th:nth-child(n+3):not(:last-child),.izl td:nth-child(n+3):not(.ak){display:none}.izl td.ak a:not(:last-child){display:none}}';
 }
 
 /* ---------------------------------------------------------------- prijava + 2FA */
@@ -329,7 +329,7 @@ function hk_sadrzaj( string $kljuc, array $c, string $dio ): void {
 	$o = '<p style="float:right"><a class="gumb" href="' . esc_url( $baza . 'novi' ) . '">+ ' . esc_html( $c['novi'] ) . '</a></p><h1>' . esc_html( $c['n'] ) . '</h1>'
 		. ( isset( $_GET['obrisano'] ) ? '<div class="ok">Obrisano (u smeću).</div>' : '' );
 	$q = get_posts( array( 'post_type' => $c['cpt'], 'post_status' => array( 'publish', 'draft' ), 'numberposts' => -1, 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC' ) ) );
-	$o .= '<table><tr><th>Naslov</th><th>Status</th>' . ( 'izleti' === $kljuc ? '<th>Cijena</th><th>Polazak</th>' : '' ) . '<th></th></tr>';
+	$o .= '<table class="izl"><tr><th>Naslov</th><th>Status</th>' . ( 'izleti' === $kljuc ? '<th>Cijena</th><th>Polazak</th>' : '' ) . '<th></th></tr>';
 	foreach ( $q as $p ) {
 		$o .= '<tr><td><a href="' . esc_url( $baza . $p->ID . '/' ) . '">' . esc_html( $p->post_title ) . '</a></td><td>' . ( 'publish' === $p->post_status ? 'Objavljeno' : 'Skica' ) . '</td>';
 		if ( 'izleti' === $kljuc ) {

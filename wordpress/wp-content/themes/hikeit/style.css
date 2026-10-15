@@ -95,6 +95,7 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 
 /* početna i stranice bez naslova: sekcije idu do ruba, razmak unutra */
 .hk-bleed { padding-left: 0 !important; padding-right: 0 !important; }
+.hk-bleed > .alignfull { margin-left: 0 !important; margin-right: 0 !important; }
 .hk-sekcija { padding-left: var(--wp--preset--spacing--30); padding-right: var(--wp--preset--spacing--30); }
 .hikeit-header .wp-block-site-title { font-size: 1.4rem; }
 .hikeit-header .wp-block-site-title a { color: var(--wp--preset--color--accent) !important; }
@@ -147,3 +148,4 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 .hk-sekcija > * + h2 { margin-top: 3rem; }
 .hk-gumb-linkedin { margin-top: 1rem; }
 .hk-sekcija > p:not(.has-text-align-center) { max-width: 46rem; }
+.wpcf7 input:not([type=submit]), .wpcf7 select, .wpcf7 textarea, .hk-filter input, .hk-filter select { box-sizing: border-box; max-width: 100%; }
