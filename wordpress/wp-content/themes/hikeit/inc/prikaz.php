@@ -204,7 +204,7 @@ add_shortcode( 'hikeit_postavke', function () {
 		$o .= '<p><small>Radno vrijeme</small><br>' . nl2br( esc_html( $r ) ) . $napomena( 'radno_vrijeme_napomena' ) . '</p>';
 	}
 	foreach ( array( 'instagram' => 'Instagram', 'facebook' => 'Facebook', 'linkedin' => 'LinkedIn' ) as $k => $n ) {
-		if ( $u = $s( $k ) ) {
+		if ( ( 'linkedin' !== $k || HIKEIT_DEV ) && $u = $s( $k ) ) { // LinkedIn je samo na stranici o razvoju, ne na planinarskoj
 			$o .= '<a class="hk-mreza-link" href="' . esc_url( $u ) . '" target="_blank" rel="noopener">' . $n . '</a> ';
 		}
 	}
