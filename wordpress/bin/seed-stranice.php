@@ -19,9 +19,6 @@ $mozaik  = array_map( fn( $i ) => array( $foto( $i[0], $i[1] ), '', $i[1] ), arr
 	array( 'm07', 'Jezero u dolini među planinama' ), array( 'm08', 'Zalazak sunca nad planinama' ), array( 'm09', 'Tirkizno planinsko jezero' ),
 	array( 'm10', 'Planinski prijevoj i livade' ),
 ) );
-$traka = array_map( fn( $i ) => array( $foto( $i[0], $i[1] ), '', $i[1] ), array(
-	array( 'm03', 'Uspon po ledenjaku' ), array( 'o2', 'Penjanje po via ferrati' ), array( 'o3', 'Pogled na ledenjak' ), array( 'o4', 'Planinski greben' ),
-) );
 
 /* ---------- Početna ---------- */
 $home  = hk_naslovnica( $planina,
@@ -171,7 +168,6 @@ $ometi = hk_sekcija( hk_s_portretom( $portret,
 	. hk_p( 'Zanima nas da stvari rade jednostavno: da stranicu možete sami uređivati, da je brza i da vas ne košta više nego što mora. Kad treba nešto što gotovo rješenje ne zna, napišemo to po mjeri.' )
 	. hk_p( 'Izvan ekrana planiniramo, penjemo ferrate i bavimo se ljetnim alpinizmom — otud i ime hikeIT.' )
 	. hk_gumbi( array( array( 'LinkedIn profil', $linkedin ), array( 'Pošaljite upit', '/kontakt/' ) ), true, 'left' ) ) );
-$ometi .= hk_sekcija( hk_p( 'IZVAN EKRANA', 'hk-oznaka', 'center' ) . hk_h( 'Gdje se najradije nalazimo', 2, 'center' ) . hk_galerija_blok( $traka, 'hk-traka' ) );
 $ometi .= hk_sekcija( hk_p( 'STRUČNOSTI', 'hk-oznaka', 'center' ) . hk_h( 'Čime se bavimo', 2, 'center' ) . hk_stupci( array(
 	hk_kartica( 'Web stranice', 'WordPress: vlastite teme i blokovi, prilagođena polja, WP-CLI i selidbe sadržaja između sustava.' ),
 	hk_kartica( 'Aplikacije po mjeri', 'Kotlin i Spring Boot na poslužitelju, React i TypeScript u pregledniku, PostgreSQL i verzionirane migracije baze.' ),
