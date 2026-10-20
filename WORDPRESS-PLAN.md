@@ -117,7 +117,7 @@ ne-radi auto-deploy, `r2.dev` rate limit.
 - ☐ Ostaje: pregled na mobitelu, fino štimanje izgleda, SEO/OG podaci, 301 `/galerija/{id}`, SMTP,
   `hikeit.dev` sadržaj (tekst na stranici Razvoj je NACRT), uklanjanje izmišljenih brojki (vidi niže).
 - Sadržaj koji NISAM prenio jer je izmišljen u React kodu: „120+ putnika", „5★", „8+ godina", „5.0 (12 recenzija)".
-- Provjeriti prije lansiranja: tvrdnje „certificirani vodiči" i „max 12 osoba", te tekst „Ana…" u O nama (na produkciji je samo jedan vodič).
+- Provjeriti prije lansiranja: tvrdnju „certificirani vodiči" (na produkciji je samo jedan vodič). „Max 12 osoba" i tekst „Ana…" u O nama uklonjeni.
 
 ## 9. Pitanja za tebe (ostala)
 

@@ -44,7 +44,7 @@ Ovo treba potvrditi **prije** nego se izleti stvarno naplaćuju. Ne pretpostavlj
 ## 3. Sadržaj stranice
 - [ ] Napraviti **3–5 stvarnih izleta** u upravljanju (`/upravljanje/izleti/`): naslov, opis, težina, trajanje, cijena, najviše sudionika, polazište,
   datum, vodič, 8–10 slika, oznake. Probni izlet "Stol za Paulu" je obrisan.
-- [ ] Provjeriti tvrdnje u tekstovima: "certificirani vodiči", "max 12 osoba", tekst o Ani na stranici O nama (na stranici je samo jedan vodič).
+- [ ] Provjeriti tvrdnju u tekstovima: "certificirani vodiči" (na stranici je samo jedan vodič). "Max 12 osoba" i tekst o Ani uklonjeni.
 - [ ] Dopuniti galerije opisima slika i imenima mjesta (sada su opisi općeniti).
 - [ ] Potvrditi cijene na dev stranici (od 590 € / 1.200 € / 30 € mjesečno su bili prijedlog) i reference.
 - [ ] Pravne stranice: **politika privatnosti** (forma prikuplja podatke), **kolačići/analitika** ako se uključi, **uvjeti korištenja**.
