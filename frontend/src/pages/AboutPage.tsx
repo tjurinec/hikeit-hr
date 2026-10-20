@@ -50,16 +50,16 @@ export default function AboutPage() {
           <div>
             <h2 className="font-display text-3xl font-bold text-[#3d2b1f] mb-4">Kako je sve počelo</h2>
             <p className="text-stone-600 leading-relaxed mb-4">
-              Ljubav prema planinama i moru i uvjerenje da Hrvatska i regija nude nešto nevjerojatno — 
-              to je bio početak. Tomislav je godinama vodio planinare po Velebitu i Alpama.
+              Sve je počelo od ljubavi prema planinama i moru i uvjerenja da Hrvatska i okolica nude više 
+              nego što se vidi s glavnih cesta. Tomislav je godinama vodio planinare po Velebitu i Alpama.
             </p>
             <p className="text-stone-600 leading-relaxed mb-4">
-              Jednog dana sam se pitao: zašto ne napraviti agenciju koja nudi i visoko planinarenje 
-              i kulturne ture — sve s istom razinom strasti i profesionalnosti?
+              Onda se došlo do ideje da ne mora biti ili–ili: može visoko planinarenje i kulturne ture, 
+              uz isti pristup i istu ozbiljnost.
             </p>
             <p className="text-stone-600 leading-relaxed">
-              Tako je nastao <strong className="text-[#2d5a27]">hikeIT.hr</strong> — mala, strastvena agencija
-              koja vjeruje da prava avantura mijenja ljude iznutra.
+              Tako je nastao <strong className="text-[#2d5a27]">hikeIT.hr</strong>, mala agencija
+              za one koji od putovanja žele malo više od uobičajenog odmora.
             </p>
           </div>
           <div className="relative">
