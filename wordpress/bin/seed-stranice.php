@@ -40,8 +40,8 @@ $home .= hk_sekcija(
 	. hk_stupci( array(
 		hk_kartica( 'Certificirani vodiči', 'Planinski i turistički vodiči s licencama i godinama terenske prakse.' ),
 		hk_kartica( 'Sigurnost na prvom mjestu', 'Profesionalna oprema, osiguranje i protokoli za svaki izlet.' ),
-		hk_kartica( 'Male grupe', 'Maksimalno 12 osoba po grupi — pravi doživljaj, ne masovni turizam.' ),
-		hk_kartica( 'Autentično iskustvo', 'Lokalna znanja, skrivene staze i priče koje ne naći u vodiču.' ),
+		hk_kartica( 'Male grupe', 'Pravi doživljaj, ne masovni turizam.' ),
+		hk_kartica( 'Autentično iskustvo', 'Lokalna znanja, skrivene staze i priče koje nećete naći u vodiču.' ),
 	) ) );
 $home .= hk_naslovnica( $staza,
 	hk_h( 'Spremni za avanturu?', 2, 'center' )
@@ -58,7 +58,7 @@ $onama  = hk_naslovnica( $staza,
 $onama .= hk_sekcija( hk_stupci( array(
 	hk_h( 'Kako je sve počelo', 2 )
 	. hk_p( 'Sve je počelo od ljubavi prema planinama i moru i uvjerenja da Hrvatska i okolica nude više nego što se vidi s glavnih cesta. Tomislav je godinama vodio planinare po Velebitu i Alpama.' )
-	. hk_p( 'Onda se došlo do ideje da ne mora biti ili–ili: može visoko planinarenje i kulturne ture, uz isti pristup i istu ozbiljnost.' )
+	. hk_p( 'Onda se došlo do ideje da ne mora biti ili-ili: može visoko planinarenje i kulturne ture, uz isti pristup i istu ozbiljnost.' )
 	. hk_p( 'Tako je nastao <strong>hikeIT.hr</strong>, mala agencija za one koji od putovanja žele malo više od uobičajenog odmora.' ),
 	"<!-- wp:image {\"id\":$onama_slika,\"sizeSlug\":\"large\",\"style\":{\"border\":{\"radius\":\"1rem\"}}} -->\n<figure class=\"wp-block-image size-large has-custom-border\"><img src=\"" . wp_get_attachment_url( $onama_slika ) . "\" alt=\"Planinar na grebenu\" class=\"wp-image-$onama_slika\" style=\"border-radius:1rem\"/></figure>\n<!-- /wp:image -->\n",
 ) ) );
@@ -66,7 +66,7 @@ $onama .= hk_naslovnica( $foto( 'm06', 'Stjenoviti tornjevi uz stazu' ), '', 24,
 $onama .= hk_sekcija( hk_h( 'Naše vrijednosti', 2, 'center' ) . hk_stupci( array(
 	hk_kartica( 'Autentičnost', 'Skrivene staze, lokalna hrana, prave priče — bez turističkih klišeja i masovnih grupnih izleta.' ),
 	hk_kartica( 'Strast', 'Volimo ono što radimo. I to se osjeti. Svaki izlet planiramo kao da ga organiziramo za sebe.' ),
-	hk_kartica( 'Profesionalnost', 'Certifikati, iskustvo i oprema — sve da bi vaša sigurnost i ugoda bili na prvom mjestu.' ),
+	hk_kartica( 'Profesionalnost', 'Certifikati, iskustvo i oprema — sve da bi vaša sigurnost i ugoda bile na prvom mjestu.' ),
 ) ) );
 $onama .= hk_naslovnica( $foto( 'm09', 'Tirkizno planinsko jezero' ), '', 24, 15 );
 $onama .= hk_sekcija( hk_p( 'UPOZNAJTE NAS', 'hk-oznaka', 'center' ) . hk_h( 'Naš tim', 2, 'center' ) . hk_shortcode( '[hikeit_vodici]' ) );
@@ -138,11 +138,11 @@ $razvoj .= hk_sekcija( hk_p( 'USLUGE', 'hk-oznaka', 'center' ) . hk_h( 'Što rad
 	hk_kartica_usluge( 'Aplikacije po mjeri', 'Interni alati, integracije i web aplikacije prema vašim procesima.', 'po dogovoru', '/usluge/aplikacije-po-mjeri/' ),
 	hk_kartica_usluge( 'Održavanje', 'Ažuriranja, sigurnosne kopije i manje izmjene, da stranica ostane brza i sigurna.', 'od 30 € mjesečno', '/usluge/odrzavanje/' ),
 ) ) . hk_p( 'Cijene su orijentacijske. Točnu ponudu dobit ćete nakon kratkog razgovora, prije početka rada.', 'hk-biljeska', 'center' ), '', 'usluge' );
-$razvoj .= hk_sekcija( hk_p( 'KAKO RADIMO', 'hk-oznaka', 'center' ) . hk_h( 'Od upita do lansiranja', 2, 'center' ) . hk_stupci( array(
+$razvoj .= hk_sekcija( hk_p( 'KAKO RADIMO', 'hk-oznaka', 'center' ) . hk_h( 'Od upita do pokretanja', 2, 'center' ) . hk_stupci( array(
 	hk_kartica( '1. Razgovor', 'Kratko pojasnite što trebate i što želite postići. Bez obveze.' ),
 	hk_kartica( '2. Ponuda', 'Jasan opseg, rok i cijena prije početka rada.' ),
 	hk_kartica( '3. Izrada', 'Gradimo u koracima i redovito vam pokazujemo napredak.' ),
-	hk_kartica( '4. Lansiranje', 'Pokrećemo stranicu, educiramo vas i ostajemo na raspolaganju.' ),
+	hk_kartica( '4. Pokretanje', 'Pokrećemo stranicu, educiramo vas i ostajemo na raspolaganju.' ),
 ) ) );
 $razvoj .= hk_sekcija( hk_shortcode( '[hikeit_reference]' ) );
 $tko_tekst = hk_p( 'TKO STOJI IZA', 'hk-oznaka' ) . hk_h( 'Mi smo hikeIT', 2 )

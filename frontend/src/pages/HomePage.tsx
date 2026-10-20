@@ -25,7 +25,7 @@ const WHY_US = [
   {
     icon: <Users className="w-6 h-6" />,
     title: 'Male grupe',
-    desc: 'Maksimalno 12 osoba po grupi — pravi doživljaj, ne masovni turizam.',
+    desc: 'Pravi doživljaj, ne masovni turizam.',
   },
   {
     icon: <Star className="w-6 h-6" />,
