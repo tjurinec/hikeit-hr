@@ -60,9 +60,9 @@ $onama  = hk_naslovnica( $staza,
 	. hk_p( 'hikeIT.hr je nastao iz jednostavne ideje — dijeliti ljubav prema prirodi, kulturi i pustolovini s ljudima koji žele nešto više od prosječnog godišnjeg odmora.', '', 'center' ), 45, 65 );
 $onama .= hk_sekcija( hk_stupci( array(
 	hk_h( 'Kako je sve počelo', 2 )
-	. hk_p( 'Dvoje prijatelja, zajednička ljubav prema planinama i moru, i uvjerenje da Hrvatska i regija nude nešto nevjerojatno — to je bio početak. Tomislav je godinama vodio planinare po Velebitu i Alpama, Ana je upoznavala putnike s tajnama dalmatinskih gradova i otoka.' )
-	. hk_p( 'Jednog dana smo se pitali: zašto ne spojimo te dvije perspektive? Zašto ne napravimo agenciju koja nudi i visoko planinarenje i kulturne ture — sve s istom razinom strasti i profesionalnosti?' )
-	. hk_p( 'Tako je nastao <strong>hikeIT.hr</strong> — mali, strastveni tim koji vjeruje da prava avantura mijenja ljude iznutra.' ),
+	. hk_p( 'Ljubav prema planinama i moru i uvjerenje da Hrvatska i regija nude nešto nevjerojatno — to je bio početak. Tomislav je godinama vodio planinare po Velebitu i Alpama.' )
+	. hk_p( 'Jednog dana sam se pitao: zašto ne napraviti agenciju koja nudi i visoko planinarenje i kulturne ture — sve s istom razinom strasti i profesionalnosti?' )
+	. hk_p( 'Tako je nastao <strong>hikeIT.hr</strong> — mala, strastvena agencija koja vjeruje da prava avantura mijenja ljude iznutra.' ),
 	"<!-- wp:image {\"id\":$onama_slika,\"sizeSlug\":\"large\",\"style\":{\"border\":{\"radius\":\"1rem\"}}} -->\n<figure class=\"wp-block-image size-large has-custom-border\"><img src=\"" . wp_get_attachment_url( $onama_slika ) . "\" alt=\"Planinar na grebenu\" class=\"wp-image-$onama_slika\" style=\"border-radius:1rem\"/></figure>\n<!-- /wp:image -->\n",
 ) ) );
 $onama .= hk_naslovnica( $foto( 'm06', 'Stjenoviti tornjevi uz stazu' ), '', 24, 15 );
