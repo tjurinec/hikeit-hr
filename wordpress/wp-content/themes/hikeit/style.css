@@ -197,24 +197,25 @@ html[data-mode="dark"] .hk-kartica:hover, html[data-mode="dark"] .hk-ploha:hover
 /* mobilni izbornik (hamburger): tamna pozadina, velika slova, razdjelnici i oznaka u kutu */
 .wp-block-navigation__responsive-container-open { border-radius: .6rem; padding: .35rem; }
 .wp-block-navigation__responsive-container-open:hover { color: var(--wp--preset--color--accent); background: var(--wp--preset--color--base-2); }
-.wp-block-navigation__responsive-container.is-menu-open { background: linear-gradient(160deg, #08090b 0%, #11151c 55%, #1a2230 100%) !important; color: #fff !important; animation: hk-izbornik .25s ease-out; }
+.wp-block-navigation__responsive-container.is-menu-open { background: var(--wp--preset--color--base) !important; color: var(--wp--preset--color--contrast) !important; animation: hk-izbornik .25s ease-out; }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; padding: 4.5rem 1.75rem 2.5rem; position: relative; box-sizing: border-box; }
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog::before { content: ""; position: absolute; top: 1.4rem; left: 1.75rem; width: 2.2rem; height: 2.2rem;
-	background: conic-gradient(#E3242B 0 25%, #fff 0 50%, #E3242B 0 75%, #fff 0); background-size: 100% 100%; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); opacity: .95; transform: rotate(0deg); border-radius: 2px; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog::before { content: "hikeIT"; position: absolute; top: 1.2rem; left: 1.75rem; padding-left: 3.5rem; font-family: var(--wp--preset--font-family--display); font-weight: 700; font-size: 1.7rem; line-height: 2.4rem; letter-spacing: -.02em; color: var(--wp--preset--color--contrast);
+	background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%224 6 160 78%22%3E%3Cpath d=%22M76 45 L76 22 Q76 18 80 16 L91 12 L102 16 Q106 18 106 22 L106 53 L76 53 Z%22 fill=%22%23E3242B%22/%3E%3Cpath d=%22M73 22 L91 10 L109 22 L106 25 L91 16 L76 25 Z%22 fill=%22%23E3242B%22/%3E%3Cpath fill=%22%23171819%22 d=%22M8 79 L25 66 L39 61 L53 47 L66 54 L80 37 L95 48 L111 43 L127 58 L145 64 L160 79 L143 75 L128 68 L114 64 L101 56 L88 63 L76 59 L64 70 L48 68 L33 75 L20 76 Z%22/%3E%3Cpath d=%22M43 70 L56 57 L65 61 L80 46 L94 55 L105 51 L118 62%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%222.4%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E") no-repeat left center / 3rem auto; }
+body.hk-dev .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog::before { padding-left: 0; background: none; } /* dev: samo tekst, bez simbola */
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content { align-items: stretch; padding: 0; }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container { gap: 0 !important; width: 100%; align-items: stretch !important; text-align: center; }
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item { border-top: 1px solid rgba(255, 255, 255, .14); width: 100%; animation: hk-stavka .45s ease-out both; }
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item:last-child { border-bottom: 1px solid rgba(255, 255, 255, .14); }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item { border-top: 1px solid rgba(128, 128, 128, .3); width: 100%; animation: hk-stavka .45s ease-out both; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item:last-child { border-bottom: 1px solid rgba(128, 128, 128, .3); }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item:nth-child(2) { animation-delay: .05s; }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item:nth-child(3) { animation-delay: .1s; }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item:nth-child(4) { animation-delay: .15s; }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item:nth-child(5) { animation-delay: .2s; }
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content { display: block; text-align: center; padding: 1.1rem 0; font-family: var(--wp--preset--font-family--display); font-size: 1.9rem; font-weight: 700; color: #fff; background: none; }
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content:hover { color: #F05648; }
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close { top: 1.1rem; right: 1.4rem; color: #fff; border-radius: 50%; padding: .35rem; }
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close:hover { background: rgba(255, 255, 255, .12); }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content { display: block; text-align: center; padding: 1.1rem 0; font-family: var(--wp--preset--font-family--display); font-size: 1.9rem; font-weight: 700; color: var(--wp--preset--color--contrast); background: none; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content:hover { color: var(--wp--preset--color--accent); }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close { top: 1.1rem; right: 1.4rem; color: var(--wp--preset--color--contrast); border-radius: 50%; padding: .35rem; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close:hover { background: rgba(128, 128, 128, .15); }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog::after { content: ""; display: block; width: 3rem; height: 3px; margin: 2.5rem auto 0; background: #E3242B; }
-.hk-nav-izleti .is-menu-open .wp-block-navigation__responsive-container-content::after, .hk-nav-razvoj .is-menu-open .wp-block-navigation__responsive-container-content::after { display: block; margin-top: 2.5rem; text-align: center; font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255, 255, 255, .6); }
+.hk-nav-izleti .is-menu-open .wp-block-navigation__responsive-container-content::after, .hk-nav-razvoj .is-menu-open .wp-block-navigation__responsive-container-content::after { display: block; margin-top: 2.5rem; text-align: center; font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; color: var(--wp--preset--color--contrast-2); }
 .hk-nav-izleti .is-menu-open .wp-block-navigation__responsive-container-content::after { content: "Planinski i turistički izleti"; }
 .hk-nav-razvoj .is-menu-open .wp-block-navigation__responsive-container-content::after { content: "Web i softverska rješenja"; }
 @keyframes hk-izbornik { from { opacity: 0; } to { opacity: 1; } }
@@ -258,3 +259,12 @@ body.hk-agencija .hikeit-footer, body.hk-dev .hikeit-footer { background: color-
 /* polja forme i filtra: tamniji obrub da se vide na svijetloj podlozi; fokus ih naglašava */
 .hk-filter input, .hk-filter select, .wpcf7 input:not([type=submit]), .wpcf7 select, .wpcf7 textarea { border-color: color-mix(in srgb, var(--wp--preset--color--contrast-2) 55%, transparent); }
 .hk-filter input:focus, .hk-filter select:focus, .wpcf7 input:focus, .wpcf7 select:focus, .wpcf7 textarea:focus { border-color: var(--wp--preset--color--accent); outline: 2px solid color-mix(in srgb, var(--wp--preset--color--accent) 25%, transparent); outline-offset: 0; }
+
+/* mobilni izbornik prati svijetli/tamni način i ima isti uzorak u pozadini kao stranica */
+body.hk-agencija .wp-block-navigation__responsive-container.is-menu-open, body.hk-dev .wp-block-navigation__responsive-container.is-menu-open { background-repeat: repeat-y !important; background-position: center top !important; background-size: max(100%, 1400px) auto !important; }
+body.hk-agencija .wp-block-navigation__responsive-container.is-menu-open { background-image: url("assets/izohipse-svijetla.svg") !important; }
+body.hk-dev .wp-block-navigation__responsive-container.is-menu-open { background-image: url("assets/it-svijetla.svg") !important; }
+html[data-mode="dark"] body.hk-agencija .wp-block-navigation__responsive-container.is-menu-open { background-image: url("assets/izohipse-tamna.svg") !important; }
+html[data-mode="dark"] body.hk-dev .wp-block-navigation__responsive-container.is-menu-open { background-image: url("assets/it-tamna.svg") !important; }
+
+html[data-mode="dark"] body.hk-agencija .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog::before { background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%224 6 160 78%22%3E%3Cpath d=%22M76 45 L76 22 Q76 18 80 16 L91 12 L102 16 Q106 18 106 22 L106 53 L76 53 Z%22 fill=%22%23E3242B%22/%3E%3Cpath d=%22M73 22 L91 10 L109 22 L106 25 L91 16 L76 25 Z%22 fill=%22%23E3242B%22/%3E%3Cpath fill=%22%23F7F4EE%22 d=%22M8 79 L25 66 L39 61 L53 47 L66 54 L80 37 L95 48 L111 43 L127 58 L145 64 L160 79 L143 75 L128 68 L114 64 L101 56 L88 63 L76 59 L64 70 L48 68 L33 75 L20 76 Z%22/%3E%3Cpath d=%22M43 70 L56 57 L65 61 L80 46 L94 55 L105 51 L118 62%22 fill=%22none%22 stroke=%22%2311151c%22 stroke-width=%222.4%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E"); }
