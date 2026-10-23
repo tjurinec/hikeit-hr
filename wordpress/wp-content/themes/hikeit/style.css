@@ -116,10 +116,10 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 /* sekcije imaju istu podlogu kao zaglavlje, bez crta među njima, poziv na akciju na naslovnici je jedina tamna traka (slika) */
 
 /* podnaslovi u heroju i pozivu na akciju: veći i podebljani da se čitaju preko slike */
-.hk-hero p:not(.hk-oznaka) { font-size: clamp(1.2rem, 1.05rem + .7vw, 1.55rem); font-weight: 600; line-height: 1.5; text-shadow: 0 1px 14px rgba(0,0,0,.55); }
-.hk-hero .hk-oznaka { font-size: 1.05rem; }
-.hk-sekcija h2 { margin-top: .5rem; margin-bottom: 2rem; font-size: clamp(2.1rem, 1.6rem + 1.8vw, 3rem); }
-.hk-sekcija h3 { font-size: 1.75rem; }
+.hk-hero p:not(.hk-oznaka) { font-size: clamp(1.05rem, 1rem + .4vw, 1.25rem); font-weight: 400; line-height: 1.5; text-shadow: 0 1px 14px rgba(0,0,0,.55); }
+.hk-hero .hk-oznaka { font-size: .8rem; }
+.hk-sekcija h2 { margin-top: .5rem; margin-bottom: 1.5rem; font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem); }
+.hk-sekcija h3 { font-size: clamp(1.125rem, 1.05rem + .4vw, 1.375rem); }
 .hk-sekcija .wp-block-columns { margin-top: 1rem; }
 .hk-mreza + .wp-block-buttons { margin-top: 2.5rem; }
 
@@ -131,7 +131,7 @@ html[data-mode="dark"] .hikeit-nacin .sunce { display: inline; }
 .hk-tamna { background: linear-gradient(135deg, #1A1718 0%, #2c1411 100%); color: #fff; padding-top: var(--wp--preset--spacing--50); padding-bottom: var(--wp--preset--spacing--50); padding-left: var(--wp--preset--spacing--30); padding-right: var(--wp--preset--spacing--30); }
 .hk-tamna .hk-oznaka { color: #F05648; }
 .hk-tamna h1, .hk-tamna h2, .hk-tamna p { color: #fff; }
-.hk-tamna p:not(.hk-oznaka) { font-size: clamp(1.15rem, 1rem + .6vw, 1.4rem); font-weight: 600; line-height: 1.5; }
+.hk-tamna p:not(.hk-oznaka) { font-size: clamp(1rem, .95rem + .35vw, 1.2rem); font-weight: 400; line-height: 1.5; }
 .hk-tamna .wp-block-columns { align-items: center; gap: 3rem; }
 .hk-prozor { margin: 0; }
 .hk-prozor img { display: block; width: 100%; height: auto; border-radius: .75rem; border: 1px solid rgba(255,255,255,.18); box-shadow: 0 30px 60px -20px rgba(0,0,0,.7); }
@@ -235,11 +235,9 @@ html[data-mode="dark"] body.hk-agencija::before { background-image: url("assets/
 html[data-mode="dark"] body.hk-dev::before { background-image: url("assets/it-tamna.svg"); }
 body.hk-agencija .hikeit-footer, body.hk-dev .hikeit-footer { background: transparent; }
 
-/* Tipografija: manji naslovi, opisi bez bolda, manje glasne oznake (sve stranice) */
+/* Tipografija: manji naslovi, opisi bez bolda, manje glasne oznake (sve stranice; sekcije imaju vlastita pravila gore) */
 h2 { font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem); }
 h3 { font-size: clamp(1.125rem, 1.05rem + .4vw, 1.375rem); }
-.hk-hero p:not(.hk-oznaka) { font-size: clamp(1.05rem, 1rem + .4vw, 1.25rem); font-weight: 400; }
-.hk-tamna p:not(.hk-oznaka) { font-size: clamp(1rem, .95rem + .35vw, 1.2rem); font-weight: 400; }
 .hk-oznaka { font-size: .8rem; letter-spacing: .14em; }
 
 /* ikone društvenih mreža */
