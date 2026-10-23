@@ -174,7 +174,7 @@ $ometi .= hk_sekcija( hk_p( 'STRUČNOSTI', 'hk-oznaka', 'center' ) . hk_h( 'Čim
 	hk_kartica( 'Infrastruktura', 'Docker, deploy i hosting (Render, Cloudflare), sigurnosne kopije i e-pošta (SMTP).' ),
 	hk_kartica( 'Kvaliteta', 'Git, testovi i pregled koda — da ono što isporučimo radi i nakon prve izmjene.' ),
 ) ) );
-$ometi .= hk_sekcija( hk_p( 'ISKUSTVO', 'hk-oznaka', 'center' ) . hk_h( 'Gdje sam radio', 2, 'center' ) . hk_p( 'Programersko iskustvo iz većih tvrtki:', '', 'center' ) . hk_lista( array(
+$ometi .= hk_sekcija( hk_p( 'ISKUSTVO', 'hk-oznaka', 'center' ) . hk_h( 'Gdje sam radio', 2, 'center' ) . hk_p( 'Programer sam od 2014. godine, a radio sam u:', '', 'center' ) . hk_lista( array(
 	'fintech tvrtke u Hrvatskoj',
 	'IBM',
 	'Adcubum (Švicarska)',
