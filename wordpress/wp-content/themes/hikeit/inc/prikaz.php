@@ -203,9 +203,14 @@ add_shortcode( 'hikeit_postavke', function () {
 	if ( ! HIKEIT_DEV && $r = $s( 'radno_vrijeme' ) ) {
 		$o .= '<p><small>Radno vrijeme</small><br>' . nl2br( esc_html( $r ) ) . $napomena( 'radno_vrijeme_napomena' ) . '</p>';
 	}
+	$ikone = array( // 24x24, boja prati tekst (currentColor)
+		'instagram' => '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/>',
+		'facebook'  => '<path fill="currentColor" d="M9.1 23.7v-8H6.6v-3.7h2.5v-1.6c0-4.1 1.8-6 5.9-6 .4 0 .95.04 1.5.1a8.7 8.7 0 0 1 1.1.2v3.3a8.6 8.6 0 0 0-.65-.04h-.73c-.7 0-1.26.1-1.68.3a1.7 1.7 0 0 0-.68.62c-.26.42-.37 1-.37 1.75V12h3.92l-.39 2.1-.29 1.56h-3.25v8.25C19.4 23.2 24 18.2 24 12.04c0-6.63-5.37-12-12-12s-12 5.37-12 12c0 5.63 3.87 10.35 9.1 11.65Z"/>',
+		'linkedin'  => '<rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><rect x="6.6" y="10" width="2.4" height="7.4" fill="currentColor"/><circle cx="7.8" cy="7.3" r="1.4" fill="currentColor"/><path fill="currentColor" d="M11 10h2.3v1c.5-.8 1.4-1.2 2.5-1.2 2 0 2.9 1.2 2.9 3.4v4.2h-2.4v-3.8c0-1-.4-1.6-1.3-1.6s-1.6.6-1.6 1.7v3.7H11z"/>',
+	);
 	foreach ( array( 'instagram' => 'Instagram', 'facebook' => 'Facebook', 'linkedin' => 'LinkedIn' ) as $k => $n ) {
 		if ( ( 'linkedin' !== $k || HIKEIT_DEV ) && $u = $s( $k ) ) { // LinkedIn je samo na stranici o razvoju, ne na planinarskoj
-			$o .= '<a class="hk-mreza-link" href="' . esc_url( $u ) . '" target="_blank" rel="noopener">' . $n . '</a> ';
+			$o .= '<a class="hk-mreza-link" href="' . esc_url( $u ) . '" target="_blank" rel="noopener" aria-label="' . $n . '" title="' . $n . '"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">' . $ikone[ $k ] . '</svg></a> ';
 		}
 	}
 	return $o . '</div>';
