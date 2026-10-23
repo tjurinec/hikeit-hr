@@ -43,11 +43,12 @@ add_filter( 'render_block_data', function ( $blok ) {
 	return $blok;
 } );
 
-// Favicon: šahovnica (SVG za moderne preglednike, PNG za Apple i starije).
+// Favicon: planina s tornjem (SVG za moderne preglednike, PNG za Apple i starije).
 add_action( 'wp_head', function () {
 	$a = get_theme_file_uri( 'assets/' );
-	echo '<link rel="icon" href="' . esc_url( $a . 'favicon.svg' ) . '" type="image/svg+xml">' . "\n";
-	echo '<link rel="apple-touch-icon" href="' . esc_url( $a . 'favicon-180.png' ) . '">' . "\n";
+	$d = HIKEIT_DEV ? '-dev' : ''; // dev ima samo slovo h, bez simbola
+	echo '<link rel="icon" href="' . esc_url( $a . "favicon$d.svg" ) . '" type="image/svg+xml">' . "\n";
+	echo '<link rel="apple-touch-icon" href="' . esc_url( $a . "favicon$d-180.png" ) . '">' . "\n";
 }, 5 );
 
 // Komentara nema nigdje.
