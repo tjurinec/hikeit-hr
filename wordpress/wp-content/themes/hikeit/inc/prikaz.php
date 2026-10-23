@@ -209,7 +209,7 @@ add_shortcode( 'hikeit_postavke', function () {
 		'linkedin'  => '<rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><rect x="6.6" y="10" width="2.4" height="7.4" fill="currentColor"/><circle cx="7.8" cy="7.3" r="1.4" fill="currentColor"/><path fill="currentColor" d="M11 10h2.3v1c.5-.8 1.4-1.2 2.5-1.2 2 0 2.9 1.2 2.9 3.4v4.2h-2.4v-3.8c0-1-.4-1.6-1.3-1.6s-1.6.6-1.6 1.7v3.7H11z"/>',
 	);
 	foreach ( array( 'instagram' => 'Instagram', 'facebook' => 'Facebook', 'linkedin' => 'LinkedIn' ) as $k => $n ) {
-		if ( ( 'linkedin' !== $k || HIKEIT_DEV ) && $u = $s( $k ) ) { // LinkedIn je samo na stranici o razvoju, ne na planinarskoj
+		if ( ( 'linkedin' === $k ) === HIKEIT_DEV && $u = $s( $k ) ) { // dev: samo LinkedIn; planinarska stranica: samo Instagram i Facebook
 			$o .= '<a class="hk-mreza-link" href="' . esc_url( $u ) . '" target="_blank" rel="noopener" aria-label="' . $n . '" title="' . $n . '"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">' . $ikone[ $k ] . '</svg></a> ';
 		}
 	}
