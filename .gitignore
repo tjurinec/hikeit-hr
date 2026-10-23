@@ -38,3 +38,7 @@ postgres_data/
 
 # ===== WordPress izvoz za hosting (baza + uploads) =====
 wordpress/build/
+
+# ===== Cold mailovi (tuđi kontakti) =====
+cold_mailovi/
+.hikeit_mail_pass

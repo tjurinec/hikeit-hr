@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+<rect width="1200" height="520" fill="#F7F4EE"/>
+<text x="55" y="52" font-family="Arial, sans-serif" font-size="20" letter-spacing="4" fill="#666">HIKEIT / LOGO SYSTEM</text>
+<rect x="40" y="80" width="1120" height="180" rx="10" fill="#fff"/>
+<g transform="translate(90,110) scale(1.05)">
+  <path d="M76 45 L76 22 Q76 18 80 16 L91 12 L102 16 Q106 18 106 22 L106 53 L76 53 Z" fill="#D62828"/>
+  <path d="M73 22 L91 10 L109 22 L106 25 L91 16 L76 25 Z" fill="#D62828"/>
+  <path d="M89 23 L89 27 L96 27 L96 23" fill="none" stroke="#D62828" stroke-width="1.4"/>
+  <path d="M8 79 L25 66 L39 61 L53 47 L66 54 L80 37 L95 48 L111 43 L127 58 L145 64 L160 79 L143 75 L128 68 L114 64 L101 56 L88 63 L76 59 L64 70 L48 68 L33 75 L20 76 Z" fill="#171819"/>
+  <path d="M43 70 L56 57 L65 61 L80 46 L94 55 L105 51 L118 62" fill="none" stroke="#F7F4EE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<text x="290" y="198" font-family="Georgia, Times New Roman, serif" font-size="92" font-weight="bold" letter-spacing="-4" fill="#171819">hikeIT</text>
+<text x="55" y="310" font-family="Arial, sans-serif" font-size="16" letter-spacing="3" fill="#666">SYMBOL ONLY</text>
+<rect x="40" y="330" width="330" height="150" rx="8" fill="#fff"/>
+<g transform="translate(120,355) scale(1.0)">
+  <path d="M76 45 L76 22 Q76 18 80 16 L91 12 L102 16 Q106 18 106 22 L106 53 L76 53 Z" fill="#D62828"/>
+  <path d="M73 22 L91 10 L109 22 L106 25 L91 16 L76 25 Z" fill="#D62828"/>
+  <path d="M89 23 L89 27 L96 27 L96 23" fill="none" stroke="#D62828" stroke-width="1.4"/>
+  <path d="M8 79 L25 66 L39 61 L53 47 L66 54 L80 37 L95 48 L111 43 L127 58 L145 64 L160 79 L143 75 L128 68 L114 64 L101 56 L88 63 L76 59 L64 70 L48 68 L33 75 L20 76 Z" fill="#171819"/>
+  <path d="M43 70 L56 57 L65 61 L80 46 L94 55 L105 51 L118 62" fill="none" stroke="#F7F4EE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<text x="420" y="310" font-family="Arial, sans-serif" font-size="16" letter-spacing="3" fill="#666">MONOCHROME / PRINT</text>
+<rect x="400" y="330" width="360" height="150" rx="8" fill="#fff"/>
+<g transform="translate(425,355) scale(.85)">
+  <path d="M76 45 L76 22 Q76 18 80 16 L91 12 L102 16 Q106 18 106 22 L106 53 L76 53 Z" fill="#171819"/>
+  <path d="M73 22 L91 10 L109 22 L106 25 L91 16 L76 25 Z" fill="#171819"/>
+  <path d="M89 23 L89 27 L96 27 L96 23" fill="none" stroke="#171819" stroke-width="1.4"/>
+  <path d="M8 79 L25 66 L39 61 L53 47 L66 54 L80 37 L95 48 L111 43 L127 58 L145 64 L160 79 L143 75 L128 68 L114 64 L101 56 L88 63 L76 59 L64 70 L48 68 L33 75 L20 76 Z" fill="#171819"/>
+  <path d="M43 70 L56 57 L65 61 L80 46 L94 55 L105 51 L118 62" fill="none" stroke="#F7F4EE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<text x="610" y="420" font-family="Georgia, Times New Roman, serif" font-size="48" font-weight="bold" fill="#171819">hikeIT</text>
+<text x="810" y="310" font-family="Arial, sans-serif" font-size="16" letter-spacing="3" fill="#666">DARK APPLICATION</text>
+<rect x="790" y="330" width="370" height="150" rx="8" fill="#171819"/>
+<g transform="translate(820,355) scale(.85)">
+  <path d="M76 45 L76 22 Q76 18 80 16 L91 12 L102 16 Q106 18 106 22 L106 53 L76 53 Z" fill="#D62828"/>
+  <path d="M73 22 L91 10 L109 22 L106 25 L91 16 L76 25 Z" fill="#D62828"/>
+  <path d="M89 23 L89 27 L96 27 L96 23" fill="none" stroke="#D62828" stroke-width="1.4"/>
+  <path d="M8 79 L25 66 L39 61 L53 47 L66 54 L80 37 L95 48 L111 43 L127 58 L145 64 L160 79 L143 75 L128 68 L114 64 L101 56 L88 63 L76 59 L64 70 L48 68 L33 75 L20 76 Z" fill="#F7F4EE"/>
+  <path d="M43 70 L56 57 L65 61 L80 46 L94 55 L105 51 L118 62" fill="none" stroke="#171819" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<text x="1005" y="420" font-family="Georgia, Times New Roman, serif" font-size="48" font-weight="bold" fill="#F7F4EE">hikeIT</text>
+</svg>
