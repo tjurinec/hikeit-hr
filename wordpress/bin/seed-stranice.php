@@ -32,13 +32,13 @@ $home .= hk_sekcija(
 	. hk_shortcode( '[hikeit_izleti istaknuti="1" limit="3"]' )
 	. hk_gumbi( array( array( 'Svi izleti', '/izleti/' ) ) ), '', 'izleti' );
 $home .= hk_sekcija(
-	hk_p( 'S NAŠIH STAZA', 'hk-oznaka', 'center' ) . hk_h( 'Trenuci s terena', 2, 'center' )
+	hk_p( 'S NAŠIH STAZA', 'hk-oznaka', 'center' ) . hk_h( 'Trenuci s planine', 2, 'center' )
 	. hk_p( 'Fotografije s tura po planinama, jezerima i obali.', '', 'center' )
 	. hk_galerija_blok( $mozaik, 'hk-mozaik' ) );
 $home .= hk_sekcija(
 	hk_p( 'NAŠE PREDNOSTI', 'hk-oznaka', 'center' ) . hk_h( 'Zašto baš mi?', 2, 'center' )
 	. hk_stupci( array(
-		hk_kartica( 'Certificirani vodiči', 'Planinski i turistički vodiči s licencama i godinama terenske prakse.' ),
+		hk_kartica( 'Certificirani vodiči', 'Planinski i turistički vodiči s licencama i godinama iskustva na stazama.' ),
 		hk_kartica( 'Sigurnost na prvom mjestu', 'Profesionalna oprema, osiguranje i protokoli za svaki izlet.' ),
 		hk_kartica( 'Male grupe', 'Pravi doživljaj, ne masovni turizam.' ),
 		hk_kartica( 'Autentično iskustvo', 'Lokalna znanja, skrivene staze i priče koje nećete naći u vodiču.' ),
