@@ -282,3 +282,17 @@ add_filter( 'wpcf7_form_tag', function ( $tag ) {
 	}
 	return $tag;
 } );
+
+/** Kontakt dijele obje domene; na hikeit.dev hero ima kod u pozadini (kao ostale stranice razvoja), a ne planinsku fotografiju. */
+add_filter( 'render_block', function ( $html, $blok ) {
+	if ( ! HIKEIT_DEV || 'core/cover' !== $blok['blockName'] || ! is_page( 'kontakt' ) ) {
+		return $html;
+	}
+	$kod = get_posts( array( 'post_type' => 'attachment', 'post_status' => 'any', 'numberposts' => 1, 'fields' => 'ids', 'meta_key' => '_hikeit_izvor', 'meta_value' => 'datoteka:kod-java.jpg' ) );
+	if ( ! $kod ) {
+		return $html;
+	}
+	$img = wp_get_attachment_image( $kod[0], 'full', false, array( 'class' => 'wp-block-cover__image-background wp-image-' . $kod[0], 'alt' => '', 'data-object-fit' => 'cover' ) );
+	$html = preg_replace( '~<img[^>]*wp-block-cover__image-background[^>]*>~', $img, $html, 1 );
+	return str_replace( 'has-background-dim-65', 'has-background-dim-35', $html );
+}, 10, 2 );
