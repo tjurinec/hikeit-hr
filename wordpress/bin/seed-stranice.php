@@ -85,7 +85,7 @@ if ( ! $forma && class_exists( 'WPCF7_ContactForm' ) ) {
 	$poruke = $f->prop( 'messages' );
 	$poruke['mail_sent_ok'] = 'Poruka poslana! Javit ćemo vam se u roku od 24 sata. Hvala na povjerenju!';
 	$f->set_properties( array(
-		'form'     => "<label>Ime i prezime *[text* ime autocomplete:name]</label>\n<label>E-mail *[email* email autocomplete:email]</label>\n<label>Telefon [tel telefon autocomplete:tel]</label>\n<label>Tema upita [select tema \"Rezervacija izleta\" \"Privatni / custom izlet\" \"Opće informacije\" \"Suradnja\" \"Web / softverska rješenja\" \"Ostalo\"]</label>\n<label>Poruka *[textarea* poruka]</label>\n[submit \"Pošaljite poruku\"]",
+		'form'     => "<label>Ime i prezime *[text* ime autocomplete:name]</label>\n<label>E-mail *[email* email autocomplete:email]</label>\n<label>Telefon [tel telefon autocomplete:tel]</label>\n<label>Tema upita [select tema \"Rezervacija izleta\" \"Privatni / custom izlet\" \"Opće informacije\" \"Suradnja\" \"Ostalo\"]</label>\n<label>Poruka *[textarea* poruka]</label>\n[submit \"Pošaljite poruku\"]",
 		'mail'     => $mail,
 		'messages' => $poruke,
 		'additional_settings' => "flamingo_name: \"[ime]\"\nflamingo_email: \"[email]\"\nflamingo_subject: \"[tema]\"",
