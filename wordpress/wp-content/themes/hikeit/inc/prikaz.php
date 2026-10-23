@@ -243,6 +243,9 @@ add_shortcode( 'hikeit_reference', function ( $a ) {
 	foreach ( $r as $p ) {
 		$url  = hikeit_meta( $p->ID, 'adresa' );
 		$sl   = get_the_post_thumbnail( $p->ID, 'large', array( 'loading' => 'lazy' ) ) ?: '<span class="hk-kartica__prazno"></span>';
+		if ( ( $f = get_attached_file( get_post_thumbnail_id( $p->ID ) ) ) && is_file( $f ) ) { // nova snimka istog imena ne smije ostati u kešu preglednika
+			$sl = preg_replace( '~(/uploads/[^\s"]+?\.(?:jpe?g|png|webp))~i', '$1?v=' . filemtime( $f ), $sl );
+		}
 		$o   .= '<article class="hk-kartica hk-referenca">' . ( $url ? '<a class="hk-kartica__slika" href="' . esc_url( $url ) . '" target="_blank" rel="noopener">' . $sl . '</a>' : '<div class="hk-kartica__slika">' . $sl . '</div>' );
 		$o   .= '<div class="hk-kartica__tijelo"><h3>' . esc_html( $p->post_title ) . '</h3><p>' . esc_html( $p->post_excerpt ) . '</p>';
 		if ( $t = hikeit_meta( $p->ID, 'tehnologije' ) ) {
