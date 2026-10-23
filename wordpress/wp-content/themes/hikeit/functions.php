@@ -51,6 +51,11 @@ add_action( 'wp_head', function () {
 	echo '<link rel="apple-touch-icon" href="' . esc_url( $a . "favicon$d-180.png" ) . '">' . "\n";
 }, 5 );
 
+// Reference su crno-bijele; na dodirnim uređajima (nema hovera) u boji je kartica koja je u sredini ekrana.
+add_action( 'wp_footer', function () {
+	echo '<script>(function(){var k=document.querySelectorAll(".hk-referenca");if(!k.length||!("IntersectionObserver"in window)||matchMedia("(hover:hover)").matches)return;var o=new IntersectionObserver(function(e){e.forEach(function(x){x.target.classList.toggle("u-fokusu",x.isIntersecting)})},{rootMargin:"-35% 0px -35% 0px"});k.forEach(function(c){o.observe(c)})})();</script>' . "\n";
+}, 20 );
+
 // Komentara nema nigdje.
 add_filter( 'comments_open', '__return_false', 20 );
 add_filter( 'pings_open', '__return_false', 20 );

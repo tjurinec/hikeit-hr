@@ -244,3 +244,8 @@ h3 { font-size: clamp(1.125rem, 1.05rem + .4vw, 1.375rem); }
 .hk-mreza-link { display: inline-flex; margin: .25rem .6rem 0 0; color: inherit; }
 .hk-mreza-link:hover { color: var(--wp--preset--color--accent); }
 .hk-mreza-link svg { display: block; }
+
+/* reference: crno-bijele dok se ne pređe mišem; na dodirnim uređajima u boji je kartica u sredini ekrana */
+.hk-referenca .hk-kartica__slika img { filter: grayscale(1); transition: filter .4s, transform .4s; }
+@media (hover: hover) { .hk-referenca:hover .hk-kartica__slika img { filter: none; } }
+.hk-referenca.u-fokusu .hk-kartica__slika img { filter: none; }
