@@ -119,7 +119,7 @@ add_shortcode( 'hikeit_izlet_podaci', function () {
 	foreach ( array_filter( $redovi ) as $k => $v ) {
 		$o .= '<dt>' . esc_html( $k ) . '</dt><dd>' . esc_html( $v ) . '</dd>';
 	}
-	$o .= '</dl><a class="hk-gumb" href="' . esc_url( home_url( '/kontakt/' ) ) . '">Pošaljite upit za rezervaciju</a>';
+	$o .= '</dl><a class="hk-gumb" href="' . esc_url( add_query_arg( 'rezervacija', rawurlencode( get_the_title( $id ) ), home_url( '/kontakt/' ) ) ) . '">Pošaljite upit za rezervaciju</a>';
 	if ( $vodic = (int) hikeit_meta( $id, 'vodic' ) ) {
 		$o .= '<div class="hk-podaci__vodic"><strong>Vaš vodič</strong><br>' . esc_html( get_the_title( $vodic ) );
 		if ( $s = hikeit_meta( $vodic, 'specijalizacija' ) ) {
@@ -265,4 +265,12 @@ add_action( 'wp_head', function () {
 		'url'      => home_url( '/o-meni/' ),
 		'sameAs'   => $sameas,
 	), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . "</script>\n";
+} );
+
+/** Gumb "Pošaljite upit za rezervaciju" vodi na /kontakt/?rezervacija=Naziv; poruka je tada unaprijed ispunjena. */
+add_filter( 'wpcf7_form_tag', function ( $tag ) {
+	if ( 'poruka' === $tag['name'] && ! empty( $_GET['rezervacija'] ) ) {
+		$tag['values'] = array( 'Želim se prijaviti na izlet „' . sanitize_text_field( wp_unslash( $_GET['rezervacija'] ) ) . '”. Molim vas za slobodne termine i detalje.' );
+	}
+	return $tag;
 } );

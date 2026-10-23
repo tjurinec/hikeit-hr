@@ -235,9 +235,9 @@ html[data-mode="dark"] body.hk-agencija::before { background-image: url("assets/
 html[data-mode="dark"] body.hk-dev::before { background-image: url("assets/it-tamna.svg"); }
 body.hk-agencija .hikeit-footer, body.hk-dev .hikeit-footer { background: transparent; }
 
-/* PILOT tipografija (samo naslovnica): manji naslovi, opisi bez bolda, manje glasne oznake */
-.home h2 { font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem); }
-.home h3 { font-size: clamp(1.125rem, 1.05rem + .4vw, 1.375rem); }
-.home .hk-hero p:not(.hk-oznaka) { font-size: clamp(1.05rem, 1rem + .4vw, 1.25rem); font-weight: 400; }
-.home .hk-tamna p:not(.hk-oznaka) { font-size: clamp(1rem, .95rem + .35vw, 1.2rem); font-weight: 400; }
-.home .hk-oznaka { font-size: .8rem; letter-spacing: .14em; }
+/* Tipografija: manji naslovi, opisi bez bolda, manje glasne oznake (sve stranice) */
+h2 { font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem); }
+h3 { font-size: clamp(1.125rem, 1.05rem + .4vw, 1.375rem); }
+.hk-hero p:not(.hk-oznaka) { font-size: clamp(1.05rem, 1rem + .4vw, 1.25rem); font-weight: 400; }
+.hk-tamna p:not(.hk-oznaka) { font-size: clamp(1rem, .95rem + .35vw, 1.2rem); font-weight: 400; }
+.hk-oznaka { font-size: .8rem; letter-spacing: .14em; }
