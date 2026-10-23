@@ -249,3 +249,8 @@ h3 { font-size: clamp(1.125rem, 1.05rem + .4vw, 1.375rem); }
 .hk-referenca .hk-kartica__slika img { filter: grayscale(1); transition: filter .4s, transform .4s; }
 @media (hover: hover) { .hk-referenca:hover .hk-kartica__slika img { filter: none; } }
 .hk-referenca.u-fokusu .hk-kartica__slika img { filter: none; }
+
+/* header i footer su odvojeni od sadržaja: sjena ispod zaglavlja, podnožje je puna podloga druge boje (uzorak teče samo iza sadržaja) */
+.hikeit-header { box-shadow: 0 2px 16px rgba(0, 0, 0, .08); }
+html[data-mode="dark"] .hikeit-header { box-shadow: 0 2px 16px rgba(0, 0, 0, .5); }
+body.hk-agencija .hikeit-footer, body.hk-dev .hikeit-footer { background: var(--wp--preset--color--base-2); border-top: 1px solid rgba(128, 128, 128, .28); }
