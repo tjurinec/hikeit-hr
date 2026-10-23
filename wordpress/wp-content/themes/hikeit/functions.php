@@ -53,7 +53,7 @@ add_action( 'wp_head', function () {
 
 // Reference su crno-bijele; na dodirnim uređajima (nema hovera) u boji je kartica koja je u sredini ekrana.
 add_action( 'wp_footer', function () {
-	echo '<script>(function(){var k=document.querySelectorAll(".hk-referenca");if(!k.length||!("IntersectionObserver"in window)||matchMedia("(hover:hover)").matches)return;var o=new IntersectionObserver(function(e){e.forEach(function(x){x.target.classList.toggle("u-fokusu",x.isIntersecting)})},{rootMargin:"-35% 0px -35% 0px"});k.forEach(function(c){o.observe(c)})})();</script>' . "\n";
+	echo '<script>(function(){var k=document.querySelectorAll(".hk-referenca");if(!k.length||!("IntersectionObserver"in window)||!matchMedia("(hover:none)").matches)return;var o=new IntersectionObserver(function(e){e.forEach(function(x){x.target.classList.toggle("u-fokusu",x.isIntersecting)})},{rootMargin:"-49% 0px -49% 0px"});k.forEach(function(c){o.observe(c)})})();</script>' . "\n";
 }, 20 );
 
 // Komentara nema nigdje.
