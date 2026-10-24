@@ -232,7 +232,7 @@ add_shortcode( 'hikeit_podnozje', function () {
 		$o .= '<li><a href="' . esc_url( str_starts_with( $u, 'http' ) ? $u : home_url( $u ) ) . '">' . esc_html( $n ) . '</a></li>';
 	}
 	$o .= '</ul></nav><div><strong>Kontakt</strong>' . do_shortcode( '[hikeit_postavke]' ) . '</div></div>';
-	$o .= '<p class="hk-podnozje__kraj">© ' . gmdate( 'Y' ) . ' hikeIT · Sva prava pridržana.</p>';
+	$o .= '<p class="hk-podnozje__kraj">hikeIT, obrt za usluge, vl. Tomislav Jurinec · Rakitje, Rakitska cesta 116 · OIB 34480527423 · MB obrta 99389959<br>© ' . gmdate( 'Y' ) . ' hikeIT · Sva prava pridržana.</p>';
 	return $o;
 } );
 
