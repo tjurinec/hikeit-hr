@@ -25,7 +25,7 @@ Koliko sam uspio potvrditi (izvor: Zakon o pružanju usluga u turizmu, NN 130/17
 - **Tko može biti agencija:** trgovačko društvo, **obrtnik** ili njihova organizacijska jedinica – dakle može preko postojećeg obrta.
 - **Što treba:**
   1. registriran obrt (**imamo**) s upisanom odgovarajućom djelatnošću (nju ćemo dodati; šifra je u NKD-u 79.x **[provjeriti točnu šifru NKD 2025]**) – promjena u Obrtnom registru kod ureda državne uprave/ovlaštenog tijela,
-  2. poslovni prostor ili prostor stambene namjene (sjedište na adresi u Rakitju vjerojatno ide, **[provjeriti]** uvjete prostora),
+  2. **prostor – ne trebamo ga:** radit ćemo kao **internet agencija** (bez poslovnice, sve online). Sjedište je adresa obrta u Rakitju. Prema izvoru, internet agencija bez poslovnice **ipak mora zaposliti osobu koja ispunjava uvjete voditelja poslova** **[provjeriti kod Ministarstva kako se to prijavljuje bez poslovnice]**,
   3. **voditelj poslova** koji ispunjava uvjete iz zakona (stručni ispit ili odgovarajuće iskustvo/obrazovanje). Jedan izvor navodi da je jedan uvjet za voditelja poslovnice brisan 2019., a drugi izvori još traže „uvjerenje o položenom stručnom ispitu" – **[provjeriti što točno vrijedi za prijateljicu]**,
   4. **obavijest Ministarstvu turizma i sporta** na propisanom obrascu, e-poštom, **prije početka rada**. Naknade za upis **nema**,
   5. dokaz o **zaštiti za slučaj nesolventnosti** i dokaz o **osiguranju od odgovornosti** (obvezni za agencije koje organiziraju paket-aranžmane ili povezane putne aranžmane).
@@ -131,7 +131,7 @@ Osnovno pravilo: većina natječaja financira **nakon** što trošak nastane (na
 - [ ] Osiguranje od odgovornosti agencije
 - [ ] Opći uvjeti poslovanja agencije + **ugovor o putovanju** + obrazac za program
 - [ ] Knjiga primjedbi / e-obrazac za prigovore
-- [ ] Naziv „turistička agencija" i broj upisa/rješenja istaknuti (poslovnica, web)
+- [ ] Naziv turističke agencije i broj upisa/rješenja istaknuti **na webu** (to je naša poslovnica: naziv, sjedište, OIB, kontakt, podaci o upisu, opći uvjeti, način prigovora)
 - [ ] Licence/kvalifikacije vodiča (HPS standardi; provjeriti trebaju li licence turističkog vodiča za neke lokacije)
 - [ ] Ugovori s partnerima (prijevoznik s licencom, smještaj, koće)
 
@@ -149,7 +149,7 @@ Osnovno pravilo: većina natječaja financira **nakon** što trošak nastane (na
 
 **Zapošljavanje**
 - [ ] Ugovor o radu, prijave (HZMO/HZZO), zaštita na radu
-- [ ] Radni prostor/oprema za ured (laptop, telefon, e-mail)
+- [ ] Oprema za rad na daljinu (laptop, telefon, e-mail) – ureda nema
 
 **Web i marketing**
 - [ ] Politika privatnosti, kolačići (karta učitava OSM pločice – razmotriti učitavanje na klik, kao u pd-pinklec)
