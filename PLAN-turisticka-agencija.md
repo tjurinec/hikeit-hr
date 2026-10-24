@@ -160,26 +160,33 @@ Osnovno pravilo: većina natječaja financira **nakon** što trošak nastane (na
 
 ---
 
-## 8. Predloženi redoslijed
+## 8. Redoslijed – cilj: agencija upisana do kraja 2026.
 
-**Odmah (0–1 mj.)**
-- Pitati računovođu: NKD, PDV, posebni postupak marže, fiskalizacija.
-- Razgovor s prijateljicom: uvjeti za voditelja poslova, forma zapošljavanja.
-- Upiti za ponude osiguranja (3 osiguravatelja).
+Rok je čvrst, ima ga oko **9 tjedana** (od 24. 10. do 31. 12.). Najduže traju stvari koje ne ovise o nama (ponude osiguravatelja, rok Ministarstva), pa se one pokreću prve i paralelno.
 
-**1–3 mj.**
-- Dodati djelatnost, pripremiti ugovor o putovanju i opće uvjete.
-- Odabrati osiguranje, uplatiti jamstvo/policu.
-- Poslati obavijest Ministarstvu, dobiti potvrdu.
+| Tjedan | Što | Tko |
+|---|---|---|
+| **1 (do 31. 10.)** | Razgovor s prijateljicom: pristaje li, ima li uvjete za voditelja poslova (dokazi: svjedodžba/ispit/staž), od kada može raditi, ugovor o radu da ili ne | Tomislav |
+| 1 | Poziv računovođi: promjena NKD-a, PDV (posebni postupak marže), fiskalizacija, strošak zaposlenice | Tomislav |
+| 1 | Upiti za ponude: **3 osiguravatelja**, i za jamstvo od nesolventnosti i za odgovornost (pitanja iz §3) | Tomislav |
+| 1 | Pitati Ministarstvo (e-poštom) kako se prijavljuje internet agencija i što točno prilaže voditelj poslova | Tomislav |
+| **2–3 (do 14. 11.)** | Usporediti ponude, odabrati, potpisati ugovor o osiguranju/jamstvu | Tomislav |
+| 2–3 | Prijaviti promjenu djelatnosti u Obrtnom registru (dodati agenciju) | Tomislav + računovođa |
+| 2–3 | Sklopiti ugovor o radu s prijateljicom (ako je izabrano zaposlenje), prijava HZMO/HZZO | Tomislav + računovođa |
+| **3–5 (do 28. 11.)** | Napisati **opće uvjete poslovanja** i **ugovor o putovanju** (predložak) | Claude nacrt, pravnik/računovođa pregledava |
+| 3–5 | Web: naziv agencije i podaci o upisu, opći uvjeti, politika privatnosti, kolačići, uvjeti prijave | Claude |
+| **6 (do 5. 12.)** | Poslati **obavijest Ministarstvu** s dokazima (voditelj poslova, osiguranje, jamstvo) | Tomislav + prijateljica |
+| **7–8 (do 19. 12.)** | Rok za primjedbe Ministarstva / dopune; **rezerva** | |
+| **9 (do 31. 12.)** | Agencija upisana; na webu istaknuti podaci o upisu; prvi izleti objavljeni kao ponuda | |
 
-**3–6 mj.**
-- Prvi izleti pod agencijom, prva zarada, prve recenzije.
-- Zaposliti prijateljicu (ugovor o radu).
-- Pratiti pozive HAMAG-BICRO-a, županija, EU.
+**Najveći rizici za rok:**
+1. **Voditelj poslova** – ako prijateljica nema svu potrebnu dokumentaciju, to je usko grlo; zato je to prvi razgovor.
+2. **Osiguravatelji** – ponude i potpisivanje znaju trajati 2–3 tjedna; krenuti odmah, u istom tjednu s trojicom.
+3. **Praznici** – krajem prosinca uredi sporije rade; cilj je obavijest poslati do 5. 12., ne zadnji tjedan.
+4. **Prva zaposlenica kod nas** – prijava na HZZO/HZMO i ugovor trebaju biti gotovi prije obavijesti, jer voditelj poslova mora biti zaposlen kod nas.
+5. **HZZ potpore ne dolaze prije listopada 2027.** (uvjet: 12 mjeseci poslovanja), pa trošak zaposlenice prvu godinu snosimo sami; u proračun uračunati oko 1,165 × bruto plaća mjesečno **[provjeriti s računovođom]**.
 
-**12 mj. (listopad 2027.)**
-- Ispunjen uvjet 12 mjeseci poslovanja za HZZ potpore i dio EU natječaja.
-- Prijava na potpore za zapošljavanje.
+**Nakon upisa (siječanj–lipanj 2027.):** prvi izleti pod agencijom, prve recenzije, pratiti pozive HAMAG-BICRO-a, županije i EU fondova; od listopada 2027. prijava na HZZ potpore za zapošljavanje.
 
 ---
 
