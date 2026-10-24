@@ -68,10 +68,6 @@ $onama .= hk_sekcija( hk_h( 'Naše vrijednosti', 2, 'center' ) . hk_stupci( arra
 	hk_kartica( 'Strast', 'Volimo ono što radimo. I to se osjeti. Svaki izlet planiramo kao da ga organiziramo za sebe.' ),
 	hk_kartica( 'Profesionalnost', 'Certifikati, iskustvo i oprema — sve da bi vaša sigurnost i ugoda bile na prvom mjestu.' ),
 ) ) );
-$onama .= hk_sekcija( hk_p( 'ZNANJE I POVJERENJE', 'hk-oznaka', 'center' ) . hk_h( 'Standardi i tečajevi', 2, 'center' ) . hk_stupci( array(
-	hk_h( 'Završeno', 3 ) . hk_lista( array( 'A standard Hrvatskog planinarskog saveza (HPS)', 'B tečaj' ) ),
-	hk_h( 'Uskoro', 3 ) . hk_lista( array( 'B standard', 'Visokogorska škola', 'Ljetna alpinistička škola' ) ),
-) ) );
 $onama .= hk_naslovnica( $foto( 'm09', 'Tirkizno planinsko jezero' ), '', 24, 15 );
 $onama .= hk_sekcija( hk_p( 'UPOZNAJTE NAS', 'hk-oznaka', 'center' ) . hk_h( 'Naš tim', 2, 'center' ) . hk_shortcode( '[hikeit_vodici]' ) );
 hk_postavi_sadrzaj( 'o-nama', $onama, $sili( 'o-nama' ), 'page-bez-naslova' );

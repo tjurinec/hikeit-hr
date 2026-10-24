@@ -143,7 +143,11 @@ add_shortcode( 'hikeit_vodici', function () {
 		if ( $s = hikeit_meta( $v->ID, 'specijalizacija' ) ) {
 			$o .= '<p class="hk-vodic__spec">' . esc_html( $s ) . '</p>';
 		}
-		$o .= wpautop( esc_html( wp_strip_all_tags( $v->post_content ) ) ) . '</div></article>';
+		$o .= wpautop( esc_html( wp_strip_all_tags( $v->post_content ) ) );
+		if ( $kv = array_filter( array_map( 'trim', explode( "\n", (string) hikeit_meta( $v->ID, 'kvalifikacije' ) ) ) ) ) {
+			$o .= '<ul class="hk-vodic__kv"><li>' . implode( '</li><li>', array_map( 'esc_html', $kv ) ) . '</li></ul>';
+		}
+		$o .= '</div></article>';
 	}
 	return $o . '</div>';
 } );

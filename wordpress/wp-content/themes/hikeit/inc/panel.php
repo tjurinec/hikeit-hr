@@ -239,6 +239,7 @@ function hk_tipovi(): array {
 		) ),
 		'vodici'   => array( 'cpt' => 'vodic', 'n' => 'Vodiči', 'novi' => 'Novi vodič', 'slike' => false, 'polja' => array(
 			array( 'specijalizacija', 'Specijalizacija', 'text' ),
+			array( 'kvalifikacije', 'Standardi i tečajevi (jedan po retku)', 'textarea' ),
 		) ),
 	);
 }
@@ -477,7 +478,7 @@ function hk_spremi( array $c, int $id ) {
 
 	foreach ( $c['polja'] as [ $naziv, , $vrsta ] ) {
 		$v = wp_unslash( $_POST['p'][ $naziv ] ?? '' );
-		$v = 'url' === $vrsta ? esc_url_raw( $v ) : ( 'check' === $vrsta ? ( $v ? 1 : 0 ) : sanitize_text_field( $v ) );
+		$v = 'url' === $vrsta ? esc_url_raw( $v ) : ( 'check' === $vrsta ? ( $v ? 1 : 0 ) : ( 'textarea' === $vrsta ? sanitize_textarea_field( $v ) : sanitize_text_field( $v ) ) );
 		function_exists( 'update_field' ) ? update_field( $naziv, $v, $id ) : update_post_meta( $id, $naziv, $v );
 	}
 	if ( ! empty( $c['oznake'] ) ) {
@@ -520,6 +521,9 @@ function hk_polje_html( string $naziv, string $oznaka, string $vrsta, $vr, $opci
 			$o .= '<option value="' . $e( $k ) . '"' . selected( (string) $vr, (string) $k, false ) . '>' . esc_html( $t ) . '</option>';
 		}
 		return $o . '</select></label></div>';
+	}
+	if ( 'textarea' === $vrsta ) {
+		return $o . '<textarea ' . $ime . ' rows="5">' . esc_textarea( $vr ) . '</textarea></label></div>';
 	}
 	return $o . '<input type="' . $e( $vrsta ) . '"' . ( 'number' === $vrsta ? ' step="any" min="0"' : '' ) . ' ' . $ime . ' value="' . $e( $vr ) . '"></label></div>';
 }

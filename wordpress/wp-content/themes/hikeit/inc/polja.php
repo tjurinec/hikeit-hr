@@ -40,7 +40,10 @@ add_action( 'acf/init', function () {
 		'key'      => 'group_hk_vodic',
 		'title'    => 'Vodič',
 		'location' => array( array( array( 'param' => 'post_type', 'operator' => '==', 'value' => 'vodic' ) ) ),
-		'fields'   => array( $tekst( 'specijalizacija', 'Specijalizacija' ) ),
+		'fields'   => array(
+			$tekst( 'specijalizacija', 'Specijalizacija' ),
+			$tekst( 'kvalifikacije', 'Standardi i tečajevi (jedan po retku)', array( 'type' => 'textarea', 'rows' => 5 ) ),
+		),
 	) );
 
 	acf_add_local_field_group( array(

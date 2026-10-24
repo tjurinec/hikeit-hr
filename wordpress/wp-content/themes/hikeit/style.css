@@ -291,3 +291,6 @@ html[data-mode="dark"] body.hk-agencija .wp-block-navigation__responsive-contain
 .hk-staza .hk-brojke { gap: 1rem 1.5rem; }
 .hk-staza .hk-brojke dd { font-size: 1.3rem; }
 .hk-staza .hk-karta { block-size: 16rem; }
+
+.hk-vodic__kv { margin: 1rem 0 0; padding-left: 1.2rem; font-size: .95rem; }
+.hk-vodic__kv li { margin-bottom: .25rem; }
