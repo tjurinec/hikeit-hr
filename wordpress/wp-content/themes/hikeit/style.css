@@ -72,7 +72,7 @@ Text Domain: hikeit
 .hk-stranicenje .current { background: var(--wp--preset--color--accent); color: #fff; border-color: transparent; }
 
 /* --- stranica izleta --- */
-.hk-podaci { background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--base-2); border-radius: 1rem; padding: 1.5rem; position: sticky; top: 6rem; }
+.hk-podaci { background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--base-2); border-radius: 1rem; padding: 1.5rem; }
 .hk-podaci__cijena { font-family: var(--wp--preset--font-family--display); font-size: 2rem; font-weight: 700; color: var(--wp--preset--color--accent); }
 .hk-podaci__cijena small { font-family: var(--wp--preset--font-family--body); font-size: .85rem; font-weight: 400; color: var(--wp--preset--color--contrast-2); }
 .hk-podaci dl { display: grid; grid-template-columns: auto 1fr; gap: .4rem 1rem; margin: 1rem 0 1.5rem; font-size: .95rem; }
@@ -285,3 +285,9 @@ html[data-mode="dark"] body.hk-agencija .wp-block-navigation__responsive-contain
 .hk-oznaka-os { fill: var(--wp--preset--color--contrast-2); font-size: 9px; font-weight: 600; }
 .hk-karta { block-size: clamp(20rem, 46vh, 30rem); border-radius: 1rem; overflow: hidden; border: 1px solid var(--wp--preset--color--base-2); margin-bottom: 1.5rem; z-index: 0; }
 .hk-karta .leaflet-container { font-family: inherit; }
+
+.hk-staza { background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--base-2); border-radius: 1rem; padding: 1.5rem; margin-top: 1.5rem; }
+.hk-staza h3 { margin: 0 0 1rem; }
+.hk-staza .hk-brojke { gap: 1rem 1.5rem; }
+.hk-staza .hk-brojke dd { font-size: 1.3rem; }
+.hk-staza .hk-karta { margin-top: 1.5rem; }
