@@ -329,13 +329,13 @@ function hk_sadrzaj( string $kljuc, array $c, string $dio ): void {
 	$o = '<p style="float:right"><a class="gumb" href="' . esc_url( $baza . 'novi' ) . '">+ ' . esc_html( $c['novi'] ) . '</a></p><h1>' . esc_html( $c['n'] ) . '</h1>'
 		. ( isset( $_GET['obrisano'] ) ? '<div class="ok">Obrisano (u smeću).</div>' : '' );
 	$q = get_posts( array( 'post_type' => $c['cpt'], 'post_status' => array( 'publish', 'draft' ), 'numberposts' => -1, 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC' ) ) );
-	$o .= '<table class="izl"><tr><th>Naslov</th><th>Status</th>' . ( 'izleti' === $kljuc ? '<th>Cijena</th><th>Polazak</th>' : '' ) . '<th></th></tr>';
+	$o .= '<table class="izl"><tr><th>Naslov</th><th>Status</th>' . ( 'izleti' === $kljuc ? '<th>Cijena</th><th>Polazak</th><th>Slobodno</th>' : '' ) . '<th></th></tr>';
 	foreach ( $q as $p ) {
 		$o .= '<tr><td><a href="' . esc_url( $baza . $p->ID . '/' ) . '">' . esc_html( $p->post_title ) . '</a></td><td>' . ( 'publish' === $p->post_status ? 'Objavljeno' : 'Skica' ) . '</td>';
 		if ( 'izleti' === $kljuc ) {
 			$ci = get_post_meta( $p->ID, 'cijena', true );
 			$po = get_post_meta( $p->ID, 'sljedeci_polazak', true );
-			$o .= '<td>' . ( '' !== $ci ? esc_html( hikeit_cijena( $ci ) ) : '—' ) . '</td><td>' . ( $po ? esc_html( date_i18n( 'j. n. Y.', strtotime( $po ) ) ) : '—' ) . '</td>';
+			$o .= '<td>' . ( '' !== $ci ? esc_html( hikeit_cijena( $ci ) ) : '—' ) . '</td><td>' . ( $po ? esc_html( date_i18n( 'j. n. Y.', strtotime( $po ) ) ) : '—' ) . '</td><td>' . ( null === ( $sl = hk_slobodna_mjesta( $p->ID ) ) ? '—' : $sl ) . '</td>';
 		}
 		$o .= '<td class="ak">' . ( 'publish' === $p->post_status && is_post_type_viewable( $c['cpt'] ) ? '<a href="' . esc_url( get_permalink( $p ) ) . '" target="_blank" rel="noopener">Pogledaj ↗</a> ' : '' )
 			. '<a href="' . esc_url( $baza . $p->ID . '/' ) . '">Uredi</a></td></tr>';
@@ -551,18 +551,62 @@ function hk_tablica_upita( int $limit = 0, int $str = 1 ): string {
 	if ( ! $poruke ) {
 		return '<p class="mala">Još nema upita.</p>';
 	}
-	$o = '<table><tr><th>Od</th><th>Tema / poruka</th><th>Primljeno</th></tr>';
+	$o = '<table><tr><th>Od</th><th>Tema / poruka</th><th>Izlet</th><th>Primljeno</th></tr>';
 	foreach ( $poruke as $m ) {
 		$nov = ! get_post_meta( $m->id(), '_hk_procitano', true );
 		$o  .= '<tr' . ( $nov ? ' class="neproc"' : '' ) . '><td><a href="' . esc_url( home_url( '/upravljanje/upiti/' . $m->id() . '/' ) ) . '">' . esc_html( $m->from_name ?: $m->from_email ) . '</a><div class="mala">' . esc_html( $m->from_email ) . '</div></td>'
-			. '<td>' . esc_html( $m->subject ) . '</td><td>' . esc_html( get_the_date( 'j. n. Y. H:i', $m->id() ) ) . '</td></tr>';
+			. '<td>' . esc_html( $m->subject ) . '</td><td>' . esc_html( get_the_title( (int) get_post_meta( $m->id(), '_hk_izlet', true ) ) ) . '</td><td>' . esc_html( get_the_date( 'j. n. Y. H:i', $m->id() ) ) . '</td></tr>';
 	}
 	return $o . '</table>';
+}
+
+/** Slobodna mjesta izleta (null ako nije zadan najveći broj). Vidljivo samo u upravljanju, nikad javno. */
+function hk_slobodna_mjesta( int $izlet ): ?int {
+	$max = (int) get_post_meta( $izlet, 'max_sudionika', true );
+	if ( ! $max ) {
+		return null;
+	}
+	$zauzeto = 0;
+	foreach ( get_posts( array( 'post_type' => 'flamingo_inbound', 'numberposts' => -1, 'meta_key' => '_hk_izlet', 'meta_value' => $izlet ) ) as $u ) {
+		$zauzeto += max( 1, (int) get_post_meta( $u->ID, '_hk_osoba', true ) );
+	}
+	return $max - $zauzeto;
+}
+
+function hk_pridruzi_forma( int $upit ): string {
+	$tr  = (int) get_post_meta( $upit, '_hk_izlet', true );
+	$os  = max( 1, (int) get_post_meta( $upit, '_hk_osoba', true ) );
+	$o   = '<form method="post" class="pridruzi">' . wp_nonce_field( 'hk_panel', '_n', true, false ) . '<input type="hidden" name="id" value="' . $upit . '"><input type="hidden" name="akcija" value="pridruzi">'
+		. '<h2>Pridruži izletu</h2><label for="izlet">Izlet</label><select id="izlet" name="izlet"><option value="0">— nije pridružen —</option>';
+	foreach ( get_posts( array( 'post_type' => 'izlet', 'post_status' => 'publish', 'numberposts' => -1 ) ) as $i ) {
+		$sl  = hk_slobodna_mjesta( $i->ID );
+		$o  .= '<option value="' . $i->ID . '"' . selected( $tr, $i->ID, false ) . '>' . esc_html( $i->post_title . ( null === $sl ? '' : ' — slobodno: ' . $sl ) ) . '</option>';
+	}
+	$o .= '</select><label for="osoba">Broj osoba</label><input id="osoba" name="osoba" type="number" min="1" value="' . $os . '"><p><button>Spremi</button></p>';
+	if ( $tr && null !== ( $sl = hk_slobodna_mjesta( $tr ) ) ) {
+		$o .= '<p><strong>' . esc_html( get_the_title( $tr ) ) . ':</strong> još slobodnih mjesta: ' . ( $sl < 0 ? '<span style="color:#b00">' . $sl . ' (prekoračeno)</span>' : $sl ) . ' od ' . (int) get_post_meta( $tr, 'max_sudionika', true ) . '</p>';
+	}
+	return $o . '</form>';
 }
 
 function hk_upiti( int $id ): void {
 	if ( 'POST' === $_SERVER['REQUEST_METHOD'] ) {
 		hk_provjeri_nonce();
+		if ( 'pridruzi' === ( $_POST['akcija'] ?? '' ) ) {
+			$u = (int) ( $_POST['id'] ?? 0 );
+			$i = (int) ( $_POST['izlet'] ?? 0 );
+			if ( get_post_type( $u ) === 'flamingo_inbound' ) {
+				if ( $i && get_post_type( $i ) === 'izlet' ) {
+					update_post_meta( $u, '_hk_izlet', $i );
+					update_post_meta( $u, '_hk_osoba', max( 1, (int) ( $_POST['osoba'] ?? 1 ) ) );
+				} else {
+					delete_post_meta( $u, '_hk_izlet' );
+					delete_post_meta( $u, '_hk_osoba' );
+				}
+			}
+			wp_safe_redirect( home_url( '/upravljanje/upiti/' . $u . '/' ) );
+			exit;
+		}
 		$m = new Flamingo_Inbound_Message( (int) ( $_POST['id'] ?? 0 ) );
 		if ( $m->id() ) {
 			$m->trash();
@@ -583,7 +627,7 @@ function hk_upiti( int $id ): void {
 			$v  = is_array( $v ) ? implode( ', ', $v ) : (string) $v;
 			$o .= '<dt>' . esc_html( ucfirst( $k ) ) . '</dt><dd>' . ( 'email' === $k ? '<a href="mailto:' . esc_attr( $v ) . '">' . esc_html( $v ) . '</a>' : esc_html( $v ) ) . '</dd>';
 		}
-		$o .= '</dl><p><a class="gumb" href="mailto:' . esc_attr( $m->from_email ) . '?subject=' . rawurlencode( 'Re: ' . $m->subject ) . '">Odgovori e-poštom</a></p>'
+		$o .= '</dl>' . hk_pridruzi_forma( $id ) . '<p><a class="gumb" href="mailto:' . esc_attr( $m->from_email ) . '?subject=' . rawurlencode( 'Re: ' . $m->subject ) . '">Odgovori e-poštom</a></p>'
 			. '<form method="post" data-potvrda="Obrisati ovaj upit?">' . wp_nonce_field( 'hk_panel', '_n', true, false ) . '<input type="hidden" name="id" value="' . $id . '"><button class="sek">Obriši upit</button></form>';
 		hk_html( 'Upit', $o, true );
 		return;
