@@ -296,3 +296,170 @@ add_filter( 'render_block', function ( $html, $blok ) {
 	$html = preg_replace( '~<img[^>]*wp-block-cover__image-background[^>]*>~', $img, $html, 1 );
 	return str_replace( 'has-background-dim-65', 'has-background-dim-35', $html );
 }, 10, 2 );
+
+/**
+ * Glatka linija kroz točke (Catmull-Rom → Bézier). Greben ne ide u pravcima.
+ *
+ * @param array $pts Niz [x, y] u koordinatama crteža.
+ */
+function hikeit_smooth_path( array $pts ) {
+	$n = count( $pts );
+	if ( $n < 2 ) {
+		return '';
+	}
+
+	$d = sprintf( 'M %.1f %.1f', $pts[0][0], $pts[0][1] );
+	for ( $i = 0; $i < $n - 1; $i++ ) {
+		$p0 = $pts[ max( 0, $i - 1 ) ];
+		$p1 = $pts[ $i ];
+		$p2 = $pts[ $i + 1 ];
+		$p3 = $pts[ min( $n - 1, $i + 2 ) ];
+
+		$d .= sprintf(
+			' C %.1f %.1f, %.1f %.1f, %.1f %.1f',
+			$p1[0] + ( $p2[0] - $p0[0] ) / 6,
+			$p1[1] + ( $p2[1] - $p0[1] ) / 6,
+			$p2[0] - ( $p3[0] - $p1[0] ) / 6,
+			$p2[1] - ( $p3[1] - $p1[1] ) / 6,
+			$p2[0],
+			$p2[1]
+		);
+	}
+	return $d;
+}
+
+/**
+ * Visinski profil kao SVG.
+ *
+ * @param array $track Točke [lat, lon, visina, prijeđeno].
+ * @param array $args  w, h, pad, peak (istakni vrh), labels (osi s metrima).
+ */
+function hikeit_profil_svg( array $track, array $args = array() ) {
+	$a = wp_parse_args( $args, array(
+		'w'      => 640,
+		'h'      => 180,
+		'pad'    => 6,
+		'peak'   => false,
+		'labels' => false,
+		'class'  => 'hk-profil',
+	) );
+
+	$eles = array_values( array_filter( array_column( $track, 2 ), function ( $e ) {
+		return null !== $e; } ) );
+	if ( count( $eles ) < 2 ) {
+		return '';
+	}
+
+	$min   = min( $eles );
+	$max   = max( $eles );
+	$raspon = max( 1, $max - $min );
+	$total = (float) end( $track )[3];
+	if ( $total <= 0 ) {
+		return '';
+	}
+
+	// Kad se ispisuju oznake, ostavi im mjesta lijevo i dolje.
+	$ml  = $a['labels'] ? 34 : $a['pad'];
+	$mb  = $a['labels'] ? 18 : $a['pad'];
+	$pad = $a['pad'];
+
+	$pts = array();
+	foreach ( $track as $p ) {
+		if ( null === $p[2] ) {
+			continue;
+		}
+		$pts[] = array(
+			$ml + ( $p[3] / $total ) * ( $a['w'] - $ml - $pad ),
+			$a['h'] - $mb - ( ( $p[2] - $min ) / $raspon ) * ( $a['h'] - $mb - $pad ),
+		);
+	}
+
+	$d   = hikeit_smooth_path( $pts );
+	$fill = sprintf( '%s L %.1f %.1f L %.1f %.1f Z', $d, $a['w'] - $pad, $a['h'] - $mb, $ml, $a['h'] - $mb );
+
+	$svg  = sprintf(
+		'<svg class="%s" viewBox="0 0 %d %d" preserveAspectRatio="none" role="img" aria-label="%s">',
+		esc_attr( $a['class'] ),
+		$a['w'],
+		$a['h'],
+		esc_attr( sprintf(
+			'Visinski profil staze: od %1$d do %2$d metara, %3$s km',
+			$min,
+			$max,
+			number_format_i18n( $total / 1000, 1 )
+		) )
+	);
+
+	if ( $a['labels'] ) {
+		// Vodilice na najnižoj i najvišoj visini — svaka oznaka imenuje visinu koju crtež doista doseže.
+		foreach ( array( $min, $max ) as $v ) {
+			$y = $a['h'] - $mb - ( ( $v - $min ) / $raspon ) * ( $a['h'] - $mb - $pad );
+			$svg .= sprintf(
+				'<line x1="%d" y1="%.1f" x2="%d" y2="%.1f" class="hk-os"/>'
+				. '<text x="%d" y="%.1f" class="hk-oznaka-os" text-anchor="end">%d</text>',
+				$ml, $y, $a['w'] - $pad, $y,
+				$ml - 6, $y + 3.5, $v
+			);
+		}
+		$svg .= sprintf(
+			'<text x="%d" y="%d" class="hk-oznaka-os">0</text>'
+			. '<text x="%d" y="%d" class="hk-oznaka-os" text-anchor="end">%s km</text>',
+			$ml, $a['h'] - 4,
+			$a['w'] - $pad, $a['h'] - 4,
+			number_format_i18n( $total / 1000, 1 )
+		);
+	}
+
+	$svg .= sprintf( '<path d="%s" class="hk-profil-ploha"/>', esc_attr( $fill ) );
+	$svg .= sprintf( '<path d="%s" class="hk-profil-crta"/>', esc_attr( $d ) );
+
+	if ( $a['peak'] ) {
+		$i = array_search( $max, array_column( $track, 2 ), true );
+		if ( false !== $i ) {
+			$svg .= sprintf(
+				'<circle cx="%.1f" cy="%.1f" r="4" class="hk-vrh"/>',
+				$ml + ( $track[ $i ][3] / $total ) * ( $a['w'] - $ml - $pad ),
+				$a['h'] - $mb - ( ( $max - $min ) / $raspon ) * ( $a['h'] - $mb - $pad )
+			);
+		}
+	}
+
+	return $svg . '</svg>';
+}
+
+/** Spremljeni trag izleta: točke [lat, lon, visina, prijeđeno]. */
+function hikeit_track( int $id ): array {
+	$t = json_decode( (string) get_post_meta( $id, '_izlet_track', true ), true );
+	return is_array( $t ) && count( $t ) > 1 ? $t : array();
+}
+
+/** Staza izleta: brojke iz GPX-a, visinski profil, karta i preuzimanje. Ništa ako GPX nije dodan. */
+add_shortcode( 'hikeit_izlet_staza', function () {
+	$id    = get_the_ID();
+	$track = $id ? hikeit_track( $id ) : array();
+	if ( ! $track ) {
+		return '';
+	}
+	wp_enqueue_style( 'leaflet', get_theme_file_uri( 'assets/leaflet/leaflet.css' ), array(), '1.9.4' );
+	wp_enqueue_script( 'leaflet', get_theme_file_uri( 'assets/leaflet/leaflet.js' ), array(), '1.9.4', true );
+	wp_enqueue_script( 'hikeit-staza', get_theme_file_uri( 'assets/staza.js' ), array( 'leaflet' ), filemtime( get_theme_file_path( 'assets/staza.js' ) ), true );
+
+	$brojke = array(
+		'Duljina' => array( get_post_meta( $id, '_izlet_gpx_duljina', true ), 'km' ),
+		'Uspon'   => array( get_post_meta( $id, '_izlet_gpx_uspon', true ), 'm' ),
+		'Spust'   => array( get_post_meta( $id, '_izlet_gpx_spust', true ), 'm' ),
+	);
+	$o = '<section class="hk-staza"><h2>Staza</h2><dl class="hk-brojke">';
+	foreach ( $brojke as $n => [ $v, $j ] ) {
+		if ( '' !== (string) $v ) {
+			$o .= '<div><dt>' . esc_html( $n ) . '</dt><dd>' . esc_html( number_format_i18n( (float) $v, 'km' === $j ? 1 : 0 ) ) . ' ' . $j . '</dd></div>';
+		}
+	}
+	$o .= '</dl><figure class="hk-profil-okvir"><figcaption>Visinski profil</figcaption>'
+		. hikeit_profil_svg( $track, array( 'w' => 640, 'h' => 190, 'peak' => true, 'labels' => true ) ) . '</figure>'
+		. '<div class="hk-karta" data-track="' . esc_attr( wp_json_encode( array_map( fn( $p ) => array( $p[0], $p[1] ), $track ) ) ) . '" data-bounds="' . esc_attr( (string) get_post_meta( $id, '_izlet_bounds', true ) ) . '"></div>';
+	if ( ( $g = (int) get_post_meta( $id, '_izlet_gpx_id', true ) ) && ( $u = wp_get_attachment_url( $g ) ) ) {
+		$o .= '<p><a class="hk-gumb" href="' . esc_url( $u ) . '" download>Preuzmi GPX</a></p>';
+	}
+	return $o . '</section>';
+} );

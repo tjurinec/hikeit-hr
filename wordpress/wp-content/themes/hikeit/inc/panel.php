@@ -223,7 +223,7 @@ function hk_prijava(): void {
 
 function hk_tipovi(): array {
 	return array(
-		'izleti'   => array( 'cpt' => 'izlet', 'n' => 'Izleti', 'novi' => 'Novi izlet', 'slike' => true, 'sazetak' => true, 'oznake' => true, 'polja' => array(
+		'izleti'   => array( 'cpt' => 'izlet', 'n' => 'Izleti', 'novi' => 'Novi izlet', 'slike' => true, 'gpx' => true, 'sazetak' => true, 'oznake' => true, 'polja' => array(
 			array( 'tezina', 'Težina', 'select', hikeit_tezine() ),
 			array( 'trajanje_dana', 'Trajanje (dana)', 'number' ),
 			array( 'max_sudionika', 'Najviše sudionika', 'number' ),
@@ -319,7 +319,7 @@ function hk_sadrzaj( string $kljuc, array $c, string $dio ): void {
 			hk_forma( $kljuc, $c, $id, $r->get_error_message() );
 			exit;
 		}
-		wp_safe_redirect( add_query_arg( 'spremljeno', 1, $baza . $r . '/' ) );
+		wp_safe_redirect( add_query_arg( array( 'spremljeno' => 1, 'gpx_greska' => empty( $GLOBALS['hk_gpx_greska'] ) ? null : rawurlencode( $GLOBALS['hk_gpx_greska'] ) ), $baza . $r . '/' ) );
 		exit;
 	}
 	if ( 'novi' === $dio || ( ctype_digit( $dio ) && get_post_type( (int) $dio ) === $c['cpt'] ) ) {
@@ -379,6 +379,38 @@ function hk_razlozi( string $s ): array {
 	$bez = preg_replace( '#<!-- wp:(gallery|image).*?<!-- /wp:\1 -->#s', '', $s );
 	$bez = preg_replace( '#<br\s*/?>#i', "\n", str_replace( '</p>', "\n\n", $bez ) );
 	return array( trim( html_entity_decode( wp_strip_all_tags( $bez ) ) ), $slike );
+}
+
+/** GPX: dopusti .gpx, spremi trag i brojke u meta izleta (ili ukloni ako je zadano). */
+function hk_gpx( int $id ): ?string {
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	require_once ABSPATH . 'wp-admin/includes/media.php';
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+	$kljucevi = array( '_izlet_track', '_izlet_bounds', '_izlet_gpx_duljina', '_izlet_gpx_uspon', '_izlet_gpx_spust', '_izlet_gpx_id' );
+	if ( ! empty( $_POST['gpx_ukloni'] ) ) {
+		array_map( fn( $k ) => delete_post_meta( $id, $k ), $kljucevi );
+	}
+	if ( empty( $_FILES['gpx']['name'] ) || UPLOAD_ERR_OK !== $_FILES['gpx']['error'] ) {
+		return null;
+	}
+	if ( 'gpx' !== strtolower( pathinfo( $_FILES['gpx']['name'], PATHINFO_EXTENSION ) ) || $_FILES['gpx']['size'] > 6 * MB_IN_BYTES ) {
+		return 'GPX nije spremljen: treba biti datoteka .gpx manja od 6 MB.';
+	}
+	$r = hikeit_parse_gpx( (string) file_get_contents( $_FILES['gpx']['tmp_name'] ) );
+	if ( is_wp_error( $r ) ) {
+		return 'GPX nije spremljen: ' . $r->get_error_message();
+	}
+	$a = media_handle_upload( 'gpx', $id, array(), array( 'test_form' => false, 'mimes' => array( 'gpx' => 'application/gpx+xml' ) ) );
+	if ( is_wp_error( $a ) ) {
+		return 'GPX nije spremljen: ' . $a->get_error_message();
+	}
+	update_post_meta( $id, '_izlet_gpx_id', $a );
+	update_post_meta( $id, '_izlet_track', wp_json_encode( $r['track'] ) );
+	update_post_meta( $id, '_izlet_bounds', wp_json_encode( $r['bounds'] ) );
+	update_post_meta( $id, '_izlet_gpx_duljina', round( $r['distance_m'] / 1000, 1 ) );
+	update_post_meta( $id, '_izlet_gpx_uspon', $r['ascent_m'] );
+	update_post_meta( $id, '_izlet_gpx_spust', $r['descent_m'] );
+	return null;
 }
 
 function hk_ucitaj( string $polje, int $roditelj ): array {
@@ -452,6 +484,10 @@ function hk_spremi( array $c, int $id ) {
 		wp_set_object_terms( $id, array_filter( array_map( 'trim', explode( ',', sanitize_text_field( wp_unslash( $_POST['oznake'] ?? '' ) ) ) ) ), 'oznaka' );
 	}
 
+	if ( ! empty( $c['gpx'] ) && ( $gr = hk_gpx( $id ) ) ) {
+		$GLOBALS['hk_gpx_greska'] = $gr;
+	}
+
 	// naslovna slika: nova > postojeća > prva slika galerije
 	if ( ! empty( $_POST['ukloni_naslovnu'] ) ) {
 		delete_post_thumbnail( $id );
@@ -497,7 +533,7 @@ function hk_forma( string $kljuc, array $c, int $id, string $greska = '' ): void
 	$tekst  = $_POST ? wp_unslash( $_POST['opis'] ?? '' ) : $tekst;
 	$e = 'esc_html';
 	$o = '<p><a href="' . esc_url( $baza ) . '">← ' . $e( $c['n'] ) . '</a></p><h1>' . $e( $p ? $p->post_title : $c['novi'] ) . '</h1>'
-		. ( isset( $_GET['spremljeno'] ) ? '<div class="ok">Spremljeno.</div>' : '' ) . ( $greska ? '<div class="gr">' . $e( $greska ) . '</div>' : '' )
+		. ( isset( $_GET['spremljeno'] ) ? '<div class="ok">Spremljeno.</div>' : '' ) . ( isset( $_GET['gpx_greska'] ) ? '<div class="gr">' . $e( sanitize_text_field( wp_unslash( $_GET['gpx_greska'] ) ) ) . '</div>' : '' ) . ( $greska ? '<div class="gr">' . $e( $greska ) . '</div>' : '' )
 		. '<form method="post" enctype="multipart/form-data">' . wp_nonce_field( 'hk_panel', '_n', true, false ) . '<input type="hidden" name="id" value="' . $id . '">'
 		. '<label for="naslov">Naslov</label><input id="naslov" name="naslov" type="text" value="' . esc_attr( $naslov ) . '" required>';
 	if ( ! empty( $c['sazetak'] ) ) {
@@ -520,6 +556,14 @@ function hk_forma( string $kljuc, array $c, int $id, string $greska = '' ): void
 			. '<br><label class="cb" style="margin:.3rem 0 0;font-weight:500"><input type="checkbox" name="ukloni_naslovnu" value="1"> ukloni</label></p>';
 	}
 	$o .= '<input id="naslovna" name="naslovna[]" type="file" accept="image/*">';
+	if ( ! empty( $c['gpx'] ) ) {
+		$g = $id ? (int) get_post_meta( $id, '_izlet_gpx_id', true ) : 0;
+		$o .= '<h2>Staza (GPX)</h2>';
+		if ( $g && hikeit_track( $id ) ) {
+			$o .= '<p>Dodano: ' . esc_html( basename( (string) get_attached_file( $g ) ) ) . ' — ' . esc_html( get_post_meta( $id, '_izlet_gpx_duljina', true ) ) . ' km, uspon ' . (int) get_post_meta( $id, '_izlet_gpx_uspon', true ) . ' m. <label class="cb" style="font-weight:500"><input type="checkbox" name="gpx_ukloni" value="1"> ukloni</label></p>';
+		}
+		$o .= '<label for="gpx">' . ( $g ? 'Zamijeni GPX' : 'GPX datoteka' ) . ' <span class="mala">(iz nje se sami izračunaju duljina, uspon i visinski profil te karta na stranici izleta)</span></label><input id="gpx" name="gpx" type="file" accept=".gpx">';
+	}
 	if ( $c['slike'] ) {
 		$o .= '<h2>Slike</h2>';
 		if ( $slike ) {

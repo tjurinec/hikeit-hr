@@ -268,3 +268,20 @@ html[data-mode="dark"] body.hk-agencija .wp-block-navigation__responsive-contain
 html[data-mode="dark"] body.hk-dev .wp-block-navigation__responsive-container.is-menu-open { background-image: url("assets/it-tamna.svg") !important; }
 
 html[data-mode="dark"] body.hk-agencija .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog::before { background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%224 6 160 78%22%3E%3Cpath d=%22M76 45 L76 22 Q76 18 80 16 L91 12 L102 16 Q106 18 106 22 L106 53 L76 53 Z%22 fill=%22%23E3242B%22/%3E%3Cpath d=%22M73 22 L91 10 L109 22 L106 25 L91 16 L76 25 Z%22 fill=%22%23E3242B%22/%3E%3Cpath fill=%22%23F7F4EE%22 d=%22M8 79 L25 66 L39 61 L53 47 L66 54 L80 37 L95 48 L111 43 L127 58 L145 64 L160 79 L143 75 L128 68 L114 64 L101 56 L88 63 L76 59 L64 70 L48 68 L33 75 L20 76 Z%22/%3E%3Cpath d=%22M43 70 L56 57 L65 61 L80 46 L94 55 L105 51 L118 62%22 fill=%22none%22 stroke=%22%2311151c%22 stroke-width=%222.4%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E"); }
+
+/* Staza izleta (GPX): brojke, visinski profil, karta */
+.hk-staza { margin-top: 2.5rem; }
+.hk-brojke { display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem; margin: 0 0 1.5rem; }
+.hk-brojke div { display: grid; }
+.hk-brojke dt { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--wp--preset--color--contrast-2); }
+.hk-brojke dd { margin: 0; font-family: var(--wp--preset--font-family--display); font-size: 1.6rem; font-weight: 700; }
+.hk-profil-okvir { margin: 0 0 1.5rem; }
+.hk-profil-okvir figcaption { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--wp--preset--color--contrast-2); margin-bottom: .6rem; }
+.hk-profil { inline-size: 100%; block-size: auto; display: block; overflow: visible; }
+.hk-profil-ploha { fill: var(--wp--preset--color--accent); fill-opacity: .14; }
+.hk-profil-crta { fill: none; stroke: var(--wp--preset--color--accent); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.hk-vrh { fill: var(--wp--preset--color--base); stroke: var(--wp--preset--color--accent); stroke-width: 2.6; }
+.hk-os { stroke: var(--wp--preset--color--base-2); stroke-width: 1; stroke-dasharray: 2 3; }
+.hk-oznaka-os { fill: var(--wp--preset--color--contrast-2); font-size: 9px; font-weight: 600; }
+.hk-karta { block-size: clamp(20rem, 46vh, 30rem); border-radius: 1rem; overflow: hidden; border: 1px solid var(--wp--preset--color--base-2); margin-bottom: 1.5rem; z-index: 0; }
+.hk-karta .leaflet-container { font-family: inherit; }
