@@ -290,4 +290,4 @@ html[data-mode="dark"] body.hk-agencija .wp-block-navigation__responsive-contain
 .hk-staza h3 { margin: 0 0 1rem; }
 .hk-staza .hk-brojke { gap: 1rem 1.5rem; }
 .hk-staza .hk-brojke dd { font-size: 1.3rem; }
-.hk-staza .hk-karta { margin-top: 1.5rem; }
+.hk-staza .hk-karta { block-size: 16rem; }

@@ -434,8 +434,7 @@ function hikeit_track( int $id ): array {
 }
 
 /** Staza izleta: brojke iz GPX-a, visinski profil, karta i preuzimanje. Ništa ako GPX nije dodan. */
-add_shortcode( 'hikeit_izlet_staza', function ( $a ) {
-	$karta = 'karta' === ( $a['dio'] ?? '' );
+add_shortcode( 'hikeit_izlet_staza', function () {
 	$id    = get_the_ID();
 	$track = $id ? hikeit_track( $id ) : array();
 	if ( ! $track ) {
@@ -444,10 +443,6 @@ add_shortcode( 'hikeit_izlet_staza', function ( $a ) {
 	wp_enqueue_style( 'leaflet', get_theme_file_uri( 'assets/leaflet/leaflet.css' ), array(), '1.9.4' );
 	wp_enqueue_script( 'leaflet', get_theme_file_uri( 'assets/leaflet/leaflet.js' ), array(), '1.9.4', true );
 	wp_enqueue_script( 'hikeit-staza', get_theme_file_uri( 'assets/staza.js' ), array( 'leaflet' ), filemtime( get_theme_file_path( 'assets/staza.js' ) ), true );
-
-	if ( $karta ) {
-		return '<div class="hk-karta" data-track="' . esc_attr( wp_json_encode( array_map( fn( $p ) => array( $p[0], $p[1] ), $track ) ) ) . '" data-bounds="' . esc_attr( (string) get_post_meta( $id, '_izlet_bounds', true ) ) . '"></div>';
-	}
 
 	$brojke = array(
 		'Duljina' => array( get_post_meta( $id, '_izlet_gpx_duljina', true ), 'km' ),
@@ -461,7 +456,7 @@ add_shortcode( 'hikeit_izlet_staza', function ( $a ) {
 		}
 	}
 	$o .= '</dl><figure class="hk-profil-okvir"><figcaption>Visinski profil</figcaption>'
-		. hikeit_profil_svg( $track, array( 'w' => 320, 'h' => 150, 'peak' => true, 'labels' => true ) ) . '</figure>';
+		. hikeit_profil_svg( $track, array( 'w' => 320, 'h' => 150, 'peak' => true, 'labels' => true ) ) . '</figure>' . '<div class="hk-karta" data-track="' . esc_attr( wp_json_encode( array_map( fn( $p ) => array( $p[0], $p[1] ), $track ) ) ) . '" data-bounds="' . esc_attr( (string) get_post_meta( $id, '_izlet_bounds', true ) ) . '"></div>';
 	if ( ( $g = (int) get_post_meta( $id, '_izlet_gpx_id', true ) ) && ( $u = wp_get_attachment_url( $g ) ) ) {
 		$o .= '<p><a class="hk-gumb" href="' . esc_url( $u ) . '" download>Preuzmi GPX</a></p>';
 	}
