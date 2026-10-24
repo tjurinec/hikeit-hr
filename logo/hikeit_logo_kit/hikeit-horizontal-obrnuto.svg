@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="120" viewBox="0 0 520 120" role="img" aria-labelledby="title desc">
+<title id="title">hikeIT logo</title><desc id="desc">Minimal mountain ridge and red summit shelter with a white h, beside the hikeIT wordmark.</desc>
+
+<g transform="translate(0,10) scale(0.95)">
+  <path d="M76 45 L76 22 Q76 18 80 16 L91 12 L102 16 Q106 18 106 22 L106 53 L76 53 Z" fill="#D62828"/>
+  <path d="M73 22 L91 10 L109 22 L106 25 L91 16 L76 25 Z" fill="#D62828"/>
+  <path d="M89 23 L89 27 L96 27 L96 23" fill="none" stroke="#D62828" stroke-width="1.4"/>
+  <path d="M8 79 L25 66 L39 61 L53 47 L66 54 L80 37 L95 48 L111 43 L127 58 L145 64 L160 79 L143 75 L128 68 L114 64 L101 56 L88 63 L76 59 L64 70 L48 68 L33 75 L20 76 Z" fill="#F7F4EE"/>
+  <path d="M43 70 L56 57 L65 61 L80 46 L94 55 L105 51 L118 62" fill="none" stroke="#171819" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+</g><text x="178" y="77" font-family="Georgia, Times New Roman, serif" font-size="70" font-weight="bold" letter-spacing="-3" fill="#F7F4EE">hikeIT</text>
+</svg>
