@@ -166,6 +166,7 @@ Rok je čvrst, ima ga oko **9 tjedana** (od 24. 10. do 31. 12.). Najduže traju 
 
 | Tjedan | Što | Tko |
 |---|---|---|
+| **1–3 (do 14. 11.)** | **Probni privatni izlet s prijateljima** (besplatan, vidi §8a): odabrati stazu i datum, pozvati ljude, snimiti merch i izlet | Tomislav |
 | **1 (do 31. 10.)** | Razgovor s prijateljicom: pristaje li, ima li uvjete za voditelja poslova (dokazi: svjedodžba/ispit/staž), od kada može raditi, ugovor o radu da ili ne | Tomislav |
 | 1 | Poziv računovođi: promjena NKD-a, PDV (posebni postupak marže), fiskalizacija, strošak zaposlenice | Tomislav |
 | 1 | Upiti za ponude: **3 osiguravatelja**, i za jamstvo od nesolventnosti i za odgovornost (pitanja iz §3) | Tomislav |
@@ -185,6 +186,24 @@ Rok je čvrst, ima ga oko **9 tjedana** (od 24. 10. do 31. 12.). Najduže traju 
 3. **Praznici** – krajem prosinca uredi sporije rade; cilj je obavijest poslati do 5. 12., ne zadnji tjedan.
 4. **Prva zaposlenica kod nas** – prijava na HZZO/HZMO i ugovor trebaju biti gotovi prije obavijesti, jer voditelj poslova mora biti zaposlen kod nas.
 5. **HZZ potpore ne dolaze prije listopada 2027.** (uvjet: 12 mjeseci poslovanja), pa trošak zaposlenice prvu godinu snosimo sami; u proračun uračunati oko 1,165 × bruto plaća mjesečno **[provjeriti s računovođom]**.
+
+### 8a. Probni privatni izlet za prijatelje
+
+**Svrha:** (1) imati barem jedan odrađen izlet, (2) snimiti **merch** (majice) i fotografije za web i društvene mreže, (3) isprobati cijeli postupak: najava, prijava, sigurnosni brifing, vođenje, prikupljanje dojmova.
+
+**Pravila da ostane privatno i besplatno:**
+- Ništa se **ne naplaćuje** (ni „dobrovoljni prilog", ni podjela troškova preko tebe). Prijevoz i hranu neka svatko riješi sam ili se dogovore među sobom.
+- **Ne oglašavati** kao ponudu agencije; zove se osobno, poruke prijateljima. Na webu se objavljuje tek *nakon* izleta, kao izvještaj („prvi izlet"), a ne kao prijava.
+- **Sigurnost svejedno:** pisana izjava svakog sudionika da ide na vlastitu odgovornost, mali brifing, prva pomoć, kontakt HGSS (112), vremenska prognoza i plan odustajanja. Provjeri pokriva li te HPS članstvo ili osobna polica pri vođenju; sudionici neka imaju svoje osiguranje od nezgode (npr. HPS članstvo).
+- **Zakonski:** besplatno vođenje prijatelja nije djelatnost, ali nemoj ga predstavljati kao pokusnu uslugu agencije prije upisa. Detalje potvrdi s računovođom.
+
+**Što napraviti:**
+- [ ] Odabrati stazu (kratku, sigurnu, lijepi pogledi za fotografije; snimiti **GPX** za stranicu)
+- [ ] Datum s rezervom za loše vrijeme; 6–10 ljudi, mali tim
+- [ ] Majice za sve (ili barem dio), dogovor oko veličina; **fotograf** (netko od prijatelja ili stativ/timer)
+- [ ] Fotografije: grupa, detalji merch-a, staza; zapisati dojmove i kratke citate
+- [ ] Nakon izleta: objaviti kao prvi izlet na webu (GPX, profil, galerija), objava na Facebooku/Instagramu
+- [ ] Prikupiti povratne informacije što bi trebalo drukčije prije prvih plaćenih izleta
 
 **Nakon upisa (siječanj–lipanj 2027.):** prvi izleti pod agencijom, prve recenzije, pratiti pozive HAMAG-BICRO-a, županije i EU fondova; od listopada 2027. prijava na HZZ potpore za zapošljavanje.
 
